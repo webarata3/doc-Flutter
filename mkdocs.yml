@@ -1,0 +1,38 @@
+site_name: Flutterの前のDart
+theme:
+  name: material
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.keys
+  - def_list
+  - abbr
+  - footnotes
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+extra_javascript:
+  - js/highlight.min.js
+  - javascripts/config.js
+extra_css:
+  - css/vs.min.css
+  - css/custom.css
+# use_directory_urls: false
+
+nav:
+  - はじめに: index.md
+  - 第1章 Webアプリケーション: 01/index.md
+  - 第2章 開発準備: 02/index.md
+  - 第3章 HTTP: 03/index.md
+  - 第4章 サーブレットの基本: 04/index.md
+#  - 第5章 JSPの基本
+#  - 第6章 スコープ
+#  - 第7章
+
+
+# - 第1章 はじめに:
+#    - 1-1 aaa: 01/01-01.md
+#    - 1-2 bbb: 01/01-02.md
