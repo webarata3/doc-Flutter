@@ -25,4 +25,4 @@ extra_css:
 nav:
   - はじめに: index.md
   - 第1章 変数: 01/index.md
-  - 第2章 関数: 02/index.md
+  - 第2章 制御フロー: 02/index.md
