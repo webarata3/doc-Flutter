@@ -1,186 +1,149 @@
-# 関数
+# 制御フロー
 
-## 関数の基本
+## if
 
-関数は基本的には次のような形式で作成します。
-
-```
-戻り値の型 関数名(引数の型 変数名) {
-  // 処理内容
-}
-```
-
-関数の戻り値の型や、引数の型は必須ではないが、書いたほうがいい。
-
-関数の処理内容が1行だけの場合には`=>`で書けます。
+`if`は、単独で使ったり、`else`と組み合わせたりということができます。基本的な`if`文は次の通り。
 
 ```dart
 void main() {
-  var value = 4;
-  if (isEven(value)) {
-    print('偶数です');
+  var speed = 50;
+
+  if (speed > 40) {
+    print('スピード違反です');
+  }
+}
+```
+
+`if`の後ろの`()`内が`true`の場合に、`{}`の中の命令が実行されます。`false`の場合には単に無視されます。また、`{}`の中の命令文が1つだけの場合には、`{}`は省略できます。
+
+```dart
+void main() {
+  var speed = 50;
+
+  if (speed > 40) print('スピード違反です');
+}
+```
+
+`if`の条件を満たさないときにも命令を実行したい場合には`else`を使います。
+
+```dart
+void main() {
+  var speed = 50;
+
+  if (speed > 40) {
+    print('スピード違反です');
   } else {
-    print('奇数です');
-  }
-}
-
-bool isEven(int value) => value % 2 == 0;
-```
-
-## 引数
-
-関数は名前付きの引数も作成できます。
-
-例えば、次のように作成して使用することができます。
-
-```dart
-void main() {
-  printProfile(name: '山田', age: 30);
-  printProfile(name: '田中');
-  printProfile(age: 22);
-}
-
-void printProfile({String? name, int? age}) {
-  print('自己紹介');
-  if (name != null) {
-    print('名前は$name');
-  }
-  if (age != null) {
-    print('年齢は$age');
+    print('安全運転です');
   }
 }
 ```
 
-名前付きの引数は、そのままだと任意の引数になります。そのため、`null`になる可能性があるため、
+`else`も`if`と同様に命令が1つの場合には`{}`は省略できます。
 
-## オプションパラメータ
-
-引数を`[]`で囲むと、引数の指定が任意になります。任意の変数のため、型はnull許容型にしないといけません。
+`if`と`else`の組み合わせは1つだけではなく`else`に`if`を続けて書くこともできます。
 
 ```dart
 void main() {
-  printProfile('山田', 30);
-  printProfile('田中');
-}
+  var speed = 50;
 
-void printProfile(String name, [int? age]) {
-  print('自己紹介');
-  print('名前は$name');
-  if (age != null) {
-    print('年齢は$age');
+  if (speed <= 40) {
+    print('安全運転です');
+  } else if (speed <= 60) {
+    print('スピード違反です');
+  } else {
+    print('大変危険です');
   }
 }
 ```
 
-## デフォルト値
+`else if`とすると、最初の`if`の条件を満たさない場合のうち、さらに`if`でチェックをします。上記の場合、`speed`が40以下の場合は`安全運転です`、40より大きい場合のうち60以下の場合`スピード違反です`、それ以外、つまり60より大きい場合`大変危険です`となります。
 
-引数にはデフォルト値を設定できます。デフォルト値を設定できるためnull許容型にしなくても良くなります。
+## for
 
-```dart
-void main() {
-  printProfile('山田', 30);
-  printProfile('田中');
-}
-
-void printProfile(String name, [int age = 20]) {
-  print('自己紹介');
-  print('名前は$name');
-  print('年齢は$age');
-}
-```
-
-名前付き引数もデフォルト値を設定できます。
+回数を指定するような繰り返しは`for`ループを使用します。
 
 ```dart
 void main() {
-  printProfile(name: '山田', age: 30);
-  printProfile(name: '田中');
-}
-
-void printProfile({required String name, int age = 30}) {
-  print('自己紹介');
-  print('名前は$name');
-  print('年齢は$age');
+  for (var i = 0; i < 10; i++) {
+    print(i);
+  }
 }
 ```
 
-## main関数
-
-`main`関数はエントリーポイントになっていてます。`main`関数は戻り値は`void`で、引数はなしか`List<String>`になります。
-
-引数を`List<String>`にした場合には、コマンドライン引数を受け取ることができます。
-
-=== "test.dart"
-
-    ```dart
-    void main(List<String> arguments) {
-      for (var value in arguments) {
-        print(value);
-      }
-    }
-    ```
-
-実行する際に、引数をつけるとそれが`main`関数に渡される。
-
-```
-> dart test.dart 1 こんにちは
-1
-こんにちは
-```
-
-## 第1級オブジェクト
-
-関数は第1級オブジェクトのため、変数に代入することができます。
+`List`は`for-in`で繰り返すことができます。
 
 ```dart
-void main(List<String> arguments) {
-  var p = printHello;
-
-  p();
-}
-
-void printHello() {
-  print('hello');
+void main() {
+  var list = [1, 2, 3];
+  for (var value in list) {
+    print(value);
+  }
 }
 ```
 
-匿名関数を代入することもできます。
+## while
+
+`while`ループも同様に使用できる。
 
 ```dart
-void main(List<String> arguments) {
-  var p = () => print('Hello');
-
-  p();
+void main() {
+  var list = [1, 2, 3];
+  for (var value in list) {
+    print(value);
+  }
 }
 ```
 
-## 匿名関数
-
-匿名関数は処理内容が1行であれば、次のように書けます。
+最低でも1度実行したい場合には`do-while`も使用できる。
 
 ```dart
-void main(List<String> arguments) {
-  var p = () => print('Hello');
-
-  p();
+void main() {
+  var list = [1, 2, 3];
+  for (var value in list) {
+    print(value);
+  }
 }
 ```
 
-処理がたくさんあれば、次のように通常の関数の定義から関数名を除いた形で書くことができます。
+## break、continue
+
+`break`を使うと、ループを途中で終了する。`continue`は次のループに戻る。
 
 ```dart
-void main(List<String> arguments) {
-  [1, 2, 3].forEach((element) {
-    print(element);
-  });
+void main() {
+  print('break');
+  for (var i = 0; i < 10; i++) {
+    if (i == 3) break;
+    print(i);
+  }
+  print('continue');
+  for (var i = 0; i < 10; i++) {
+    if (i == 3) continue;
+    print(i);
+  }
 }
 ```
 
-## 戻り値
+## switch
 
-すべての関数は戻り値を返す。明示して`return`がない場合は`null`が返される。
+`if`の代わりに`switch`を使うことも可能。
 
+```dart
+void main() {
+  var value = 2;
 
-
-
-
+  switch (value) {
+    case 0:
+      print('0です');
+      break;
+    case 1:
+      print('1です');
+      break;
+    case 2:
+      print('2です');
+      break;
+    default:
+      print('0～2以外です');
+  }
+}
+```
