@@ -24,15 +24,8 @@ extra_css:
 
 nav:
   - はじめに: index.md
-  - 第1章 Webアプリケーション: 01/index.md
-  - 第2章 開発準備: 02/index.md
-  - 第3章 HTTP: 03/index.md
-  - 第4章 サーブレットの基本: 04/index.md
-#  - 第5章 JSPの基本
-#  - 第6章 スコープ
-#  - 第7章
-
-
-# - 第1章 はじめに:
-#    - 1-1 aaa: 01/01-01.md
-#    - 1-2 bbb: 01/01-02.md
+  - 第1章 変数: 01/index.md
+  - 第2章 演算子: 02/index.md
+  - 第3章 制御フロー: 03/index.md
+  - 第4章 関数: 04/index.md
+  - 第5章 クラス: 05/index.md
