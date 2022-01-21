@@ -10,13 +10,11 @@
 
 `double`型は、[IEEE 754](https://ja.wikipedia.org/wiki/IEEE_754)の浮動小数点として表されます。浮動小数点のため、次の例のように厳密な計算ができない場合があります。
 
-=== "test.dart"
-
-    ```dart
-    void main() {
-      print(0.1 + 0.2);
-    }
-    ```
+```dart title="test.dart"
+void main() {
+  print(0.1 + 0.2);
+}
+```
 
 このプログラムを実行すると、次のように誤差が出てしまいます。
 
