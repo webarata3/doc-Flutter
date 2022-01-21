@@ -2,12 +2,7 @@
 
 ## 何ができるようになる
 
-Java言語を使って、データベースを使ったWebアプリケーションが作ることができるようになります。Webアプリケーションにつきもののセキュリティについても学習します。
-
-具体的には次の内容を学習します。
-
-- 伝統的なHTMLをサーバ側で作成して返すアプリケーション
-- JSONを返し、JavaScriptで画面を構築するアプリケーション
+[A tour of the Dart language](https://dart.dev/guides/language/language-tour)をもとに
 
 ## 対象読者
 

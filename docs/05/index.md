@@ -91,26 +91,6 @@ void main() {
 }
 ```
 
-デフォルトの動きでないコンストラクタを使いたい場合には次のように明示して書きます。
-
-```dart
-class Animal {
-  Animal() {
-    print('Animalのコンストラクタ');
-  }
-}
-
-class Cat extends Animal {
-  Cat() {
-    print('Catのコンストラクタ');
-  }
-}
-
-void main() {
-  var animal = Cat();
-}
-```
-
 ## 他のコンストラクタの呼び出し
 
 `this`を使って他のコンストラクタを呼び出すこともできます。
