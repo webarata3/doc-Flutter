@@ -10,9 +10,9 @@
 }
 ```
 
-関数の戻り値の型や、引数の型は必須ではないが、書いたほうがいい。
+関数の戻り値の型や、引数の型は必須ではありませんが書いたほうがいいです。
 
-関数の処理内容が1行だけの場合には`=>`で書けます。
+また、関数の処理内容が1行だけの場合には`=>`で書けます。
 
 ```dart
 void main() {
@@ -51,7 +51,7 @@ void printProfile({String? name, int? age}) {
 }
 ```
 
-名前付きの引数は、そのままだと任意の引数になります。そのため、`null`になる可能性があるため、
+名前付きの引数は、そのままだと任意の引数になります。そのため、名前付きの引数は`null`になる可能性があります。
 
 ## オプションパラメータ
 
@@ -110,17 +110,15 @@ void printProfile({required String name, int age = 30}) {
 
 引数を`List<String>`にした場合には、コマンドライン引数を受け取ることができます。
 
-=== "test.dart"
+```dart title="test.dart"
+void main(List<String> arguments) {
+  for (var value in arguments) {
+    print(value);
+  }
+}
+```
 
-    ```dart
-    void main(List<String> arguments) {
-      for (var value in arguments) {
-        print(value);
-      }
-    }
-    ```
-
-実行する際に、引数をつけるとそれが`main`関数に渡される。
+実行する際に、引数をつけるとそれが`main`関数に渡されます。
 
 ```
 > dart test.dart 1 こんにちは
@@ -178,7 +176,7 @@ void main(List<String> arguments) {
 
 ## 戻り値
 
-すべての関数は戻り値を返す。明示して`return`がない場合は`null`が返される。
+すべての関数は戻り値を返す。明示して`return`がない場合は`null`が返されます。
 
 
 

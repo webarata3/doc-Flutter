@@ -83,7 +83,7 @@ void main() {
 
 ## while
 
-`while`ループも同様に使用できる。
+`while`ループも同様に使用できます。
 
 ```dart
 void main() {
@@ -94,7 +94,7 @@ void main() {
 }
 ```
 
-最低でも1度実行したい場合には`do-while`も使用できる。
+最低でも1度実行したい場合には`do-while`も使用できます。
 
 ```dart
 void main() {
@@ -107,7 +107,7 @@ void main() {
 
 ## break、continue
 
-`break`を使うと、ループを途中で終了する。`continue`は次のループに戻る。
+`break`を使うと、ループを途中で終了します。。`continue`は次のループに戻ります。
 
 ```dart
 void main() {
@@ -126,7 +126,7 @@ void main() {
 
 ## switch
 
-`if`の代わりに`switch`を使うことも可能。
+`if`の代わりに`switch`を使うことも可能です。
 
 ```dart
 void main() {
