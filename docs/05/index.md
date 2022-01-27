@@ -8,7 +8,7 @@
 class Human {}
 ```
 
-インスタンス変数は`{}`の中に書きます。他の言語のようにアクセス修飾子（`public`、`private`）は付けられません。
+インスタンス変数は`{}`の中に書きます。他の言語のようにアクセス修飾子（`public`、`private`）は付けられません。初期化していない場合には、`null`になる場合があるため、`?`が必要です。
 
 ```dart
 class Human {
@@ -17,6 +17,22 @@ class Human {
   List<Human> family = [];
 }
 ```
+
+`late`をつけることで初期化を遅らせることができます。
+
+```dart
+void main() {
+  var s = Sample('名前');
+  print(s.name);
+}
+
+class Sample {
+  late String name;
+
+  Sample(this.name);
+}
+```
+
 
 ## コンストラクタ
 
