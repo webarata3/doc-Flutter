@@ -35,12 +35,12 @@ void main() {
 
 | Java | Dart |
 |-|-|
-| `byte`: 1byte | `int` |
-| `short`: 2byte | `int` |
-| `int`: 4byte | `int` |
-| `long`: 8byte | `int`: 8byte |
-| `float`: IEEE754 単精度 | `double` |
-| `double`: IEEE754 倍精度 | `double`: IEEE754 倍精度|
+| `byte`: 1byte | `int`: 8byte|
+| `short`: 2byte | 同上 |
+| `int`: 4byte | 同上 |
+| `long`: 8byte | 同上 |
+| `float`: IEEE754 単精度 | `double`: IEEE754 倍精度 |
+| `double`: IEEE754 倍精度 | 同上 |
 
 ### 文字列
 
