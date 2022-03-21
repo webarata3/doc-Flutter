@@ -31,6 +31,17 @@ void main() {
 }
 ```
 
+数値に関してはJavaと比較すると次のようになります。
+
+| Java | Dart |
+|-|-|
+| `byte`: 1byte | `int` |
+| `short`: 2byte | `int` |
+| `int`: 4byte | `int` |
+| `long`: 8byte | `int`: 8byte |
+| `float`: IEEE754 単精度 | `double` |
+| `double`: IEEE754 倍精度 | `double`: IEEE754 倍精度|
+
 ### 文字列
 
 文字列は`String`型を使います。文字列リテラルは`'`（シングルクォート）か`"`（ダブルクォート）で囲みます。

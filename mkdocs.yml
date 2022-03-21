@@ -27,8 +27,8 @@ extra_css:
 nav:
   - Dart:
     - はじめに: index.md
-    - 第1章 変数: 01/index.md
-    - 第2章 演算子: 02/index.md
-    - 第3章 制御フロー: 03/index.md
-    - 第4章 関数: 04/index.md
-    - 第5章 クラス: 05/index.md
+    - 第1章 変数: dart01/index.md
+    - 第2章 演算子: dart02/index.md
+    - 第3章 制御フロー: dart03/index.md
+    - 第4章 関数: dart04/index.md
+    - 第5章 クラス: dart05/index.md
