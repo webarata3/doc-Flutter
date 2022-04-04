@@ -2,8 +2,12 @@
 
 ## 何ができるようになる
 
-[A tour of the Dart language](https://dart.dev/guides/language/language-tour)をもとにDartの文法を
+[A tour of the Dart language](https://dart.dev/guides/language/language-tour)をもとにDartの文法を一通り解説していきます。
 
 ## 対象読者
 
-次のことが理解できているものとして解説をしていきます。
+Javaを学習して、オブジェクト指向やクラス等の基本的な知識があるものとして解説していきます。
+
+また、Javaと比較してどうかという点を掘り下げていきます。
+
+プログラミング言語は初めてという人には向いていません。

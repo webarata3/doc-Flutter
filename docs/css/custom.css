@@ -1,5 +1,35 @@
 @charset 'utf-8';
 
+:root {
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+}
+
+body {
+  --md-code-font-family: var(--md-code-font,_),SFMono-Regular,Consolas,Menlo,'Noto Sans JP',monospace;
+}
+
 img {
   border: 1px solid #ccc;
+}
+
+.md-typeset h2 {
+  border-bottom: 3px solid var(--md-primary-fg-color);
+  margin-bottom: 1em;
+}
+
+h3 {
+  position: relative;
+  padding-left: 15px;
+}
+
+h3::before {
+  --border-length: 18px;
+  position: absolute;
+  content: '';
+  left: 0;
+  top: calc(0.5em - var(--border-length) / 2 + 5px); /* 最後の5pxはpadding分 */
+  height: var(--border-length);
+  width: 5px;
+  background-color: var(--md-primary-fg-color);
+  border-radius: 2px;
 }
