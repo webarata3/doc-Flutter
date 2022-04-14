@@ -1,6 +1,7 @@
 site_name: Flutter
 theme:
   name: material
+  language: 'ja'
   features:
     - navigation.tabs
 markdown_extensions:
@@ -16,6 +17,7 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.mark
   - pymdownx.tilde
+  - pymdownx.details
 extra_javascript:
   - js/highlight.min.js
   - javascripts/config.js

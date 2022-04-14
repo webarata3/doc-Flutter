@@ -62,7 +62,6 @@ int a = null;
 
 変数に`null`を入れたい場合には、特別な設定をしないといけません。上記の変数`a`に`null`を入れたい場合には、型の後ろに`null`を入れるかもしれないという意味で`?`を付けます。
 
-
 ```dart
 int? a = null;
 ```
@@ -85,6 +84,30 @@ void main() {
   print(a);
 }
 ```
+
+#### 練習問題1-1
+
+変数`x`を`int`型で作成すること（`?`は付けない）。変数の作成と同時に、`x`を`null`で初期化（代入）して、エラーになることを確認すること。
+
+??? 解答例
+
+    ```dart
+    void main() {
+      int x = null;
+    }
+    ```
+
+#### 練習問題1-2
+
+練習問題1のプログラムでエラーが起きないように型を工夫すること。
+
+??? 解答例
+
+    ```dart
+    void main() {
+      int? x = null;
+    }
+    ```
 
 ## 組み込み型
 
@@ -181,13 +204,50 @@ void main() {
 }
 ```
 
+#### 練習問題1-3
+
+`String`型の変数`html`を作成して、次の文字列を格納すること。見た目通り、改行も含めて変数に入れること。また、最後に`print(html);`として画面にその内容を表示すること。
+
+```
+<p>
+こんにちは
+</p>
+```
+
+??? 解答例
+
+    ```dart
+    void main() {
+      var s = '''
+    <p>
+    こんにちは
+    </p>''';
+      print(s);
+    }
+    ```
+
+#### 練習問題1-4
+
+変数`name`に`山本`、変数`age`に`19`を入れること。その変数を使って`私は山本です。19歳です`という文字列を`+`を使わずに作成すること。作成した変数を`print`を使って表示すること。
+
+??? 解答例
+
+    ```dart
+    void main() {
+      var name = '山本';
+      var age = 19;
+      var s = '私は${name}です。${age}歳です';
+      print(s);
+    }
+    ```
+
 ### 真偽値
 
 `true`、`false`の2値を取る真偽値型は`bool`型となります。Javaの`boolean`と変わりません。
 
 ### リスト
 
-配列はなく、順序があるリストが組み込み型として用意されています。型は`List`で、リストの中に入れるものを`<>`の中に書きます。例えば、整数のリストの場合には`List<int>`とします。
+配列はなく、順序があるリストが組み込み型として用意されています。型は`List`で、リストの中に入れるデータ型を`<>`の中に書きます。例えば、整数のリストの場合には`List<int>`とします。
 
 リストのリテラルもあり、`[]`の中に`,`区切りで書きます。
 
@@ -203,6 +263,38 @@ void main() {
 ```
 
 上記のようにリストの最後の要素の後に`,`を入れるとフォーマッタが要素ごとに改行を入れます。
+
+個別のデータを取ってきたり、データを変更する場合には、`[]`内にインデックス番号を書きます。インデックスはJavaと同じで先頭が0です。
+
+```dart
+void main() {
+  var list = [1, 2, 3];
+  print(list[0]);
+  list[0] = 99;
+  print(list[0]);
+}
+```
+
+Javaと同じで、インデックスの範囲外のアクセスはエラーになります。
+
+```dart
+void main() {
+  var list = [1, 2, 3];
+  list[3] = 10;
+}
+```
+
+実行結果。
+
+```
+Unhandled exception:
+RangeError (index): Invalid value: Not in inclusive range 0..2: 3
+#0      List._setIndexed (dart:core-patch/growable_array.dart:290:49)
+#1      List.[]= (dart:core-patch/growable_array.dart:285:5)
+#2      main (file:///C:/first/2021/app/file/dart/test.dart:3:7)
+#3      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:297:19)
+#4      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)
+```
 
 不変のリストは`const`をつけることで作成できます。
 
@@ -285,5 +377,4 @@ void main() {
 }
 ```
 
-マップの値の取得は`[]`の中にキーを書くことで行える。
-
+マップの値の取得は`[]`の中にキーを書くことで行えます。
