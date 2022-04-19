@@ -102,9 +102,10 @@ void main() {
 
 ```dart
 void main() {
-  var list = [1, 2, 3];
-  for (var value in list) {
-    print(value);
+  int i = 0;
+  while (i < 10) {
+    print(i);
+    i++;
   }
 }
 ```
@@ -113,10 +114,11 @@ void main() {
 
 ```dart
 void main() {
-  var list = [1, 2, 3];
-  for (var value in list) {
-    print(value);
-  }
+  int i = 10;
+  do {
+    print(i);
+    i++;
+  } while (i < 10);
 }
 ```
 
@@ -158,6 +160,8 @@ void main() {
 
 `if`の代わりに`switch`を使うことも可能です。
 
+`case`ごとに`break`を書かないとエラーになります。
+
 ```dart
 void main() {
   var value = 2;
@@ -169,6 +173,49 @@ void main() {
     case 1:
       print('1です');
       break;
+    case 2:
+      print('2です');
+      break;
+    default:
+      print('0～2以外です');
+  }
+}
+```
+
+次のように`case`の処理が空の場合には`break`がなくても大丈夫です。
+
+```dart
+void main() {
+  var value = 0;
+
+  switch (value) {
+    case 0:
+    case 1:
+      print('0か1です');
+      break;
+    case 2:
+      print('2です');
+      break;
+    default:
+      print('0～2以外です');
+  }
+}
+```
+
+また、`continue`を使うこともできます。
+
+```dart
+void main() {
+  var value = 0;
+
+  switch (value) {
+    case 0:
+      print('0です');
+      continue label2;
+    case 1:
+      print('1です');
+      break;
+    label2:
     case 2:
       print('2です');
       break;

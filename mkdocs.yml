@@ -1,4 +1,4 @@
-site_name: Flutter
+site_name: JavaからのFlutter
 theme:
   name: material
   language: 'ja'
@@ -34,3 +34,5 @@ nav:
     - 第3章 制御フロー: dart/03/index.md
     - 第4章 関数: dart/04/index.md
     - 第5章 クラス: dart/05/index.md
+  - Flutter:
+    - 1. サンプルアプリケーションを読む: flutter/01/index.md
