@@ -36,3 +36,4 @@ nav:
     - 第5章 クラス: dart/05/index.md
   - Flutter:
     - 1. サンプルアプリケーションを読む: flutter/01/index.md
+    - 2. レイアウト: flutter/02/index.md
