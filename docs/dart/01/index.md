@@ -337,6 +337,69 @@ void main() {
 }
 ```
 
+`List`の[API](https://api.dart.dev/stable/2.16.2/dart-core/List-class.html)からいくつか使えそうなものを紹介します。
+
+`isEmpty`、`isNotEmpty`では要素が0件か、そうでないかのチェックができます。
+
+```dart
+void main() {
+  var list = [1, 2, 3];
+  print(list.isEmpty);
+  print(list.isNotEmpty);
+}
+```
+
+`length`で`List`に入っている件数を確認できます。
+
+```dart
+void main() {
+  var list = [1, 2, 3];
+  print(list.length);
+}
+```
+
+データの追加は、主に2つです。
+
+- `add`メソッド: 最後に要素を追加
+- `insert`メソッド: 指定した位置に、要素を挿入
+
+```dart
+void main() {
+  var list = [1, 2, 3];
+  list.add(4);
+  list.insert(1, 999);
+  print(list);
+}
+```
+
+データの削除は、要素を指定するか、インデックスを指定するかどちらかになります。要素の指定の場合には、複数ある場合には最初の要素になります。
+
+```dart
+void main() {
+  var list = [1, 2, 3, 4, 5, 1, 2];
+  list.remove(1);
+  print(list);
+  list.removeAt(2);
+  print(list);
+}
+```
+
+データの検索は次のものを使います。
+
+- `contains`: 要素が含まれているかどうか
+- `indexOf`、`lastindexOf`: 要素がどこに入っているか
+
+```dart
+void main() {
+  var list = [1, 2, 3, 4, 5, 1, 2];
+  print(list.contains(3));
+  print(list.indexOf(2));
+  print(list.lastIndexOf(2));
+  print(list.lastIndexOf(7));
+}
+```
+
+
 ### セット
 
 重複せずに、順番が保証されないセットが用意されています。セットは`{}`で値を囲んで作成します。
