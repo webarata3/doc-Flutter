@@ -186,6 +186,97 @@ void main(List<String> arguments) {
 }
 ```
 
-## 戻り値
+#### 練習問題4-1
 
-すべての関数は戻り値を返します。明示して`return`がない場合は`null`が返されます。
+次の関数を作成入力すること。
+
+```dart
+void printTest({String? name, int? age}) {
+  print('名前は${name ?? "なし"}');
+  print('年齢は${age ?? 0}');
+}
+```
+
+`main`関数を作成し、次の4パターンで`printTest`関数を呼び出すこと。
+
+- 引数なし
+- 引数`name`に`山田`を渡す。
+- 引数`age`に`20`を渡す。
+- 引数`name`に`田中`、引数`age`に`19`を渡す。
+
+??? 解答例
+
+    ```dart
+    void printTest({String? name, int? age}) {
+      print('名前は${name ?? "なし"}');
+      print('年齢は${age ?? 0}');
+    }
+    
+    void main() {
+      printTest(name: '山田');
+      printTest(age: 20);
+      printTest(name: '田中', age: 19);
+    }
+    ```
+
+#### 練習問題4-2
+
+次の仕様の関数を作成すること。
+
+- 関数名: `panel`
+- 名前付き引数
+    - `String`型の`title`
+    - `int`型の`version`。`version`は必須（`required`）とする
+- 戻り値なし
+- 処理内容は、`title`と`version`を`print`関数で表示する。`title`が`null`の場合には`無題`とすること。
+
+動作確認のため、`main`関数を作成して、適当な引数で作った関数を呼び出すこと。
+
+??? 解答例
+
+    ```dart
+    void main() {
+      panel(title: 'テスト', version: 1);
+      panel(version: 2);
+    }
+    ```
+
+#### 練習問題4-3
+
+次の関数を入力すること。
+
+```dart
+int calc(int x, int y, [bool? plus]) {
+  if (plus ?? true) {
+    return x + y;
+  } else {
+    return x * y;
+  }
+}
+```
+
+`main`関数を作成し、次の3パターンで`calc`関数を呼び出すこと。
+
+最初の引数は`5`、2番目の引数は`3`とする
+
+- 3番目の引数なし
+- 3番目の引数`true`
+- 3番目の引数`false`
+
+??? 解答例
+
+    ```dart
+    int calc(int x, int y, [bool? plus]) {
+      if (plus ?? true) {
+        return x + y;
+      } else {
+        return x * y;
+      }
+    }
+    
+    void main() {
+      print(calc(3, 5));
+      print(calc(3, 5, true));
+      print(calc(3, 5, false));
+    }
+    ```
