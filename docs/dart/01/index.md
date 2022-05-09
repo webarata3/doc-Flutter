@@ -292,8 +292,40 @@ void main() {
 int num = int.parse('123');
 ```
 
+??? 解答例
 
+    ```dart
+    import 'dart:io';
+    
+    void main() {
+      stdout.write('1つ目> ');
+      var str1 = stdin.readLineSync();
+      stdout.write('2つ目> ');
+      var str2 = stdin.readLineSync();
+      int num1 = int.parse(str1 ?? '');
+      int num2 = int.parse(str2 ?? '');
+      print(num1 + num2);
+    }
+    ```
 
+#### 練習問題1-3-2
+
+キーボードから2つ文字列を入力すること。それぞれ数値に変換し、その合計を画面に表示すること。数値変換時のエラーは無視して良い。
+
+??? 解答例
+
+    ```dart
+    import 'dart:io';
+    
+    void main() {
+      stdout.write('1つ目> ');
+      var str1 = stdin.readLineSync();
+      stdout.write('2つ目> ');
+      var str2 = stdin.readLineSync();
+      int num1 = int.parse(str1 ?? '');
+      int num2 = int.parse(str2 ?? '');
+      print(num1 + num2);
+    ```
 
 ## リスト、セット、マップ
 
