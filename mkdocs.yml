@@ -11,6 +11,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.keys
+  - attr_list
   - def_list
   - abbr
   - footnotes
