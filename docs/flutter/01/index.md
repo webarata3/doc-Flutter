@@ -145,9 +145,9 @@ class MyHomePage extends StatefulWidget {
 }
 ```
 
-`MyHomePage`クラスは、`StatefulWidget`クラスを継承しています。`StatefulWidget`クラスは状態を持っています。状態を持つため、`StatefulWidget`クラスには`StatelessWidget`クラスと違い`build`メソッドは持っていません。その代わりに`createState`メソッドを使います。
+画面の内容が変更される事がある（状態を持つ）場合、`StatefulWidget`クラスを使います。`StatefulWidget`クラスでは、`createState`メソッドをオーバーライドし、`State`クラスのインスタンスを作成します。
 
-`createState`メソッドは、戻り値として`State`クラスのインスタンスを返しています。このクラスでは、`_MyHomePageState`クラスのインスタンスを返しています。その`_MyHomePageState`クラスは次のように定義されています。
+ここでは、`State`クラスを継承した`_MyHomePageState`クラスを作成しています。変更される状態自体はこちらのクラスで所持します。
 
 ```dart
 class _MyHomePageState extends State<MyHomePage> {
@@ -196,6 +196,12 @@ class _MyHomePageState extends State<MyHomePage> {
 状態を変更させる場合には`setState`メソッドを呼び出して変更しないといけません。`setState`メソッドを経由することで変更があったことをフレームワークに通知します。`setState`メソッドは、引数が関数になっています。この関数は、引数も戻り値もありません。この関数の中で変数を変更します。
 
 `_MyHomePageState`クラスでは、`build`メソッドをオーバーライドします。`StatelessWidget`クラスの`build`と同様のものになります。
+
+`State`クラスのでは制御できるタイミングとしては、次の場合に呼び出されます。
+
+- `StatefulWidget.initState`の後
+- `StatefulWidget.didUpdateWidget`の後
+- `setState`の呼び出しの後
 
 `build`の引数としてはこの場合には`Scaffold`クラスを使っています。`Scaffold`の引数として、3つ指定されています。
 
