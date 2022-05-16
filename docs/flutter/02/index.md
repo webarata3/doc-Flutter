@@ -72,6 +72,10 @@ bottomNavigationBar: BottomNavigationBar(
 
 `BottomNavigationBar`はコンストラクタで`items`を指定します。`items`は`BottomNavigationBarItem`の`List`を指定します。`BottomNavigationBarItem`はそれぞれ1つのボタンに対応します。`icon`と`label`を指定します。また、どのボタンが選ばれているかを`currentIndex`で指定します。
 
+#### 練習問題
+
+上記の`BottomNavigationBar`のサンプルに`BottomNavitaionBarItem`を1つ追加する頃こと。
+
 ### FloatingActionButton
 
 次に`FloatingActionButton`を追加します。`BottomNavigationBar`の次に`floatingActionButton`を追加します。
@@ -100,3 +104,54 @@ onPressed: () {
 ボタンを押すと次のように表示され、しばらく待つと消えます。
 
 ![SnackBar](image/03.webp)
+
+## いろいろな配置
+
+### 横に並べる
+
+部品を横に並べたいときには、`Row`クラスを使います。
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const LayoutTest(),
+    );
+  }
+}
+
+class LayoutTest extends StatelessWidget {
+  const LayoutTest({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('レイアウトテスト'),
+      ),
+      body: Row(
+        children: const [
+          Text('テキスト1'),
+          Text('テキスト2'),
+          Text('テキスト3'),
+          Text('テキスト4'),
+        ],
+      ),
+    );
+  }
+}
+```
+
