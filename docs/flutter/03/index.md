@@ -114,7 +114,7 @@ const TextField(
 
 ![画面](image/text09.webp)
 
-### チェックボックス
+## チェックボックス
 
 チェックボックスは、チェックの状態を持つため`StatefulWidget`として作成する必要があります。まず全体像を確認します。
 
@@ -176,3 +176,84 @@ class _MyHomePageState extends State<MyHomePage> {
 これでチェックボックスが作成できます。
 
 ![画面](image/check01.webp)
+
+チェックボックスにラベルをつけるには、`CheckboxListTile`を使います。`Checkbox`との違いは`title`を指定するかどうかです。
+
+```dart
+CheckboxListTile(
+  title: const Text('確認しました'),
+  value: check,
+  onChanged: (bool? value) {
+    setState(() => check = value ?? false);
+  },
+),
+```
+
+## スイッチ
+
+チェックボックスと同様のもので、スイッチの形をしたものが使えます。
+
+```dart
+SwitchListTile(
+  title: const Text('確認しました'),
+  value: check,
+  onChanged: (bool? value) {
+    setState(() => check = value ?? false);
+  },
+)
+```
+
+## ラジオボタン
+
+ラジオボタンは`enum`と一緒に使うと便利に使えます。
+
+```dart
+enum Janken { gu, choki, pa }
+
+class _MyHomePageState extends State<MyHomePage> {
+  Janken? _te = Janken.gu;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Column(
+        children: [
+          RadioListTile<Janken>(
+            title: const Text('グー'),
+            value: Janken.gu,
+            groupValue: _te,
+            onChanged: (Janken? value) {
+              setState(() {
+                _te = value;
+              });
+            },
+          ),
+          RadioListTile<Janken>(
+            title: const Text('チョキ'),
+            value: Janken.choki,
+            groupValue: _te,
+            onChanged: (Janken? value) {
+              setState(() {
+                _te = value;
+              });
+            },
+          ),
+          RadioListTile<Janken>(
+            title: const Text('パー'),
+            value: Janken.pa,
+            groupValue: _te,
+            onChanged: (Janken? value) {
+              setState(() {
+                _te = value;
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
