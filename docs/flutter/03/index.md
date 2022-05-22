@@ -100,8 +100,9 @@ const TextField(
 
 ```dart
 const TextField(
-    decoration: InputDecoration(
-        border: OutlineInputBorder(), labelText: '名前を入力'),
+  decoration: InputDecoration(
+    border: OutlineInputBorder(),
+    labelText: '名前を入力',
   ),
 ),
 ```
