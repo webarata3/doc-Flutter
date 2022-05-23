@@ -54,57 +54,25 @@ Widgetを縦方向に並べたい場合には、`Column`を使います。
 :    `children`
      :    並べたい`Widget`の`List`
 
-例えば、次のように作成します。
+例えば、次のように作成します。最初の例の`LayoutTest`クラスの`build`メソッドの`Scaffold`コンストラクタの`body`に指定します。
 
 ```dart
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const LayoutTest(),
-    );
-  }
-}
-
-class LayoutTest extends StatelessWidget {
-  const LayoutTest({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('レイアウトテスト'),
-        ),
-        body: Column(
-          children: [
-            Text(
-              'test1',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              'test2',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              'test3',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ));
-  }
-}
+body: Column(
+  children: [
+    Text(
+      'test1',
+      style: Theme.of(context).textTheme.headline4,
+    ),
+    Text(
+      'test2',
+      style: Theme.of(context).textTheme.headline4,
+    ),
+    Text(
+      'test3',
+      style: Theme.of(context).textTheme.headline4,
+    ),
+  ],
+));
 ```
 
 `mainAxisAlignment`には次の値が指定できます。
@@ -251,6 +219,8 @@ class LayoutTest extends StatelessWidget {
 `Container`を使うことで、`Widget`に余白を付けたり、色を付けたりすることができます。
 
 `Container`コンストラクタの主な名前付き引数
+:    `color`
+     :    領域の背景色
 :    `width`
      :    `double`型<br>
           幅
@@ -272,6 +242,33 @@ class LayoutTest extends StatelessWidget {
 :    引数で、左、右、上、下の4つの値を指定します
 `EdgeInsets.only({double left = 0.0, double top = 0.0, double right = 0.0, double bottom = 0.0})`
 :    名前付き引数で、上下左右の必要な場所の指定をします。指定しない場合には初期値の`0.0`が使われます
+
+例えば、次のように使います。
+
+```dart
+body: Column(
+  children: [
+    Container(
+      child: Text(
+        'test1',
+        style: Theme.of(context).textTheme.headline4,
+      ),
+      padding: const EdgeInsets.all(20.0),
+      margin: const EdgeInsets.only(bottom: 20.0),
+      color: Colors.red,
+    ),
+    Text(
+      'test2',
+      style: Theme.of(context).textTheme.headline4,
+    ),
+    Text(
+      'test3',
+      style: Theme.of(context).textTheme.headline4,
+    ),
+  ],
+),
+```
+
 
 ### Expanded
 
@@ -570,4 +567,3 @@ class LayoutTest extends StatelessWidget {
   }
 }
 ```
-
