@@ -39,3 +39,5 @@ nav:
     - 1. サンプルアプリケーションを読む: flutter/01/index.md
     - 2. レイアウト: flutter/02/index.md
     - 3. UI部品: flutter/03/index.md
+    - 4. ListView: flutter/04/index.md
+    - 5. 簡単なアプリを作ってみよう: flutter/05/index.md

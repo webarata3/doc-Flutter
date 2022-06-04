@@ -258,3 +258,66 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
+
+## ドロップダウンリスト
+
+```dart
+class SamplePage extends StatefulWidget {
+  const SamplePage({Key? key}) : super(key: key);
+
+  @override
+  State<SamplePage> createState() => _SamplePageState();
+}
+
+class _SamplePageState extends State<SamplePage> {
+  //2
+  String? isSelectedItem = 'aaa';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('DropdownButton Sample'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //3
+            DropdownButton(
+              //4
+              items: const [
+                //5
+                DropdownMenuItem(
+                  child: Text('aaa'),
+                  value: 'aaa',
+                ),
+                DropdownMenuItem(
+                  child: Text('bbb'),
+                  value: 'bbb',
+                ),
+                DropdownMenuItem(
+                  child: Text('ccc'),
+                  value: 'ccc',
+                ),
+              ],
+              //6
+              onChanged: (String? value) {
+                setState(() {
+                  isSelectedItem = value;
+                });
+              },
+              //7
+              value: isSelectedItem,
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            Text('$isSelectedItem が選択されました。')
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
