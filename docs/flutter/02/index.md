@@ -1,8 +1,10 @@
 # レイアウト
 
-## サンプルアプリケーションを変更する
+## アプリケーションの準備
 
 サンプルアプリケーションの内容を削除（必要ならすぐにまた作れます）して、次のコードのみ残します。
+
+これに追記して動きを確認していきます。
 
 ```dart
 import 'package:flutter/material.dart';
@@ -47,12 +49,12 @@ class LayoutTest extends StatelessWidget {
 Widgetを縦方向に並べたい場合には、`Column`を使います。
 
 `Column`コンストラクタの主な名前付き引数
-:    `mainAxisAlignment`
-     :    配置方法。`MainAxisAlignment`に`enum`として定義されているものを使う
-:    `crossAxisAlignment`
-     :    並べる方向と直行する方向にどのように配置するかを決める。`CrossAxisAlignment`に`enum`として定義されているものを使う
-:    `children`
-     :    並べたい`Widget`の`List`
+
+| 引数 | 説明 |
+|-|-|
+| `mainAxisAlignment` | 配置方法。`MainAxisAlignment`に`enum`として定義されているものを使う |
+| `crossAxisAlignment` | 並べる方向と直行する方向にどのように配置するかを決める。`CrossAxisAlignment`に`enum`として定義されているものを使う |
+| `children` | 並べたい`Widget`の`List` |
 
 例えば、次のように作成します。最初の例の`LayoutTest`クラスの`build`メソッドの`Scaffold`コンストラクタの`body`に指定します。
 
@@ -75,16 +77,22 @@ body: Column(
 ));
 ```
 
-`mainAxisAlignment`には次の値が指定できます。
+このように縦に並びます。
 
-- `start`
-- `center`
-- `end`
-- `spaceAround`
-- `spaceBetween`
-- `spaceEvenly`
+![Column](image/layout01.webp)
 
-`crossAxisAlignment`は次のものが使えます。
+`mainAxisAlignment`には次の値が指定できます。`main`と付いている通り、主となる方向の並べ方のため縦方向にどのように並べるかということになります。
+
+| 指定できる値 | 説明 | 画面 |
+|-|-|-|
+| `start` | | <img src="image/column_start.webp" width="150"> |
+| `center` | | <img src="image/column_center.webp" width="150"> |
+| `end` | | <img src="image/column_end.webp" width="150"> |
+| `spaceAround` | | <img src="image/column_around.webp" width="150"> |
+| `spaceBetween` | | <img src="image/column_between.webp" width="150"> |
+| `spaceEvenly` | | <img src="image/column_evenly.webp" width="150"> |
+
+`crossAxisAlignment`は次のものが使えます。`cross`と付いている通り、主となる方向（縦）と直行する横方向の並べ方の指定になります。
 
 - `baseline`
 - `start`
@@ -102,14 +110,14 @@ body: Column(
 
     ```dart
     import 'package:flutter/material.dart';
-    
+
     void main() {
       runApp(const MyApp());
     }
-    
+
     class MyApp extends StatelessWidget {
       const MyApp({Key? key}) : super(key: key);
-    
+
       @override
       Widget build(BuildContext context) {
         return MaterialApp(
@@ -121,10 +129,10 @@ body: Column(
         );
       }
     }
-    
+
     class LayoutTest extends StatelessWidget {
       const LayoutTest({Key? key}) : super(key: key);
-    
+
       @override
       Widget build(BuildContext context) {
         return Scaffold(
@@ -156,92 +164,39 @@ body: Column(
 
 横に並べるには、`Row`クラスを使います。コンストラクタに指定できる値は`Column`と変わりません。
 
-#### 練習問題
+`mainAxisAlignment`には次の値が指定できます。`Row`の場合には横方向の並べ方になります。
 
-`Column`の練習問題の`Column`を`Row`にして、`mainAxisAlignment`を試すこと。
-
-??? 解答例
-
-    ```dart
-    import 'package:flutter/material.dart';
-    
-    void main() {
-      runApp(const MyApp());
-    }
-    
-    class MyApp extends StatelessWidget {
-      const MyApp({Key? key}) : super(key: key);
-    
-      @override
-      Widget build(BuildContext context) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: const LayoutTest(),
-        );
-      }
-    }
-    
-    class LayoutTest extends StatelessWidget {
-      const LayoutTest({Key? key}) : super(key: key);
-    
-      @override
-      Widget build(BuildContext context) {
-        return Scaffold(
-            appBar: AppBar(
-              title: const Text('レイアウトテスト'),
-            ),
-            body: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'test1',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-                Text(
-                  'test2',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-                Text(
-                  'test3',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ],
-            ));
-      }
-    }
-    ```
+| 指定できる値 | 説明 | 画面 |
+|-|-|-|
+| `start` | | <img src="image/row_start.webp" width="150"> |
+| `center` | | <img src="image/row_center.webp" width="150"> |
+| `end` | | <img src="image/row_end.webp" width="150"> |
+| `spaceAround` | | <img src="image/row_around.webp" width="150"> |
+| `spaceBetween` | | <img src="image/row_between.webp" width="150"> |
+| `spaceEvenly` | | <img src="image/row_evenly.webp" width="150"> |
 
 ### Container
 
 `Container`を使うことで、`Widget`に余白を付けたり、色を付けたりすることができます。
 
 `Container`コンストラクタの主な名前付き引数
-:    `color`
-     :    領域の背景色
-:    `width`
-     :    `double`型<br>
-          幅
-:    `height`
-     :    `double`型<br>
-          高さ
-:    `padding`
-     :    `EdgeInsetsGeometry`型<br>
-          パディング（設定方法は後述）
-:    `margin`
-     :    `EdgeInsetsGeometry`型<br>
-          マージン（設定方法は後述）
+
+| 引数 | 説明 |
+|-|-|
+| `color` | 領域の背景色。`decoration`を指定する場合には、`decoration`の`color`で指定する |
+| `width` | `double`型<br>幅 |
+| `height` | `double`型<br>高さ |
+| `padding` | `EdgeInsetsGeometry`型<br>パディング（設定方法は後述） |
+| `margin` | `EdgeInsetsGeometry`型<br>マージン（設定方法は後述） |
+| `decoration` | `Container`の装飾 |
 
 パディングとマージンについては、`EdgeInsetsGeometry`を継承した`EdgeInsets`クラスのコンストラクタを使用すると簡単に扱えます。
 
-`EdgeInsets.all(double value)`
-:    上下左右すべて同じ`value`の値にします
-`EdgeInsets.fromLTRB(double left, double right, double top, double bottom)`
-:    引数で、左、右、上、下の4つの値を指定します
-`EdgeInsets.only({double left = 0.0, double top = 0.0, double right = 0.0, double bottom = 0.0})`
-:    名前付き引数で、上下左右の必要な場所の指定をします。指定しない場合には初期値の`0.0`が使われます
+| コンストラクタ | 説明 |
+|-|-|
+| `EdgeInsets.all(double value)` | 上下左右すべて同じ`value`の値にします |
+| `EdgeInsets.fromLTRB(double left, double right, double top, double bottom)` | 引数で、左、右、上、下の4つの値を指定します |
+| `EdgeInsets.only({double left = 0.0, double top = 0.0, double right = 0.0, double bottom = 0.0})` | 名前付き引数で、上下左右の必要な場所の指定をします。指定しない場合には初期値の`0.0`が使われます |
 
 例えば、次のように使います。
 
@@ -255,7 +210,15 @@ body: Column(
       ),
       padding: const EdgeInsets.all(20.0),
       margin: const EdgeInsets.only(bottom: 20.0),
-      color: Colors.red,
+      decoration: const BoxDecoration(
+        color: Colors.red,
+        border: Border(
+          right: BorderSide(
+            width: 5.0,
+            color: Colors.blue,
+          ),
+        ),
+      ),
     ),
     Text(
       'test2',
@@ -268,6 +231,56 @@ body: Column(
   ],
 ),
 ```
+
+`Container`に似たクラスとして次のクラスがあります。`Container`は一通りの指定ができますが、次のクラスは、必要最低限の指定のみとなります。
+
+| クラス | 説明 |
+|-|-|
+| `Padding` | `padding`のみ指定可能 |
+| `SizedBox` | `width`と`height`のみ指定可能 |
+
+`Container`と組み合わせることで、`Column`や`Row`の`crossAxisAlignment`が働きます。
+
+次の`Column`に対して設定して確認します。
+
+```dart
+body: Column(
+  children: [
+    Container(
+      width: double.infinity,
+      color: Colors.blue[100],
+      child: Text(
+        'test1',
+        style: Theme.of(context).textTheme.headline4,
+      ),
+    ),
+    Container(
+      color: Colors.blue[200],
+      child: Text(
+        'test2',
+        style: Theme.of(context).textTheme.headline4,
+      ),
+    ),
+    Container(
+      color: Colors.blue[300],
+      child: Text(
+        'test3',
+        style: Theme.of(context).textTheme.headline4,
+      ),
+    ),
+  ],
+),
+```
+
+![cross_default](image/column_cross_default.webp)
+
+| 指定できる値 | 説明 | 画面 |
+|-|-|-|
+| `baseline` | | |
+| `start` | | <img src="image/column_cross_start.webp" width="150"> |
+| `center`  | | <img src="image/column_cross_center.webp" width="150"> |
+| `end` | | <img src="image/column_cross_end.webp" width="150"> |
+| `strech` | | <img src="image/column_cross_stretch.webp" width="150"> |
 
 
 ### Expanded
