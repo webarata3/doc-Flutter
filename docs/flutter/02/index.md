@@ -313,6 +313,7 @@ body: Column(
       ),
     ),
   ],
+),
 ```
 
 次のような表示になります。
@@ -371,12 +372,12 @@ body: Column(
       ),
     ),
   ],
-));
+),
 ```
 
 ![画像](image/06.webp)
 
-### ButtonNavigationBar
+### BottomNavigationBar
 
 `Scaffold`のコンストラクタの引数に次のものを追加します。
 
@@ -405,23 +406,19 @@ bottomNavigationBar: BottomNavigationBar(
 ![ナビゲーションバー](image/01.webp)
 
 `BottomNavigationBar`コンストラクタの主な名前付き引数
-:    `items`
-     :    `List<BottomNavigationBarItem>`型<br>
-          配置するアイコンのリスト
-:    `currentIndex`
-     :    `int`型<br>
-          選択済みのアイコンの位置。0〜
-:    `onTap`
-     :    `ValueChanged<int>`型<br>
-          タップされたときに呼び出される関数
+
+| 引数 | 説明 |
+|-|-|
+| `items` | `List<BottomNavigationBarItem>`型<br>配置するアイコンのリスト |
+| `currentIndex` | `int`型<br>選択済みのアイコンの位置。0〜 |
+| `onTap` | `ValueChanged<int>`型<br>タップされたときに呼び出される関数 |
 
 `BottomNavigationBarItem`コンストラクタの主な名前付き引数
-:    `icon`
-     :    `Widget`型<br>
-          表示するアイコン
-:    `label`
-     :    `String`型<br>
-          アイコンと同時に表示する文字
+
+| 引数 | 説明 |
+|-|-|
+| `icon` | `Widget`型<br>表示するアイコン |
+| `label` | `String`型<br>アイコンと同時に表示する文字 |
 
 使えるアイコンは、[Iconsクラスのドキュメント](https://api.flutter.dev/flutter/material/Icons-class.html){target=_blank}で確認できます。
 
@@ -530,53 +527,3 @@ onPressed: () {
 ボタンを押すと次のように表示され、しばらく待つと消えます。
 
 ![SnackBar](image/03.webp)
-
-## いろいろな配置
-
-### 横に並べる
-
-部品を横に並べたいときには、`Row`クラスを使います。
-
-```dart
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const LayoutTest(),
-    );
-  }
-}
-
-class LayoutTest extends StatelessWidget {
-  const LayoutTest({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('レイアウトテスト'),
-      ),
-      body: Row(
-        children: const [
-          Text('テキスト1'),
-          Text('テキスト2'),
-          Text('テキスト3'),
-          Text('テキスト4'),
-        ],
-      ),
-    );
-  }
-}
-```
