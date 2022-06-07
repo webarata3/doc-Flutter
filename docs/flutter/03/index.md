@@ -190,6 +190,8 @@ CheckboxListTile(
 ),
 ```
 
+![画面](image/check02.webp)
+
 ## スイッチ
 
 チェックボックスと同様のもので、スイッチの形をしたものが使えます。
@@ -203,6 +205,8 @@ SwitchListTile(
   },
 )
 ```
+
+![画面](image/switch01.webp)
 
 ## ラジオボタン
 
@@ -259,6 +263,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
+![画面](image/radio01.webp)
+
 ## ドロップダウンリスト
 
 ```dart
@@ -270,48 +276,39 @@ class SamplePage extends StatefulWidget {
 }
 
 class _SamplePageState extends State<SamplePage> {
-  //2
-  String? isSelectedItem = 'aaa';
+  String? isSelectedItem = '1';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('DropdownButton Sample'),
+        title: const Text('ドロップダウン'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //3
             DropdownButton(
-              //4
               items: const [
-                //5
                 DropdownMenuItem(
-                  child: Text('aaa'),
-                  value: 'aaa',
+                  child: Text('北海道'),
+                  value: '1',
                 ),
                 DropdownMenuItem(
-                  child: Text('bbb'),
-                  value: 'bbb',
+                  child: Text('東京都'),
+                  value: '2',
                 ),
                 DropdownMenuItem(
-                  child: Text('ccc'),
-                  value: 'ccc',
+                  child: Text('沖縄県'),
+                  value: '3',
                 ),
               ],
-              //6
               onChanged: (String? value) {
                 setState(() {
                   isSelectedItem = value;
                 });
               },
-              //7
               value: isSelectedItem,
-            ),
-            const SizedBox(
-              height: 32,
             ),
             Text('$isSelectedItem が選択されました。')
           ],
