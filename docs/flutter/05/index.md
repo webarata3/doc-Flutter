@@ -1,10 +1,10 @@
-# ListView
+# 簡単なアプリを作る - 計算機
 
-`ListView`はスクロール可能なウィジェットです。
+ここまで学習したことをもとに、かんたんな計算機を作成します。
 
-## 最初の例
+![完成](image/calc01.webp)
 
-`ListView`に画面からはみ出る程度の内容を含んだサンプルです。
+## 画面のレイアウトの作成
 
 ```dart
 import 'package:flutter/material.dart';
@@ -19,86 +19,169 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '計算機',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LayoutTest(),
+      home: const CalcWidget(),
     );
   }
 }
 
-class LayoutTest extends StatelessWidget {
-  const LayoutTest({Key? key}) : super(key: key);
+class CalcWidget extends StatefulWidget {
+  const CalcWidget({Key? key}) : super(key: key);
+
+  @override
+  State<CalcWidget> createState() => _CalcState();
+}
+
+class _CalcState extends State<CalcWidget> {
+  final num1Controller = TextEditingController();
+  final num2Controller = TextEditingController();
+  String? selectedOperator = '+';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('レイアウトテスト'),
+        title: const Text('サンプル'),
       ),
-      body: ListView(
-        children: [
-          for (var i = 1; i <= 20; i++)
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             Container(
               padding: const EdgeInsets.all(20.0),
-              child: Text('List$i'),
-            )
-        ],
+              child: TextField(
+                controller: num1Controller,
+                keyboardType: TextInputType.number,
+              ),
+            ),
+            DropdownButton(
+              items: const [
+                DropdownMenuItem(
+                  child: Text('＋'),
+                  value: '+',
+                ),
+                DropdownMenuItem(
+                  child: Text('ー'),
+                  value: '-',
+                ),
+                DropdownMenuItem(
+                  child: Text('×'),
+                  value: '*',
+                ),
+                DropdownMenuItem(
+                  child: Text('÷'),
+                  value: '/',
+                ),
+              ],
+              onChanged: (String? value) {
+                setState(() {
+                  selectedOperator = value;
+                });
+              },
+              value: selectedOperator,
+            ),
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              child: TextField(
+                controller: num2Controller,
+                keyboardType: TextInputType.number,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('計算'),
+            ),
+            const Text('答え: ')
+          ],
+        ),
       ),
     );
   }
 }
 ```
 
-`ListView`の主なコンストラクタ引数は次のとおりです。
+## テキストフィールドの値の取得
 
-| 引数 | 型 | 説明 |
-|-|-|-|
-| `children` | `<Widget>[]` | リストに含めるウィジェット |
+次に計算ボタンを押したときに、テキストフィールドの値を取得してみます。
 
-### コンテナの装飾
-
-`Container`に対して、`decoration`を設定できます。例えば、下線を引くには次のようにします。
+テキストフィールドからは、`controller`を経由して値の取得ができます。文字列として取得できるので、`int.parse`メソッドで`int`型に変換します。その際、`int`型に変換できない場合`FormatException`という例外が発生するので、`try〜catch`で囲んでいます。
 
 ```dart
-Container(
-  padding: const EdgeInsets.all(20.0),
-  decoration: const BoxDecoration(
-    border: Border(
-      bottom: BorderSide(
-        width: 1.0,
-        color: Colors.black,
-      ),
-    ),
-  ),
-  child: Text('List$i'),
-)
+void calc() {
+  try {
+    var num1 = int.parse(num1Controller.text);
+    var num2 = int.parse(num1Controller.text);
+  } catch (e) {}
+}
 ```
 
-### 表示件数が不明の場合
-
-表示する件数が事前にw駆らないような場合には`ListView.builder`を使います。
+また、++"計算"++ボタンの`onPressed`を押したときに`calc`メソッドが動作するようにします。
 
 ```dart
-body: ListView.builder(
-  itemBuilder: (context, index) {
-    return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 1.0,
-            color: Colors.grey,
-          ),
-        ),
-      ),
-      child: Text('$index番目'),
-    );
-  },
+ElevatedButton(
+  onPressed: calc,
+  child: const Text('計算'),
 ),
 ```
 
-この例では、無限にリストを作成しています。特にリストの項目が多い場合に、すべてのウィジェットを最初に作ってしまうと、メモリ等の資源を使ってしまいますし、時間もかかってしまいます。
+### 足し算だけしてみる
 
-`ListView.builder`では表示される部分のウィジェットを用意しますので、効率よくリストを扱うことができます。
+++"計算"++ボタンを押したときに2つの数字を足した結果を表示してみます。
 
+まずは、結果を表示するためのフィールドを用意します。
+
+
+```dart
+var result = '数値を入力して計算ボタンを押してください';
+```
+
+この変数は、`Text`で使用します。（`const`は削除します`）
+
+```dart
+Text('答え: $result')
+```
+
+最後に、++"計算"++ボタンを押したときに動作する`calc`メソッドを変更します。状態を変更するので、`setState`を使用します。例外が発生した場合には、答えの代わりにエラーメッセージを出します。
+
+```dart
+void calc() {
+  setState(() {
+    try {
+      var num1 = int.parse(num1Controller.text);
+      var num2 = int.parse(num2Controller.text);
+      result = (num1 + num2).toString();
+    } catch (e) {
+      result = '計算できません';
+    }
+  });
+}
+```
+
+## ドロップダウンリストに応じた計算をする
+
+ドロップダウンリストの値によって、計算方法を選択し計算する`operatorCalc`を作成します。
+
+```dart
+int operatorCalc(String? operator, int num1, int num2) {
+  // nullにはならない？
+  if (operator == null || operator == "+") {
+    return num1 + num2;
+  } else if (operator == "-") {
+    return num1 - num2;
+  } else if (operator == "*") {
+    return num1 * num2;
+  }
+  return num1 ~/ num2;
+}
+```
+
+`calc`メソッドの計算部分をこのメソッドに置き換えます。
+
+```dart
+var num1 = int.parse(num1Controller.text);
+var num2 = int.parse(num2Controller.text);
+result = operatorCalc(selectedOperator, num1, num2).toString();
+```
