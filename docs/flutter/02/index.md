@@ -282,6 +282,22 @@ body: Column(
 | `end` | | <img src="image/column_cross_end.webp" width="150"> |
 | `strech` | | <img src="image/column_cross_stretch.webp" width="150"> |
 
+`Container`に対して、`decoration`を設定できます。例えば、下線を引くには次のようにします。
+
+```dart
+Container(
+  padding: const EdgeInsets.all(20.0),
+  decoration: const BoxDecoration(
+    border: Border(
+      bottom: BorderSide(
+        width: 1.0,
+        color: Colors.black,
+      ),
+    ),
+  ),
+  child: Text('List$i'),
+)
+```
 
 ### Expanded
 
