@@ -327,17 +327,172 @@ class _SamplePageState extends State<SamplePage> {
 
 ![練習問題1](image/ex01.webp)
 
+??? 解答例
+
+    ```dart
+    import 'package:flutter/material.dart';
+
+    void main() {
+      runApp(const MyApp());
+    }
+
+    class MyApp extends StatelessWidget {
+      const MyApp({Key? key}) : super(key: key);
+
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      }
+    }
+
+    class MyHomePage extends StatefulWidget {
+      const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+      final String title;
+
+      @override
+      State<MyHomePage> createState() => _MyHomePageState();
+    }
+
+    class _MyHomePageState extends State<MyHomePage> {
+      int _counter = 0;
+
+      void _incrementCounter() {
+        setState(() {
+          _counter++;
+        });
+      }
+
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('左'),
+                  Text('右'),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('左'),
+                  Text('右'),
+                ],
+              ),
+            ],
+          ),
+        );
+      }
+    }
+    ```
+
 ### 練習問題2
 
 次のレイアウトになるように画面を作成すること。
 
 ![練習問題2](image/ex02.webp)
 
+テキストフィールドのキーボードは電話番号に特化したキーボードとすること。
+
+画面のボタンは、`ElevatedButton`。必要な引数は次の2つ。
+
+- `onPressed`: ボタンが押されたときに呼び出される関数。今は何もしなくて良いので、`() {}`としておく
+- `child`: ボタンに表示する内容。文字を表示する場合には`Text`を指定する
+
+??? 解答例
+
+    ```dart
+    import 'package:flutter/material.dart';
+
+    void main() {
+      runApp(const MyApp());
+    }
+
+    class MyApp extends StatelessWidget {
+      const MyApp({Key? key}) : super(key: key);
+
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      }
+    }
+
+    class MyHomePage extends StatefulWidget {
+      const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+      final String title;
+
+      @override
+      State<MyHomePage> createState() => _MyHomePageState();
+    }
+
+    class _MyHomePageState extends State<MyHomePage> {
+      int _counter = 0;
+
+      void _incrementCounter() {
+        setState(() {
+          _counter++;
+        });
+      }
+
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Column(
+            children: [
+              const Text('電話番号'),
+              const Padding(
+                padding: EdgeInsets.only(
+                  left: 10.0,
+                  right: 10.0,
+                ),
+                child: TextField(
+                  keyboardType: TextInputType.phone,
+                  maxLength: 15,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('送信'),
+              )
+            ],
+          ),
+        );
+      }
+    }
+    ```
+
 ### 練習問題3
 
 次のレイアウトになるように画面を作成すること。
 
 ![練習問題3](image/ex03.webp)
+
+真ん中の青い文字は、`TextButton`。引数は`ElevatedButton`と同じ。
+
+チェックボックスは、状態を変化させないとチェックマークがつかないので注意。
 
 ### 練習問題4
 
