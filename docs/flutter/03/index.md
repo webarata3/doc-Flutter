@@ -319,6 +319,29 @@ class _SamplePageState extends State<SamplePage> {
 }
 ```
 
+## ボタン
+
+ボタンは3種類あります。
+
+```dart
+ElevatedButton(
+  onPressed: () {},
+  child: const Text('ElevatedButton'),
+),
+TextButton(
+  onPressed: () {},
+  child: const Text('TextButton'),
+),
+OutlinedButton(
+  onPressed: () {},
+  child: const Text('OutlinedButton'),
+),
+```
+
+実行結果は次のとおりです。
+
+![ボタン](images/button01.webp);
+
 ## 練習問題
 
 ### 練習問題1
