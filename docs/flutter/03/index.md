@@ -340,7 +340,7 @@ OutlinedButton(
 
 実行結果は次のとおりです。
 
-![ボタン](images/button01.webp);
+![ボタン](image/button01.webp);
 
 ## 練習問題
 

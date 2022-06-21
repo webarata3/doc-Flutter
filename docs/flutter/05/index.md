@@ -167,11 +167,11 @@ void calc() {
 ```dart
 int operatorCalc(String? operator, int num1, int num2) {
   // nullにはならない？
-  if (operator == null || operator == "+") {
+  if (operator == null || operator == '+') {
     return num1 + num2;
-  } else if (operator == "-") {
+  } else if (operator == '-') {
     return num1 - num2;
-  } else if (operator == "*") {
+  } else if (operator == '*') {
     return num1 * num2;
   }
   return num1 ~/ num2;
