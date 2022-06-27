@@ -247,3 +247,68 @@ TextButton(
 
 画面の切り替えができたので、変更画面を表示する際に、選択されたTODOを表示されるようにします。
 
+まず、`TodoUpdatePage`のフィールドに追加します。
+
+```dart
+final TextEditingController textController = TextEditingController();
+```
+
+次に`TodoUpdatePage`のコンストラクタを次のものにします。
+
+```dart
+TodoUpdatePage({Key? key, required String todo}) : super(key: key) {
+  textController.text = todo;
+}
+```
+
+最後に、`TextField`に`controller`を追加します。
+
+```dart
+controller: textController,
+```
+
+`_TodoPageState`の`updataTodo`を次のようにします。
+
+```dart
+void updateTodo(BuildContext context, int index) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => TodoUpdatePage(
+        todo: todos[index],
+      ),
+    ),
+  );
+}
+```
+
+また、++"変更"++ボタンの`onPressed`を次のようにします。
+
+```dart
+onPressed: () => updateTodo(context, index),
+```
+
+## 変更できるようにする
+
+```dart
+Future<void> updateTodo(BuildContext context, int index) async {
+  var result = await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => TodoUpdatePage(
+        todo: todos[index],
+      ),
+    ),
+  );
+  if (result == null) return;
+  setState(() {
+    todos[index] = result;
+  });
+}
+```
+
+```dart
+void updateTodo(BuildContext context) {
+  Navigator.pop(context);
+}
+```
