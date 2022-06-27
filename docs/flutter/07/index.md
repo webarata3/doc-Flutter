@@ -172,3 +172,78 @@ TextButton(
   child: const Text('削除'),
 ),
 ```
+
+## 変更画面への切り替え
+
+変更は、++"変更"++ボタンを押したら画面が切り替わり、そこで変更するようにします。
+
+まずは、次のような変更画面を作成します。
+
+![画面](image/todo05.webp)
+
+```dart
+class TodoUpdatePage extends StatelessWidget {
+  const TodoUpdatePage({Key? key}) : super(key: key);
+
+  void updateTodo(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('todoの更新'),
+      ),
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(
+              left: 10.0,
+              right: 10.0,
+            ),
+            child: TextField(
+              decoration: InputDecoration(labelText: 'やること'),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => updateTodo(context),
+            child: const Text('更新'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+次に画面の++"変更"++ボタンを押したときに画面が切り替わるようにします。
+
+まずは、画面の切り替え用のメソッドを追加します。
+
+```dart
+void updateTodo(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => TodoUpdatePage(),
+    ),
+  );
+}
+```
+
+次に、++"削除"++ボタン前に++"変更"++ボタンを付けます。
+
+```dart
+TextButton(
+  onPressed: () => updateTodo(context),
+  child: const Text('変更'),
+),
+```
+
+ここまでで画面が切り替わるようになります。
+
+## 変更画面に選んだTODOを表示する
+
+画面の切り替えができたので、変更画面を表示する際に、選択されたTODOを表示されるようにします。
+
