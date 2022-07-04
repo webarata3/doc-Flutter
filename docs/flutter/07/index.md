@@ -127,7 +127,7 @@ Expanded(
 var textController = TextEditingController();
 ```
 
-```dart title="ElevatedButtonに追加"
+```dart title="TextFieldに追加"
 controller: textController,
 ```
 
