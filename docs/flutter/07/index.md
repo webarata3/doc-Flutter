@@ -309,6 +309,12 @@ Future<void> updateTodo(BuildContext context, int index) async {
 
 ```dart
 void updateTodo(BuildContext context) {
+  Navigator.pop(context, textController.text);
+}
+```
+
+```dart title="ElevatedButtonに追加"
+void updateTodo(BuildContext context) {
   Navigator.pop(context);
 }
 ```
