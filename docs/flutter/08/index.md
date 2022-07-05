@@ -257,7 +257,7 @@ import 'todo_update_page.dart';
 `updateTodo`メソッドを追加します。
 
 ```dart
-Future<void> updateTodo(BuildContext context, int index) async {
+void updateTodo(BuildContext context, int index) async {
   var result = await Navigator.push(
     context,
     MaterialPageRoute(
