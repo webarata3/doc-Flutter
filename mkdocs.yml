@@ -2,8 +2,6 @@ site_name: JavaからのFlutter
 theme:
   name: material
   language: 'ja'
-  features:
-    - navigation.tabs
 markdown_extensions:
   - admonition
   - pymdownx.highlight:
