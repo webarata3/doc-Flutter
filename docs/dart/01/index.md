@@ -8,15 +8,11 @@
 
 例えば、次のプログラムを`test.dart`として作成してください。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=ad54ea53da28590306bf2a5ed00b95ee"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      print('こんにちは');
-    }
-    ```
+```dart
+void main() {
+  print('こんにちは');
+}
+```
 
 記述したら、ターミナルを開きます。ターミナルで、`dart test.dart`とすると実行することができます。実行すると画面に`こんにちは`と出てくるはずです。
 
@@ -76,24 +72,20 @@ int? a = null;
 
 変数を宣言時に初期化できない場合でも、次のような場合、必ず変数に値が入るため`?`を付ける必要はありません。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=50206ad3c05ef12574a4ce3034838ebc"></iframe>
+```dart
+void main() {
+  int a;
+  int b = 3;
 
-??? オフライン用
+  if (b == 3) {
+    a = 1;
+  } else {
+    a = 2;
+  }
 
-    ```dart
-    void main() {
-      int a;
-      int b = 3;
-
-      if (b == 3) {
-        a = 1;
-      } else {
-        a = 2;
-      }
-
-      print(a);
-    }
-    ```
+  print(a);
+}
+```
 
 #### 練習問題 int-1
 
@@ -129,15 +121,11 @@ int? a = null;
 
 `double`型は、[IEEE 754](https://ja.wikipedia.org/wiki/IEEE_754)の浮動小数点として表されます。浮動小数点数のため、次の例のように厳密な計算ができない場合があります。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=bd2bdb574948419bc599d1ba2514c291"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      print(0.1 + 0.2);
-    }
-    ```
+```dart
+void main() {
+  print(0.1 + 0.2);
+}
+```
 
 このプログラムを実行すると、次のように誤差が出てしまいます。単純に小数の計算をしてしまうとこのような誤差が発生することがあります。
 
@@ -148,15 +136,11 @@ int? a = null;
 
 整数のリテラルは`0x`をつけると16進数となります。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=7a70d3580b71d69d6aa9cfb95c8c64ee"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      print(0x1a);
-    }
-    ```
+```dart
+void main() {
+  print(0x1a);
+}
+```
 
 数値に関してはJavaと比較すると次のようになります。
 
@@ -185,20 +169,16 @@ int? a = null;
 
 文字列リテラルは、`'''`もしくは`"""`で囲むことで、改行を含めることができます。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=8b08f75f417e95345fdfae89549019cf"></iframe>
+```dart
+void main() {
+  var s = '''
+  こんにちは
+  Dart
+  ''';
 
-??? オフライン用
-
-    ```dart
-    void main() {
-      var s = '''
-      こんにちは
-      Dart
-      ''';
-
-      print('>$s<');
-    }
-    ```
+  print('>$s<');
+}
+```
 
 実行すると次のようになります。
 
@@ -214,28 +194,20 @@ int? a = null;
 
 文字列の中でエスケープシーケンスを無視した、生の文字列を扱いたい場合には、文字列リテラルの先頭に`r`をつけます。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=ba4a2330857250af0548612f24c85faf"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      print(r'Hello \n Dart');
-    }
-    ```
+```dart
+void main() {
+  print(r'Hello \n Dart');
+}
+```
 
 文字列は`+`で結合することもできますが、文字列同士を隣接させると自動的に結合されます。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=543f60766677c2ca202e151b2f50e15b"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      const s = 'あいうえお' 'かきくけこ' 'さしすせそ';
-      print(s);
-    }
-    ```
+```dart
+void main() {
+  const s = 'あいうえお' 'かきくけこ' 'さしすせそ';
+  print(s);
+}
+```
 
 #### 練習問題 string-1
 
@@ -284,17 +256,13 @@ Dartでも値を変更することができる変数と、値を変更するこ�
 
 定数は、次のように`final`や`const`をつけることで宣言できます。違いは現段階ではないので、`const`を使っておくといいと思います。また、すぐに初期化する場合には、`int`や`bool`等はつけなくても構いません。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=431e3fbece96a5d23426042e4fff57cd"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      const i = 3; // intは不要
-      const b = true; // boolは不要
-      // i = 5; 変更しようとするとエラー
-    }
-    ```
+```dart
+void main() {
+  const i = 3; // intは不要
+  const b = true; // boolは不要
+  // i = 5; 変更しようとするとエラー
+}
+```
 
 ## 標準入力と型の変換
 
@@ -405,19 +373,15 @@ void main() {
 
 個別のデータを取ってきたり、データを変更する場合には、`[]`内にインデックス番号を書きます。インデックスはJavaと同じで先頭が0です。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=4ff07b8a81c612dedd756fee623ef443"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      var list = [1, 2, 3];
-      print(list);
-      print(list[0]);
-      list[0] = 99;
-      print(list[0]);
-    }
-    ```
+```dart
+void main() {
+  var list = [1, 2, 3];
+  print(list);
+  print(list[0]);
+  list[0] = 99;
+  print(list[0]);
+}
+```
 
 Javaと同じで、インデックスの範囲外のアクセスはエラーになります。
 
@@ -462,26 +426,22 @@ void main() {
 
 リストにはいろいろな方法で、値の追加ができます。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=bf6a39aff4cb0277a87a4acae8995975"></iframe>
+```dart
+void main() {
+  var list1 = [1, 2, 3];
+  var list2 = [0, ...list1];
 
-??? オフライン用
+  print('list2=${list2}');
 
-    ```dart
-    void main() {
-      var list1 = [1, 2, 3];
-      var list2 = [0, ...list1];
-
-      print('list2=${list2}');
-
-      var flag = false;
-      var list3 = [
-        0,
-        1,
-        if (flag) 3,
-      ];
-      print('list3=${list3}');
-    }
-    ```
+  var flag = false;
+  var list3 = [
+    0,
+    1,
+    if (flag) 3,
+  ];
+  print('list3=${list3}');
+}
+```
 
 この例の場合、`list2`の最後に`list1`の内容を追加しています。
 
@@ -500,83 +460,63 @@ void main() {
 
 `isEmpty`、`isNotEmpty`では要素が0件か、そうでないかのチェックができます。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=697174af5254ab97c9c90f621b9abeb8"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      var list = [1, 2, 3];
-      print(list.isEmpty);
-      print(list.isNotEmpty);
-    }
-    ```
+```dart
+void main() {
+  var list = [1, 2, 3];
+  print(list.isEmpty);
+  print(list.isNotEmpty);
+}
+```
 
 `length`で`List`に入っている件数を確認できます。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=758ca3d631bbc6c30daa34821465e8c0"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      var list = [1, 2, 3];
-      print(list.length);
-    }
-    ```
+```dart
+void main() {
+  var list = [1, 2, 3];
+  print(list.length);
+}
+```
 
 データの追加は、主に2つです。
 
 - `add`メソッド: 最後に要素を追加
 - `insert`メソッド: 指定した位置に、要素を挿入
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=74233bd68f6d8d1c54bcbb54d4f3d982"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      var list = [1, 2, 3];
-      list.add(4);
-      list.insert(1, 999);
-      print(list);
-    }
-    ```
+```dart
+void main() {
+  var list = [1, 2, 3];
+  list.add(4);
+  list.insert(1, 999);
+  print(list);
+}
+```
 
 データの削除は、要素を指定するか、インデックスを指定するかどちらかになります。要素の指定の場合には、複数ある場合には最初の要素になります。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=5697c1bc0eb58eef70906acb4c776780"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      var list = [1, 2, 3, 4, 5, 1, 2];
-      list.remove(1);
-      print(list);
-      list.removeAt(2);
-      print(list);
-    }
-    ```
+```dart
+void main() {
+  var list = [1, 2, 3, 4, 5, 1, 2];
+  list.remove(1);
+  print(list);
+  list.removeAt(2);
+  print(list);
+}
+```
 
 データの検索は次のものを使います。
 
 - `contains`: 要素が含まれているかどうか
 - `indexOf`、`lastIndexOf`: 要素がどこに入っているか
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=afa2e9302542e8b3c9393c8435ba9a23"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      var list = [1, 2, 3, 4, 5, 1, 2];
-      print(list.contains(3));
-      print(list.indexOf(2));
-      print(list.lastIndexOf(2));
-      print(list.lastIndexOf(7));
-    }
-    ```
+```dart
+void main() {
+  var list = [1, 2, 3, 4, 5, 1, 2];
+  print(list.contains(3));
+  print(list.indexOf(2));
+  print(list.lastIndexOf(2));
+  print(list.lastIndexOf(7));
+}
+```
 
 #### 練習問題1-4-1
 
@@ -639,51 +579,39 @@ void main() {
 
 重複せずに、順番が保証されないセットが用意されています。セットは`{}`で値を囲んで作成します。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=da05089d634e9ee51d9ec09bfbccd26c"></iframe>
+```dart
+void main() {
+  var set = {'東京都', '北海道', '沖縄県', '東京都', '東京都'};
 
-??? オフライン用
-
-    ```dart
-    void main() {
-      var set = {'東京都', '北海道', '沖縄県', '東京都', '東京都'};
-
-      print('set=${set}');
-    }
-    ```
+  print('set=${set}');
+}
+```
 
 上記のように、作成すると`東京都`は重複しているため1つだけセットされます（上記のようにリテラルでセットを作り、重複しているとエディタで警告が表示されます）。
 
 空の`Set`のリテラルを書く場合は、次のように型を明示します。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=471ed7d115351320181929176ff88f5a"></iframe>
+```dart
+void main() {
+  var set = <String>{};
 
-??? オフライン用
-
-    ```dart
-    void main() {
-      var set = <String>{};
-
-      print('set=${set}');
-    }
-    ```
+  print('set=${set}');
+}
+```
 
 基本的なメソッドは次のとおりです。
 
-<iframe width="100%" height="500" src="https://dartpad.dev/embed-inline.html?id=a1bc3e67280fb0cf44df1c717e1bff41"></iframe>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      final set = {'石川県', '富山県', '福井県', '東京都'};
-      print('1: $set');
-      set.add('北海道');
-      print('2: $set');
-      set.add('石川県');
-      print('3: $set');
-      print('石川県? ${set.contains("石川県")}');
-    }
-    ```
+```dart
+void main() {
+  final set = {'石川県', '富山県', '福井県', '東京都'};
+  print('1: $set');
+  set.add('北海道');
+  print('2: $set');
+  set.add('石川県');
+  print('3: $set');
+  print('石川県? ${set.contains("石川県")}');
+}
+```
 
 ### マップ
 
