@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+  <meta charset="utf-8">
+  <title>サニタイズ</title>
+  <style>
+   textarea {
+    width: 600px;
+    height: 10em;
+   }
+  </style>
+ </head>
+ <body>
+  <form>
+   <textarea id="text"></textarea><br>
+   <button type="button">変換</button>
+   <button type="reset">クリア</button>
+   <script>
+    const textElm = document.querySelector('#text');
+    const buttonElm = document.querySelector('button');
+
+    buttonElm.addEventListener('click', () => {
+     const text = textElm.value;
+     const tabText = text.split('\n')
+      .map(v => `    ${v}`).join('\n');
+
+     const sanitizeText = text.replace(/[&'`"<>]/g, match => {
+      return {
+       '&': '&amp;',
+       "'": '&#x27;',
+       '`': '&#x60;',
+       '"': '&quot;',
+       '<': '&lt;',
+       '>': '&gt;',
+      }[match]
+     });
+     const result = `<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+${sanitizeText}
+</code>
+</pre>
+
+??? オフライン用
+
+    \`\`\`dart
+${tabText}
+    \`\`\`
+`;
+     navigator.clipboard.writeText(result);
+    });
+   </script>
+ </body>
+</html>
