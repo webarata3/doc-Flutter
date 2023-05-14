@@ -8,11 +8,21 @@
 
 例えば、次のプログラムを`test.dart`として作成してください。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
-  print('こんにちは');
+  print(&#x27;こんにちは&#x27;);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      print('こんにちは');
+    }
+    ```
 
 記述したら、ターミナルを開きます。ターミナルで、`dart test.dart`とすると実行することができます。実行すると画面に`こんにちは`と出てくるはずです。
 
@@ -66,7 +76,8 @@ int? a = null;
 
 変数を宣言時に初期化できない場合でも、次のような場合、必ず変数に値が入るため`?`を付ける必要はありません。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   int a;
   int b = 3;
@@ -79,7 +90,25 @@ void main() {
 
   print(a);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      int a;
+      int b = 3;
+    
+      if (b == 3) {
+        a = 1;
+      } else {
+        a = 2;
+      }
+    
+      print(a);
+    }
+    ```
 
 #### 練習問題 int-1
 
@@ -115,11 +144,21 @@ void main() {
 
 `double`型は、[IEEE 754](https://ja.wikipedia.org/wiki/IEEE_754)の浮動小数点として表されます。浮動小数点数のため、次の例のように厳密な計算ができない場合があります。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   print(0.1 + 0.2);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      print(0.1 + 0.2);
+    }
+    ```
 
 このプログラムを実行すると、次のように誤差が出てしまいます。単純に小数の計算をしてしまうとこのような誤差が発生することがあります。
 
@@ -130,11 +169,21 @@ void main() {
 
 整数のリテラルは`0x`をつけると16進数となります。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   print(0x1a);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      print(0x1a);
+    }
+    ```
 
 数値に関してはJavaと比較すると次のようになります。
 
@@ -163,16 +212,31 @@ void main() {
 
 文字列リテラルは、`'''`もしくは`"""`で囲むことで、改行を含めることができます。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
-  var s = '''
+  var s = &#x27;&#x27;&#x27;
   こんにちは
   Dart
-  ''';
+  &#x27;&#x27;&#x27;;
 
-  print('>$s<');
+  print(&#x27;&gt;$s&lt;&#x27;);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var s = '''
+      こんにちは
+      Dart
+      ''';
+    
+      print('>$s<');
+    }
+    ```
 
 実行すると次のようになります。
 
@@ -188,20 +252,41 @@ void main() {
 
 文字列の中でエスケープシーケンスを無視した、生の文字列を扱いたい場合には、文字列リテラルの先頭に`r`をつけます。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
-  print(r'Hello \n Dart');
+  print(r&#x27;Hello \n Dart&#x27;);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      print(r'Hello \n Dart');
+    }
+    ```
 
 文字列は`+`で結合することもできますが、文字列同士を隣接させると自動的に結合されます。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
-  const s = 'あいうえお' 'かきくけこ' 'さしすせそ';
+  const s = &#x27;あいうえお&#x27; &#x27;かきくけこ&#x27; &#x27;さしすせそ&#x27;;
   print(s);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      const s = 'あいうえお' 'かきくけこ' 'さしすせそ';
+      print(s);
+    }
+    ```
 
 #### 練習問題 string-1
 
@@ -322,8 +407,6 @@ void main() {
 }
 ```
 
-
-
 #### 練習問題1-3-2
 
 キーボードから2つ文字列を入力すること。それぞれ数値に変換し、その合計を画面に表示すること。数値変換時のエラーは無視して良い。
@@ -367,7 +450,8 @@ void main() {
 
 個別のデータを取ってきたり、データを変更する場合には、`[]`内にインデックス番号を書きます。インデックスはJavaと同じで先頭が0です。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var list = [1, 2, 3];
   print(list);
@@ -375,16 +459,40 @@ void main() {
   list[0] = 99;
   print(list[0]);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list = [1, 2, 3];
+      print(list);
+      print(list[0]);
+      list[0] = 99;
+      print(list[0]);
+    }
+    ```
 
 Javaと同じで、インデックスの範囲外のアクセスはエラーになります。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var list = [1, 2, 3];
   list[3] = 10;
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list = [1, 2, 3];
+      list[3] = 10;
+    }
+    ```
 
 実行結果。
 
@@ -420,12 +528,13 @@ void main() {
 
 リストにはいろいろな方法で、値の追加ができます。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var list1 = [1, 2, 3];
   var list2 = [0, ...list1];
 
-  print('list2=${list2}');
+  print(&#x27;list2=${list2}&#x27;);
 
   var flag = false;
   var list3 = [
@@ -433,9 +542,29 @@ void main() {
     1,
     if (flag) 3,
   ];
-  print('list3=${list3}');
+  print(&#x27;list3=${list3}&#x27;);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list1 = [1, 2, 3];
+      var list2 = [0, ...list1];
+    
+      print('list2=${list2}');
+    
+      var flag = false;
+      var list3 = [
+        0,
+        1,
+        if (flag) 3,
+      ];
+      print('list3=${list3}');
+    }
+    ```
 
 この例の場合、`list2`の最後に`list1`の内容を追加しています。
 
@@ -443,51 +572,99 @@ void main() {
 
 また、次のように`for`ループの結果をリストに含むということもできます。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
-  var list = [for (var i = 1; i <= 10; i++) i];
-  print('list=${list}');
+  var list = [for (var i = 1; i &lt;= 10; i++) i];
+  print(&#x27;list=${list}&#x27;);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list = [for (var i = 1; i <= 10; i++) i];
+      print('list=${list}');
+    }
+    ```
 
 `List`の[API](https://api.dart.dev/stable/2.16.2/dart-core/List-class.html)からいくつか使えそうなものを紹介します。
 
 `isEmpty`、`isNotEmpty`では要素が0件か、そうでないかのチェックができます。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var list = [1, 2, 3];
   print(list.isEmpty);
   print(list.isNotEmpty);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list = [1, 2, 3];
+      print(list.isEmpty);
+      print(list.isNotEmpty);
+    }
+    ```
 
 `length`で`List`に入っている件数を確認できます。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var list = [1, 2, 3];
   print(list.length);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list = [1, 2, 3];
+      print(list.length);
+    }
+    ```
 
 データの追加は、主に2つです。
 
 - `add`メソッド: 最後に要素を追加
 - `insert`メソッド: 指定した位置に、要素を挿入
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var list = [1, 2, 3];
   list.add(4);
   list.insert(1, 999);
   print(list);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list = [1, 2, 3];
+      list.add(4);
+      list.insert(1, 999);
+      print(list);
+    }
+    ```
 
 データの削除は、要素を指定するか、インデックスを指定するかどちらかになります。要素の指定の場合には、複数ある場合には最初の要素になります。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var list = [1, 2, 3, 4, 5, 1, 2];
   list.remove(1);
@@ -495,14 +672,28 @@ void main() {
   list.removeAt(2);
   print(list);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list = [1, 2, 3, 4, 5, 1, 2];
+      list.remove(1);
+      print(list);
+      list.removeAt(2);
+      print(list);
+    }
+    ```
 
 データの検索は次のものを使います。
 
 - `contains`: 要素が含まれているかどうか
 - `indexOf`、`lastIndexOf`: 要素がどこに入っているか
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var list = [1, 2, 3, 4, 5, 1, 2];
   print(list.contains(3));
@@ -510,18 +701,42 @@ void main() {
   print(list.lastIndexOf(2));
   print(list.lastIndexOf(7));
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list = [1, 2, 3, 4, 5, 1, 2];
+      print(list.contains(3));
+      print(list.indexOf(2));
+      print(list.lastIndexOf(2));
+      print(list.lastIndexOf(7));
+    }
+    ```
 
 #### 練習問題list-1
 
 次のプログラムを書くこと。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var list = [1, 2, 3];
   print(list);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var list = [1, 2, 3];
+      print(list);
+    }
+    ```
 
 また、`list`の最後の要素の`3`の直後に`,`を入れてファイルを保存し、要素ごとに改行されることを確認すること。
 
@@ -573,54 +788,110 @@ void main() {
 
 重複せずに、順番が保証されないセットが用意されています。セットは`{}`で値を囲んで作成します。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
-  var set = {'東京都', '北海道', '沖縄県', '東京都', '東京都'};
+  var set = {&#x27;東京都&#x27;, &#x27;北海道&#x27;, &#x27;沖縄県&#x27;, &#x27;東京都&#x27;, &#x27;東京都&#x27;};
 
-  print('set=${set}');
+  print(&#x27;set=${set}&#x27;);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var set = {'東京都', '北海道', '沖縄県', '東京都', '東京都'};
+    
+      print('set=${set}');
+    }
+    ```
 
 上記のように、作成すると`東京都`は重複しているため1つだけセットされます（上記のようにリテラルでセットを作り、重複しているとエディタで警告が表示されます）。
 
 空の`Set`のリテラルを書く場合は、次のように型を明示します。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
-  var set = <String>{};
+  var set = &lt;String&gt;{};
 
-  print('set=${set}');
+  print(&#x27;set=${set}&#x27;);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var set = <String>{};
+    
+      print('set=${set}');
+    }
+    ```
 
 基本的なメソッドは次のとおりです。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
-  final set = {'石川県', '富山県', '福井県', '東京都'};
-  print('1: $set');
-  set.add('北海道');
-  print('2: $set');
-  set.add('石川県');
-  print('3: $set');
-  print('石川県? ${set.contains("石川県")}');
+  final set = {&#x27;石川県&#x27;, &#x27;富山県&#x27;, &#x27;福井県&#x27;, &#x27;東京都&#x27;};
+  print(&#x27;1: $set&#x27;);
+  set.add(&#x27;北海道&#x27;);
+  print(&#x27;2: $set&#x27;);
+  set.add(&#x27;石川県&#x27;);
+  print(&#x27;3: $set&#x27;);
+  print(&#x27;石川県? ${set.contains(&quot;石川県&quot;)}&#x27;);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      final set = {'石川県', '富山県', '福井県', '東京都'};
+      print('1: $set');
+      set.add('北海道');
+      print('2: $set');
+      set.add('石川県');
+      print('3: $set');
+      print('石川県? ${set.contains("石川県")}');
+    }
+    ```
 
 ### マップ
 
 キーと値をセットにしたマップも組み込み型として用意されています。マップはセットと同様にリテラルは`{}`で定義します。`{}`の中では`:`でキーと値を区切ります。
 
-```dart
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
 void main() {
   var map = {
-    '長野県': '長野市',
-    '北海道': '札幌市',
-    '富山県': '富山市',
+    &#x27;長野県&#x27;: &#x27;長野市&#x27;,
+    &#x27;北海道&#x27;: &#x27;札幌市&#x27;,
+    &#x27;富山県&#x27;: &#x27;富山市&#x27;,
   };
 
-  print('富山県の県庁所在地は${map["富山県"]}');
+  print(&#x27;富山県の県庁所在地は${map[&quot;富山県&quot;]}&#x27;);
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    void main() {
+      var map = {
+        '長野県': '長野市',
+        '北海道': '札幌市',
+        '富山県': '富山市',
+      };
+    
+      print('富山県の県庁所在地は${map["富山県"]}');
+    }
+    ```
 
 マップの値の取得は`[]`の中にキーを書くことで行えます。

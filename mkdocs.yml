@@ -18,6 +18,7 @@ markdown_extensions:
   - pymdownx.tilde
   - pymdownx.details
 extra_javascript:
+  - js/inject_embed.dart.js
   - js/highlight.min.js
   - javascripts/config.js
 extra_css:

@@ -5,7 +5,7 @@
 }
 
 body {
-  --md-code-font-family: var(--md-code-font,_),SFMono-Regular,Consolas,Menlo,'Noto Sans JP',monospace;
+  --md-code-font-family: var(--md-code-font, _), SFMono-Regular, Consolas, Menlo, 'Noto Sans JP', monospace;
 }
 
 img {
@@ -27,9 +27,15 @@ h3::before {
   position: absolute;
   content: '';
   left: 0;
-  top: calc(0.5em - var(--border-length) / 2 + 5px); /* 最後の5pxはpadding分 */
+  top: calc(0.5em - var(--border-length) / 2 + 5px);
+  /* 最後の5pxはpadding分 */
   height: var(--border-length);
   width: 5px;
   background-color: var(--md-primary-fg-color);
   border-radius: 2px;
+}
+
+.md-typeset iframe {
+  width: 100%;
+  height: 400px;
 }
