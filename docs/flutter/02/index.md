@@ -6,8 +6,9 @@
 
 これに追記して動きを確認していきます。
 
-```dart
-import 'package:flutter/material.dart';
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+import &#x27;package:flutter/material.dart&#x27;;
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: &#x27;Flutter Demo&#x27;,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -36,12 +37,52 @@ class LayoutTest extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('レイアウトテスト'),
+        title: const Text(&#x27;レイアウトテスト&#x27;),
       ),
     );
   }
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    import 'package:flutter/material.dart';
+    
+    void main() {
+      runApp(const MyApp());
+    }
+    
+    class MyApp extends StatelessWidget {
+      const MyApp({super.key});
+    
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const LayoutTest(),
+        );
+      }
+    }
+    
+    class LayoutTest extends StatelessWidget {
+      const LayoutTest({Key? key}) : super(key: key);
+    
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('レイアウトテスト'),
+          ),
+        );
+      }
+    }
+    ```
 
 ## 並べて配置
 
@@ -445,22 +486,24 @@ bottomNavigationBar: BottomNavigationBar(
 
 選択されているボタンを変更する場合には、`StatefulWidget`で作成する必要があります（ボタンの状態を持たないといけません）。
 
-```dart
-import 'package:flutter/material.dart';
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+import &#x27;package:flutter/material.dart&#x27;;
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: &#x27;Flutter Demo&#x27;,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
       home: const LayoutTest(),
     );
@@ -471,10 +514,10 @@ class LayoutTest extends StatefulWidget {
   const LayoutTest({Key? key}) : super(key: key);
 
   @override
-  State<LayoutTest> createState() => _LayoutTestState();
+  State&lt;LayoutTest&gt; createState() =&gt; _LayoutTestState();
 }
 
-class _LayoutTestState extends State<LayoutTest> {
+class _LayoutTestState extends State&lt;LayoutTest&gt; {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -487,21 +530,21 @@ class _LayoutTestState extends State<LayoutTest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('レイアウトテスト'),
+        title: const Text(&#x27;レイアウトテスト&#x27;),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: const &lt;BottomNavigationBarItem&gt;[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'ホーム',
+            label: &#x27;ホーム&#x27;,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: '設定',
+            label: &#x27;設定&#x27;,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: '検索',
+            label: &#x27;検索&#x27;,
           ),
         ],
         currentIndex: _selectedIndex,
@@ -510,7 +553,78 @@ class _LayoutTestState extends State<LayoutTest> {
     );
   }
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    import 'package:flutter/material.dart';
+    
+    void main() {
+      runApp(const MyApp());
+    }
+    
+    class MyApp extends StatelessWidget {
+      const MyApp({super.key});
+    
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const LayoutTest(),
+        );
+      }
+    }
+    
+    class LayoutTest extends StatefulWidget {
+      const LayoutTest({Key? key}) : super(key: key);
+    
+      @override
+      State<LayoutTest> createState() => _LayoutTestState();
+    }
+    
+    class _LayoutTestState extends State<LayoutTest> {
+      int _selectedIndex = 0;
+    
+      void _onItemTapped(int index) {
+        setState(() {
+          _selectedIndex = index;
+        });
+      }
+    
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('レイアウトテスト'),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'ホーム',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: '設定',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: '検索',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+          ),
+        );
+      }
+    }
+    ```
 
 `BottomNavigationBar`の`onTap`にボタンが押されたときに呼び出される関数を設定します。関数は引数に押したボタンのインデックスが渡されます。
 
