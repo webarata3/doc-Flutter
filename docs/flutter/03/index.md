@@ -321,26 +321,281 @@ class _SamplePageState extends State<SamplePage> {
 
 ## ボタン
 
-ボタンは3種類あります。
+ボタンは9種類あります。
 
-```dart
-ElevatedButton(
-  onPressed: () {},
-  child: const Text('ElevatedButton'),
-),
-TextButton(
-  onPressed: () {},
-  child: const Text('TextButton'),
-),
-OutlinedButton(
-  onPressed: () {},
-  child: const Text('OutlinedButton'),
-),
-```
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+import &#x27;package:flutter/material.dart&#x27;;
 
-実行結果は次のとおりです。
+void main() {
+  runApp(const MyApp());
+}
 
-![ボタン](image/button01.webp);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#x27;Flutter Demo&#x27;,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: &#x27;Flutter Demo Home Page&#x27;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State&lt;MyHomePage&gt; createState() =&gt; _MyHomePageState();
+}
+
+enum Size { xs, s, m, l, xl }
+
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  var selectedSize = Size.xs;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text(&#x27;Elevated&#x27;),
+            ),
+            const SizedBox(height: 15.0),
+            FilledButton(
+              onPressed: () {},
+              child: const Text(&#x27;Filled&#x27;),
+            ),
+            const SizedBox(height: 15.0),
+            FilledButton.tonal(
+              onPressed: () {},
+              child: const Text(&#x27;Filled tonal&#x27;),
+            ),
+            const SizedBox(height: 15.0),
+            OutlinedButton(
+              onPressed: () {},
+              child: const Text(&#x27;Outlined&#x27;),
+            ),
+            const SizedBox(height: 15.0),
+            TextButton(
+              onPressed: () {},
+              child: const Text(&#x27;Text&#x27;),
+            ),
+            const SizedBox(height: 15.0),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.home_outlined),
+            ),
+            const SizedBox(height: 15.0),
+            SegmentedButton&lt;Size&gt;(
+              segments: const [
+                ButtonSegment&lt;Size&gt;(
+                  value: Size.xs,
+                  label: Text(&#x27;XS&#x27;),
+                ),
+                ButtonSegment&lt;Size&gt;(
+                  value: Size.s,
+                  label: Text(&#x27;S&#x27;),
+                ),
+                ButtonSegment&lt;Size&gt;(
+                  value: Size.m,
+                  label: Text(&#x27;M&#x27;),
+                ),
+                ButtonSegment&lt;Size&gt;(
+                  value: Size.l,
+                  label: Text(&#x27;L&#x27;),
+                ),
+                ButtonSegment&lt;Size&gt;(
+                  value: Size.xl,
+                  label: Text(&#x27;XL&#x27;),
+                ),
+              ],
+              selected: {selectedSize},
+              onSelectionChanged: (newSelected) {
+                setState(() {
+                  selectedSize = newSelected.first;
+                });
+              },
+            ),
+            const SizedBox(height: 15.0),
+            FloatingActionButton(
+              onPressed: () {},
+              child: const Icon(Icons.home),
+            ),
+            const SizedBox(height: 15.0),
+            FloatingActionButton.extended(
+                onPressed: () {},
+                icon: const Icon(Icons.home),
+                label: const Text(&#x27;Extended FAB&#x27;)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    import 'package:flutter/material.dart';
+
+    void main() {
+      runApp(const MyApp());
+    }
+
+    class MyApp extends StatelessWidget {
+      const MyApp({Key? key}) : super(key: key);
+
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      }
+    }
+
+    class MyHomePage extends StatefulWidget {
+      const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+      final String title;
+
+      @override
+      State<MyHomePage> createState() => _MyHomePageState();
+    }
+
+    enum Size { xs, s, m, l, xl }
+
+    class _MyHomePageState extends State<MyHomePage> {
+      var selectedSize = Size.xs;
+
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Center(
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Elevated'),
+                ),
+                const SizedBox(height: 15.0),
+                FilledButton(
+                  onPressed: () {},
+                  child: const Text('Filled'),
+                ),
+                const SizedBox(height: 15.0),
+                FilledButton.tonal(
+                  onPressed: () {},
+                  child: const Text('Filled tonal'),
+                ),
+                const SizedBox(height: 15.0),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: const Text('Outlined'),
+                ),
+                const SizedBox(height: 15.0),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Text'),
+                ),
+                const SizedBox(height: 15.0),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.home_outlined),
+                ),
+                const SizedBox(height: 15.0),
+                SegmentedButton<Size>(
+                  segments: const [
+                    ButtonSegment<Size>(
+                      value: Size.xs,
+                      label: Text('XS'),
+                    ),
+                    ButtonSegment<Size>(
+                      value: Size.s,
+                      label: Text('S'),
+                    ),
+                    ButtonSegment<Size>(
+                      value: Size.m,
+                      label: Text('M'),
+                    ),
+                    ButtonSegment<Size>(
+                      value: Size.l,
+                      label: Text('L'),
+                    ),
+                    ButtonSegment<Size>(
+                      value: Size.xl,
+                      label: Text('XL'),
+                    ),
+                  ],
+                  selected: {selectedSize},
+                  onSelectionChanged: (newSelected) {
+                    setState(() {
+                      selectedSize = newSelected.first;
+                    });
+                  },
+                ),
+                const SizedBox(height: 15.0),
+                FloatingActionButton(
+                  onPressed: () {},
+                  child: const Icon(Icons.home),
+                ),
+                const SizedBox(height: 15.0),
+                FloatingActionButton.extended(
+                    onPressed: () {},
+                    icon: const Icon(Icons.home),
+                    label: const Text('Extended FAB')),
+              ],
+            ),
+          ),
+        );
+      }
+    }
+
+    ```
+
+実行結果は次のようになります。
+
+![](image/button01.webp)
+
+それぞれ上から、
+
+1. Elevated button
+2. Filled button
+3. Filled tonal button
+4. Outlined button
+5. Text button
+6. Icon button
+7. Segmented button
+8. Floating action button（FAB）
+9. Extended FAB
+
+という名前です。
+
+[使い分けの詳細は、マテリアルデザインのサイト](https://m3.material.io/components/all-buttons){target=_blank}で確認してください。
 
 ## 練習問題
 
