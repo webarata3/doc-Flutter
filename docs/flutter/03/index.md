@@ -622,7 +622,8 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
         return MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
           ),
           home: const MyHomePage(title: 'Flutter Demo Home Page'),
         );
@@ -638,14 +639,10 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
       State<MyHomePage> createState() => _MyHomePageState();
     }
 
-    class _MyHomePageState extends State<MyHomePage> {
-      int _counter = 0;
+    enum Size { xs, s, m, l, xl }
 
-      void _incrementCounter() {
-        setState(() {
-          _counter++;
-        });
-      }
+    class _MyHomePageState extends State<MyHomePage> {
+      var selectedSize = Size.xs;
 
       @override
       Widget build(BuildContext context) {
@@ -653,19 +650,19 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
           appBar: AppBar(
             title: Text(widget.title),
           ),
-          body: Column(
+          body: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text('左'),
                   Text('右'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text('左'),
                   Text('右'),
                 ],
