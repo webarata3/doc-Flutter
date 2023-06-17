@@ -4,22 +4,24 @@
 
 次のレイアウトを基準に作成していきます。
 
-```dart
-import 'package:flutter/material.dart';
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+import &#x27;package:flutter/material.dart&#x27;;
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: &#x27;Flutter Demo&#x27;,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
       home: const LayoutTest(),
     );
@@ -33,7 +35,7 @@ class LayoutTest extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('レイアウトテスト'),
+        title: const Text(&#x27;レイアウトテスト&#x27;),
       ),
       body: Column(
         children: [
@@ -46,7 +48,55 @@ class LayoutTest extends StatelessWidget {
     );
   }
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    import 'package:flutter/material.dart';
+    
+    void main() {
+      runApp(const MyApp());
+    }
+    
+    class MyApp extends StatelessWidget {
+      const MyApp({super.key});
+    
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const LayoutTest(),
+        );
+      }
+    }
+    
+    class LayoutTest extends StatelessWidget {
+      const LayoutTest({Key? key}) : super(key: key);
+    
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('レイアウトテスト'),
+          ),
+          body: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(20.0),
+                child: const TextField(),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+    ```
 
 テキストフィールドは`TextField`クラスを使用します。引数なしで指定すると次のように表示されます。
 
@@ -119,24 +169,26 @@ const TextField(
 
 チェックボックスは、チェックの状態を持つため`StatefulWidget`として作成する必要があります。まず全体像を確認します。
 
-```dart
-import 'package:flutter/material.dart';
+<pre>
+<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+import &#x27;package:flutter/material.dart&#x27;;
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: &#x27;Flutter Demo&#x27;,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: &#x27;Flutter Demo Home Page&#x27;),
     );
   }
 }
@@ -147,11 +199,11 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State&lt;MyHomePage&gt; createState() =&gt; _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  bool check = false;
+class _MyHomePageState extends State&lt;MyHomePage&gt; {
+  bool? _check = false;
 
   @override
   Widget build(BuildContext context) {
@@ -162,9 +214,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Checkbox(
-            value: check,
+            value: _check,
             onChanged: (bool? value) {
-              setState(() => check = value ?? false);
+              setState(() =&gt; _check = value);
             },
           )
         ],
@@ -172,7 +224,66 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-```
+</code>
+</pre>
+
+??? オフライン用
+
+    ```dart
+    import 'package:flutter/material.dart';
+    
+    void main() {
+      runApp(const MyApp());
+    }
+    
+    class MyApp extends StatelessWidget {
+      const MyApp({super.key});
+    
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      }
+    }
+    
+    class MyHomePage extends StatefulWidget {
+      const MyHomePage({Key? key, required this.title}) : super(key: key);
+    
+      final String title;
+    
+      @override
+      State<MyHomePage> createState() => _MyHomePageState();
+    }
+    
+    class _MyHomePageState extends State<MyHomePage> {
+      bool? _check = false;
+    
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Column(
+            children: [
+              Checkbox(
+                value: _check,
+                onChanged: (bool? value) {
+                  setState(() => _check = value);
+                },
+              )
+            ],
+          ),
+        );
+      }
+    }
+    ```
 
 これでチェックボックスが作成できます。
 
@@ -183,9 +294,9 @@ class _MyHomePageState extends State<MyHomePage> {
 ```dart
 CheckboxListTile(
   title: const Text('確認しました'),
-  value: check,
+  value: _check,
   onChanged: (bool? value) {
-    setState(() => check = value ?? false);
+    setState(() => _check = value);
   },
 ),
 ```
@@ -199,9 +310,9 @@ CheckboxListTile(
 ```dart
 SwitchListTile(
   title: const Text('確認しました'),
-  value: check,
-  onChanged: (bool? value) {
-    setState(() => check = value ?? false);
+  value: _check,
+  onChanged: (bool value) {
+    setState(() => _check = value);
   },
 )
 ```
@@ -268,15 +379,17 @@ class _MyHomePageState extends State<MyHomePage> {
 ## ドロップダウンリスト
 
 ```dart
-class SamplePage extends StatefulWidget {
-  const SamplePage({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
 
   @override
-  State<SamplePage> createState() => _SamplePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _SamplePageState extends State<SamplePage> {
-  String? isSelectedItem = '1';
+class _MyHomePageState extends State<MyHomePage> {
+  String? _isSelectedItem = '1';
 
   @override
   Widget build(BuildContext context) {
@@ -284,40 +397,39 @@ class _SamplePageState extends State<SamplePage> {
       appBar: AppBar(
         title: const Text('ドロップダウン'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            DropdownButton(
-              items: const [
-                DropdownMenuItem(
-                  child: Text('北海道'),
-                  value: '1',
-                ),
-                DropdownMenuItem(
-                  child: Text('東京都'),
-                  value: '2',
-                ),
-                DropdownMenuItem(
-                  child: Text('沖縄県'),
-                  value: '3',
-                ),
-              ],
-              onChanged: (String? value) {
-                setState(() {
-                  isSelectedItem = value;
-                });
-              },
-              value: isSelectedItem,
-            ),
-            Text('$isSelectedItem が選択されました。')
-          ],
-        ),
+      body: Column(
+        children: [
+          DropdownButton(
+            items: const [
+              DropdownMenuItem(
+                value: '1',
+                child: Text('北海道'),
+              ),
+              DropdownMenuItem(
+                value: '2',
+                child: Text('東京都'),
+              ),
+              DropdownMenuItem(
+                value: '3',
+                child: Text('沖縄県'),
+              ),
+            ],
+            onChanged: (String? value) {
+              setState(() {
+                _isSelectedItem = value;
+              });
+            },
+            value: _isSelectedItem,
+          ),
+          Text('$_isSelectedItem が選択されました。')
+        ],
       ),
     );
   }
 }
 ```
+
+![画面](image/dropdown01.webp)
 
 ## ボタン
 
@@ -772,9 +884,137 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
 
 チェックボックスは、状態を変化させないとチェックマークがつかないので注意。
 
+??? 解答例
+
+    ```dart
+    import 'package:flutter/material.dart';
+    
+    void main() {
+      runApp(const MyApp());
+    }
+    
+    class MyApp extends StatelessWidget {
+      const MyApp({super.key});
+    
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      }
+    }
+    
+    class MyHomePage extends StatefulWidget {
+      const MyHomePage({Key? key, required this.title}) : super(key: key);
+    
+      final String title;
+    
+      @override
+      State<MyHomePage> createState() => _MyHomePageState();
+    }
+    
+    class _MyHomePageState extends State<MyHomePage> {
+      bool? _checked = false;
+    
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Column(
+            children: [
+              const Text('利用規約'),
+              TextButton(
+                onPressed: () {},
+                child: const Text('利用規約を読む'),
+              ),
+              CheckboxListTile(
+                title: const Text('利用規約を確認しました'),
+                value: _checked,
+                onChanged: (value) {
+                  setState(() {
+                    _checked = value;
+                  });
+                },
+              ),
+            ],
+          ),
+        );
+      }
+    }
+    ```
+
 ### 練習問題4
 
 次のレイアウトになるように画面を作成すること。
 
 ![練習問題4](image/ex04.webp)
 
+??? 解答例
+
+    ```dart
+    import 'package:flutter/material.dart';
+    
+    void main() {
+      runApp(const MyApp());
+    }
+    
+    class MyApp extends StatelessWidget {
+      const MyApp({super.key});
+    
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      }
+    }
+    
+    class MyHomePage extends StatefulWidget {
+      const MyHomePage({Key? key, required this.title}) : super(key: key);
+    
+      final String title;
+    
+      @override
+      State<MyHomePage> createState() => _MyHomePageState();
+    }
+    
+    class _MyHomePageState extends State<MyHomePage> {
+      int? _value = 1;
+    
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Column(
+            children: [
+              for (var i = 1; i <= 3; i++)
+                RadioListTile<int>(
+                  title: Text('$i'),
+                  value: i,
+                  groupValue: _value,
+                  onChanged: (value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                ),
+            ],
+          ),
+        );
+      }
+    }
+    ```
