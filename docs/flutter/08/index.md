@@ -91,7 +91,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
       home: const TodoPage(),
     );
@@ -106,7 +107,7 @@ class MyApp extends StatelessWidget {
 最初にTODOを追加できるようにします。まず、`TodoState`クラスに次のメソッドを追加します。
 
 ```dart title="view/todo_page.dart"
-void showAddDialog() async {
+void _showAddDialog() async {
   final textController = TextEditingController();
   var result = await showDialog(
     context: context,
@@ -153,7 +154,7 @@ void showAddDialog() async {
 また、`FloatingActionButton`を押したときに、このメソッドが呼び出される夜にします。
 
 ```dart
-onPressed: showAddDialog,
+onPressed: _showAddDialog,
 ```
 
 ## 削除できるようにする
@@ -161,7 +162,7 @@ onPressed: showAddDialog,
 `deleteTodo`メソッドを追加します。
 
 ```dart
-void deleteTodo(int index) async {
+void _deleteTodo(int index) async {
   var result = await showDialog(
     context: context,
     builder: (_) {
@@ -198,7 +199,7 @@ void deleteTodo(int index) async {
 また、削除ボタンで、`deleteTodo`メソッドが呼び出されるようにします。
 
 ```dart
-onPressed: () => deleteTodo(index),
+onPressed: () => _deleteTodo(index),
 ```
 
 ## 更新できるようにする
@@ -257,7 +258,7 @@ import 'todo_update_page.dart';
 `updateTodo`メソッドを追加します。
 
 ```dart
-void updateTodo(BuildContext context, int index) async {
+void _updateTodo(BuildContext context, int index) async {
   var result = await Navigator.push(
     context,
     MaterialPageRoute(
@@ -276,5 +277,5 @@ void updateTodo(BuildContext context, int index) async {
 変更ボタンにメソッドを設定します。
 
 ```dart
-onPressed: () => updateTodo(context, index),
+onPressed: () => _updateTodo(context, index),
 ```
