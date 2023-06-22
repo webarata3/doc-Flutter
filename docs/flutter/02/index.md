@@ -49,14 +49,14 @@ class LayoutTest extends StatelessWidget {
 
     ```dart
     import 'package:flutter/material.dart';
-    
+
     void main() {
       runApp(const MyApp());
     }
-    
+
     class MyApp extends StatelessWidget {
       const MyApp({super.key});
-    
+
       @override
       Widget build(BuildContext context) {
         return MaterialApp(
@@ -69,10 +69,10 @@ class LayoutTest extends StatelessWidget {
         );
       }
     }
-    
+
     class LayoutTest extends StatelessWidget {
       const LayoutTest({Key? key}) : super(key: key);
-    
+
       @override
       Widget build(BuildContext context) {
         return Scaffold(
@@ -152,14 +152,14 @@ body: Column(
 
     ```dart
     import 'package:flutter/material.dart';
-    
+
     void main() {
       runApp(const MyApp());
     }
-    
+
     class MyApp extends StatelessWidget {
       const MyApp({super.key});
-    
+
       @override
       Widget build(BuildContext context) {
         return MaterialApp(
@@ -172,10 +172,10 @@ body: Column(
         );
       }
     }
-    
+
     class LayoutTest extends StatelessWidget {
       const LayoutTest({Key? key}) : super(key: key);
-    
+
       @override
       Widget build(BuildContext context) {
         return Scaffold(
@@ -560,14 +560,14 @@ class _LayoutTestState extends State&lt;LayoutTest&gt; {
 
     ```dart
     import 'package:flutter/material.dart';
-    
+
     void main() {
       runApp(const MyApp());
     }
-    
+
     class MyApp extends StatelessWidget {
       const MyApp({super.key});
-    
+
       @override
       Widget build(BuildContext context) {
         return MaterialApp(
@@ -580,23 +580,23 @@ class _LayoutTestState extends State&lt;LayoutTest&gt; {
         );
       }
     }
-    
+
     class LayoutTest extends StatefulWidget {
       const LayoutTest({Key? key}) : super(key: key);
-    
+
       @override
       State<LayoutTest> createState() => _LayoutTestState();
     }
-    
+
     class _LayoutTestState extends State<LayoutTest> {
       int _selectedIndex = 0;
-    
+
       void _onItemTapped(int index) {
         setState(() {
           _selectedIndex = index;
         });
       }
-    
+
       @override
       Widget build(BuildContext context) {
         return Scaffold(
@@ -660,3 +660,25 @@ onPressed: () {
 ボタンを押すと次のように表示され、しばらく待つと消えます。
 
 ![SnackBar](image/03.webp)
+
+## 単位
+
+`Padding`や`SizedBox`で使われる単位については、論理ピクセルという単位が使われています。
+
+論理ピクセルは、実際のピクセル数ではなく、論理的なピクセルを使うということです。これは同じ大きさの画面であっても、画面の解像度が違う場合があり、その差を吸収するために用いられています。
+
+例えば、iPhone 11とiPhone 14を比較します。
+
+| 機種 | 画面サイズ | 解像度 横 | 解像度 縦 |
+|-|-|-|-|
+| iPhone 11 | 6.1インチ | 828 | 1792 |
+| iPhone 14 | 6.1インチ | 1170 | 2532 |
+
+同じ画面サイズですが、iPhone 14のほうが解像度が高いです。こういった場合に論理ピクセルではなく、物理的なピクセル数でサイズを表すと、機種ごとに大きさの違いが出てしまいます。
+
+例えば、次のように1ピクセルのサイズが異なる2つのスマホがある場合に、物理ピクセルで5ピクセルの長さとなると、このように違った大きさになってしまいます。
+
+![](image/unit01.webp)
+
+このようなスマホごとの画面の解像度を意識しなくていいように、論理ピクセルは使われています。
+
