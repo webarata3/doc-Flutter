@@ -682,3 +682,16 @@ onPressed: () {
 
 このようなスマホごとの画面の解像度を意識しなくていいように、論理ピクセルは使われています。
 
+使用しているスマホの論理ピクセルでの縦横サイズを確認したい場合には、`build`メソッド内に次のようなコードを挿入します。
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    double _deviceWidth = MediaQuery.of(context).size.width;
+    double _deviceHeight = MediaQuery.of(context).size.height;
+    print(_deviceWidth);
+    print(_deviceHeight);
+
+    return Scaffold(
+      appBar: AppBar(
+```
