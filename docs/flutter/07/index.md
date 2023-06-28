@@ -252,7 +252,7 @@ TextButton(
 まず、`_TodoUpdatePage`のフィールドに追加します。
 
 ```dart
-final TextEditingController textController = TextEditingController();
+final _textController = TextEditingController();
 ```
 
 次に`_TodoUpdatePage`のコンストラクタを次のものにします。
