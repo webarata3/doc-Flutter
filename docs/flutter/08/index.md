@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
 
 ## 追加できるようにする
 
-最初にTODOを追加できるようにします。まず、`TodoState`クラスに次のメソッドを追加します。
+最初にTODOを追加できるようにします。まず、`TodoPageState`クラスに次のメソッドを追加します。
 
 ```dart title="view/todo_page.dart"
 void _showAddDialog() async {
@@ -279,3 +279,14 @@ void _updateTodo(BuildContext context, int index) async {
 ```dart
 onPressed: () => _updateTodo(context, index),
 ```
+
+## 練習問題
+
+### 問題1
+
+次の画面のようなアプリを作ること。
+
+<video src="image/01.mp4" width="372" controls>
+
+### 問題2
+
