@@ -284,9 +284,47 @@ onPressed: () => _updateTodo(context, index),
 
 ### 問題1
 
-次の画面のようなアプリを作ること。
+次の画面レイアウトになるように画面を作成すること。
 
-<video src="image/01.mp4" width="372" controls>
+![](image/01.webp)
+
+画像は、次の画像をダウンロードし、プロジェクトフォルダの中に`assets`フォルダを作りそこに入れること。
+
+![](image/s_06.png)
+
+また、`pubspec.yaml`ファイルの54行目付近に次を追加すること。
+
+```yaml
+flutter:
+  assets:
+    - assets/s_06.png
+```
+
+画像を丸く表示するには、次のようにします。
+
+```dart
+Container(
+  width: 50.0,
+  height: 50.0,
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    image: DecorationImage(
+      fit: BoxFit.fill,
+      image: AssetImage('assets/s_06.png'),
+    ),
+  ),
+),
+```
 
 ### 問題2
+
+次の画面レイアウトになるように画面を作成すること。
+
+![](image/02.webp)
+
+### 問題3
+
+次のようなアプリを作成すること。
+
+<video src="image/01.mp4" width="372" controls>
 
