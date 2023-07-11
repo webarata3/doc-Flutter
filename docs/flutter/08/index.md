@@ -284,6 +284,12 @@ onPressed: () => _updateTodo(context, index),
 
 ### 問題1
 
+次のようなアプリを作成すること。
+
+<video src="image/01.mp4" width="372" controls></video>
+
+### 問題2
+
 次の画面レイアウトになるように画面を作成すること。
 
 ![](image/01.webp)
@@ -316,15 +322,8 @@ Container(
 ),
 ```
 
-### 問題2
+### 問題3
 
 次の画面レイアウトになるように画面を作成すること。
 
 ![](image/02.webp)
-
-### 問題3
-
-次のようなアプリを作成すること。
-
-<video src="image/01.mp4" width="372" controls>
-
