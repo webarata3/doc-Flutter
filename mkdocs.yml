@@ -1,22 +1,26 @@
 site_name: JavaからのFlutter
 theme:
   name: material
-  language: 'ja'
+  language: "ja"
+  features:
+    - content.code.copy
+    - content.code.annotate
 markdown_extensions:
   - admonition
-  - pymdownx.highlight:
-      linenums: true
+  - pymdownx.highlight
   - pymdownx.superfences
-  - pymdownx.tabbed
   - pymdownx.keys
-  - attr_list
   - def_list
   - abbr
   - footnotes
+  - pymdownx.details
   - pymdownx.caret
+  - pymdownx.keys
   - pymdownx.mark
   - pymdownx.tilde
   - pymdownx.details
+  - pymdownx.critic
+  - attr_list
 extra_javascript:
   - js/inject_embed.dart.js
   - js/highlight.min.js
@@ -28,20 +32,20 @@ extra_css:
 
 nav:
   - Dart:
-    - はじめに: index.md
-    - 第1章 変数: dart/01/index.md
-    - 第2章 演算子: dart/02/index.md
-    - 第3章 制御フロー: dart/03/index.md
-    - 第4章 関数: dart/04/index.md
-    - 第5章 クラス: dart/05/index.md
-    - 第6章 非同期: dart/06/index.md
+      - はじめに: index.md
+      - 第1章 組み込み型と変数: dart/01/index.md
+      - 第2章 演算子: dart/02/index.md
+      - 第3章 制御フロー: dart/03/index.md
+      - 第4章 関数: dart/04/index.md
+      - 第5章 クラス: dart/05/index.md
+      - 第6章 非同期: dart/06/index.md
   - Flutter:
-    - 1. サンプルアプリケーションを読む: flutter/01/index.md
-    - 2. レイアウト: flutter/02/index.md
-    - 3. UI部品: flutter/03/index.md
-    - 4. 複雑なレイアウト: flutter/04/index.md
-    - 5. 簡単なアプリを作ってみよう: flutter/05/index.md
-    - 6. 画面の切り替え: flutter/06/index.md
-    - 7. TODOアプリ: flutter/07/index.md
-    - 8. ファイルを分けてアプリを作成（TODO）: flutter/08/index.md
-    - 9. TODOのデータベース対応: flutter/09/index.md
+      - 1. サンプルアプリケーションを読む: flutter/01/index.md
+      - 2. レイアウト: flutter/02/index.md
+      - 3. UI部品: flutter/03/index.md
+      - 4. 複雑なレイアウト: flutter/04/index.md
+      - 5. 簡単なアプリを作ってみよう: flutter/05/index.md
+      - 6. 画面の切り替え: flutter/06/index.md
+      - 7. TODOアプリ: flutter/07/index.md
+      - 8. ファイルを分けてアプリを作成（TODO）: flutter/08/index.md
+      - 9. TODOのデータベース対応: flutter/09/index.md

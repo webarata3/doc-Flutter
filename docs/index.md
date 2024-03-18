@@ -2,7 +2,7 @@
 
 ## 何ができるようになる
 
-[A tour of the Dart language](https://dart.dev/guides/language/language-tour)をもとにDartの文法を一通り解説していきます。
+[A tour of the Dart language](https://dart.dev/guides/language/language-tour){target=_blank}をもとにDartの文法を一通り解説していきます。
 
 ## 対象読者
 

@@ -1,7 +1,10 @@
 @charset 'utf-8';
 
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+
 :root {
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+  --md-text-font: "Kosugi Maru";
 }
 
 body {
@@ -35,7 +38,29 @@ h3::before {
   border-radius: 2px;
 }
 
+a[download]::before {
+  content: '';
+  display: inline-block;
+  margin-right: 0.2em;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20fill%3D%22%234051b5%22%20d%3D%22M288%2032c0-17.7-14.3-32-32-32s-32%2014.3-32%2032V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3%200s-12.5%2032.8%200%2045.3l128%20128c12.5%2012.5%2032.8%2012.5%2045.3%200l128-128c12.5-12.5%2012.5-32.8%200-45.3s-32.8-12.5-45.3%200L288%20274.7V32zM64%20352c-35.3%200-64%2028.7-64%2064v32c0%2035.3%2028.7%2064%2064%2064H448c35.3%200%2064-28.7%2064-64V416c0-35.3-28.7-64-64-64H346.5l-45.3%2045.3c-25%2025-65.5%2025-90.5%200L165.5%20352H64zM432%20456c-13.3%200-24-10.7-24-24s10.7-24%2024-24s24%2010.7%2024%2024s-10.7%2024-24%2024z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+}
+
+a[target="_blank"]::after {
+  content: '';
+  display: inline-block;
+  margin-left: 0.2em;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20448%20512%22%3E%3Cpath%20stroke%3D%22%234051b5%22%20fill%3D%22%234051b5%22%20d%3D%22M256%2064C256%2046.33%20270.3%2032%20288%2032H415.1C415.1%2032%20415.1%2032%20415.1%2032C420.3%2032%20424.5%2032.86%20428.2%2034.43C431.1%2035.98%20435.5%2038.27%20438.6%2041.3C438.6%2041.35%20438.6%2041.4%20438.7%2041.44C444.9%2047.66%20447.1%2055.78%20448%2063.9C448%2063.94%20448%2063.97%20448%2064V192C448%20209.7%20433.7%20224%20416%20224C398.3%20224%20384%20209.7%20384%20192V141.3L214.6%20310.6C202.1%20323.1%20181.9%20323.1%20169.4%20310.6C156.9%20298.1%20156.9%20277.9%20169.4%20265.4L338.7%2096H288C270.3%2096%20256%2081.67%20256%2064V64zM0%20128C0%2092.65%2028.65%2064%2064%2064H160C177.7%2064%20192%2078.33%20192%2096C192%20113.7%20177.7%20128%20160%20128H64V416H352V320C352%20302.3%20366.3%20288%20384%20288C401.7%20288%20416%20302.3%20416%20320V416C416%20451.3%20387.3%20480%20352%20480H64C28.65%20480%200%20451.3%200%20416V128z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+}
+
 .md-typeset iframe {
   width: 100%;
-  height: 600px;
+  height: 400px;
 }
