@@ -2,11 +2,25 @@
 
 ## テキスト
 
+文字は、`Text`クラスを利用します。1番目の引数が表示する文字で、文字の大きさや色を変更する場合には、名前付きの引数を利用します。
+
+``` dart linenums="1"
+const Text(
+  'Textのテスト',
+  style: TextStyle(
+    color: Colors.blue,
+    fontSize: 30.0,
+    fontWeight: FontWeight.bold,
+  ),
+),
+```
+
+## テキスト入力
+
 次のレイアウトを基準に作成していきます。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-import &#x27;package:flutter/material.dart&#x27;;
+``` dart linenums="1"
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: &#x27;Flutter Demo&#x27;,
+      title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -35,7 +49,7 @@ class LayoutTest extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(&#x27;レイアウトテスト&#x27;),
+        title: const Text('レイアウトテスト'),
       ),
       body: Column(
         children: [
@@ -48,55 +62,7 @@ class LayoutTest extends StatelessWidget {
     );
   }
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    import 'package:flutter/material.dart';
-    
-    void main() {
-      runApp(const MyApp());
-    }
-    
-    class MyApp extends StatelessWidget {
-      const MyApp({super.key});
-    
-      @override
-      Widget build(BuildContext context) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const LayoutTest(),
-        );
-      }
-    }
-    
-    class LayoutTest extends StatelessWidget {
-      const LayoutTest({Key? key}) : super(key: key);
-    
-      @override
-      Widget build(BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('レイアウトテスト'),
-          ),
-          body: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(20.0),
-                child: const TextField(),
-              ),
-            ],
-          ),
-        );
-      }
-    }
-    ```
+```
 
 テキストフィールドは`TextField`クラスを使用します。引数なしで指定すると次のように表示されます。
 
@@ -136,7 +102,7 @@ class LayoutTest extends StatelessWidget {
 
 枠線を入れる場合には次のようにします。
 
-```dart
+``` dart linenums="1"
 const TextField(
   decoration: InputDecoration(
     border: OutlineInputBorder(),
@@ -148,7 +114,7 @@ const TextField(
 
 `labelText`を追加するとヒントを表示できます。
 
-```dart
+``` dart linenums="1"
 const TextField(
   decoration: InputDecoration(
     border: OutlineInputBorder(),
@@ -169,9 +135,8 @@ const TextField(
 
 チェックボックスは、チェックの状態を持つため`StatefulWidget`として作成する必要があります。まず全体像を確認します。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-import &#x27;package:flutter/material.dart&#x27;;
+``` dart linenums="1"
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -183,12 +148,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: &#x27;Flutter Demo&#x27;,
+      title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: &#x27;Flutter Demo Home Page&#x27;),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -199,10 +164,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State&lt;MyHomePage&gt; createState() =&gt; _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State&lt;MyHomePage&gt; {
+class _MyHomePageState extends State<MyHomePage> {
   bool? _check = false;
 
   @override
@@ -216,7 +181,7 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
           Checkbox(
             value: _check,
             onChanged: (bool? value) {
-              setState(() =&gt; _check = value);
+              setState(() => _check = value);
             },
           )
         ],
@@ -224,74 +189,23 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
     );
   }
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    import 'package:flutter/material.dart';
-    
-    void main() {
-      runApp(const MyApp());
-    }
-    
-    class MyApp extends StatelessWidget {
-      const MyApp({super.key});
-    
-      @override
-      Widget build(BuildContext context) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        );
-      }
-    }
-    
-    class MyHomePage extends StatefulWidget {
-      const MyHomePage({Key? key, required this.title}) : super(key: key);
-    
-      final String title;
-    
-      @override
-      State<MyHomePage> createState() => _MyHomePageState();
-    }
-    
-    class _MyHomePageState extends State<MyHomePage> {
-      bool? _check = false;
-    
-      @override
-      Widget build(BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(widget.title),
-          ),
-          body: Column(
-            children: [
-              Checkbox(
-                value: _check,
-                onChanged: (bool? value) {
-                  setState(() => _check = value);
-                },
-              )
-            ],
-          ),
-        );
-      }
-    }
-    ```
+```
 
 これでチェックボックスが作成できます。
 
 ![画面](image/check01.webp)
 
+!!! note "チェックボックスの不定状態"
+
+    チェックボックスの`onChanged`メソッドの引数が`bool?`になっているのは、`null`にすることがあるためです。`null`の状態は不定状態といい、次のような表示になります。
+
+    ![](image/check03.webp)
+
+    ただ、デフォルトでは`value`を`null`にすることはできず、`tristate`引数を`true`とすることで`value`を`null`にする事ができます。
+
 チェックボックスにラベルをつけるには、`CheckboxListTile`を使います。`Checkbox`との違いは`title`を指定するかどうかです。
 
-```dart
+``` dart linenums="1"
 CheckboxListTile(
   title: const Text('確認しました'),
   value: _check,
@@ -307,7 +221,7 @@ CheckboxListTile(
 
 チェックボックスと同様のもので、スイッチの形をしたものが使えます。
 
-```dart
+``` dart linenums="1"
 SwitchListTile(
   title: const Text('確認しました'),
   value: _check,
@@ -323,7 +237,7 @@ SwitchListTile(
 
 ラジオボタンは`enum`と一緒に使うと便利に使えます。
 
-```dart
+``` dart linenums="1"
 enum Janken { gu, choki, pa }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -376,9 +290,48 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ![画面](image/radio01.webp)
 
+このラジオボタンは`for`ループを使って書き換えることができます。
+
+``` dart linenums="1"
+enum Janken { gu, choki, pa }
+
+class _MyHomePageState extends State<MyHomePage> {
+  Janken? _te = Janken.gu;
+  final _labels = {
+    Janken.gu: 'グー',
+    Janken.choki: 'チョキ',
+    Janken.pa: 'パー',
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Column(
+        children: [
+          for (var janken in Janken.values)
+            RadioListTile<Janken>(
+              title: Text(_labels[janken] ?? ''),
+              value: janken,
+              groupValue: _te,
+              onChanged: (Janken? value) {
+                setState(() {
+                  _te = value;
+                });
+              },
+            ),
+        ],
+      ),
+    );
+  }
+}
+```
+
 ## ドロップダウンリスト
 
-```dart
+``` dart linenums="1"
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -435,9 +388,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ボタンは9種類あります。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-import &#x27;package:flutter/material.dart&#x27;;
+``` dart linenums="1"
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -449,12 +401,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: &#x27;Flutter Demo&#x27;,
+      title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: &#x27;Flutter Demo Home Page&#x27;),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -465,12 +417,12 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State&lt;MyHomePage&gt; createState() =&gt; _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 enum Size { xs, s, m, l, xl }
 
-class _MyHomePageState extends State&lt;MyHomePage&gt; {
+class _MyHomePageState extends State<MyHomePage> {
   var selectedSize = Size.xs;
 
   @override
@@ -484,27 +436,27 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
           children: [
             ElevatedButton(
               onPressed: () {},
-              child: const Text(&#x27;Elevated&#x27;),
+              child: const Text('Elevated'),
             ),
             const SizedBox(height: 15.0),
             FilledButton(
               onPressed: () {},
-              child: const Text(&#x27;Filled&#x27;),
+              child: const Text('Filled'),
             ),
             const SizedBox(height: 15.0),
             FilledButton.tonal(
               onPressed: () {},
-              child: const Text(&#x27;Filled tonal&#x27;),
+              child: const Text('Filled tonal'),
             ),
             const SizedBox(height: 15.0),
             OutlinedButton(
               onPressed: () {},
-              child: const Text(&#x27;Outlined&#x27;),
+              child: const Text('Outlined'),
             ),
             const SizedBox(height: 15.0),
             TextButton(
               onPressed: () {},
-              child: const Text(&#x27;Text&#x27;),
+              child: const Text('Text'),
             ),
             const SizedBox(height: 15.0),
             IconButton(
@@ -512,27 +464,27 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
               icon: const Icon(Icons.home_outlined),
             ),
             const SizedBox(height: 15.0),
-            SegmentedButton&lt;Size&gt;(
+            SegmentedButton<Size>(
               segments: const [
-                ButtonSegment&lt;Size&gt;(
+                ButtonSegment<Size>(
                   value: Size.xs,
-                  label: Text(&#x27;XS&#x27;),
+                  label: Text('XS'),
                 ),
-                ButtonSegment&lt;Size&gt;(
+                ButtonSegment<Size>(
                   value: Size.s,
-                  label: Text(&#x27;S&#x27;),
+                  label: Text('S'),
                 ),
-                ButtonSegment&lt;Size&gt;(
+                ButtonSegment<Size>(
                   value: Size.m,
-                  label: Text(&#x27;M&#x27;),
+                  label: Text('M'),
                 ),
-                ButtonSegment&lt;Size&gt;(
+                ButtonSegment<Size>(
                   value: Size.l,
-                  label: Text(&#x27;L&#x27;),
+                  label: Text('L'),
                 ),
-                ButtonSegment&lt;Size&gt;(
+                ButtonSegment<Size>(
                   value: Size.xl,
-                  label: Text(&#x27;XL&#x27;),
+                  label: Text('XL'),
                 ),
               ],
               selected: {selectedSize},
@@ -551,143 +503,14 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
             FloatingActionButton.extended(
                 onPressed: () {},
                 icon: const Icon(Icons.home),
-                label: const Text(&#x27;Extended FAB&#x27;)),
+                label: const Text('Extended FAB')),
           ],
         ),
       ),
     );
   }
 }
-
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    import 'package:flutter/material.dart';
-
-    void main() {
-      runApp(const MyApp());
-    }
-
-    class MyApp extends StatelessWidget {
-      const MyApp({Key? key}) : super(key: key);
-
-      @override
-      Widget build(BuildContext context) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        );
-      }
-    }
-
-    class MyHomePage extends StatefulWidget {
-      const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-      final String title;
-
-      @override
-      State<MyHomePage> createState() => _MyHomePageState();
-    }
-
-    enum Size { xs, s, m, l, xl }
-
-    class _MyHomePageState extends State<MyHomePage> {
-      var selectedSize = Size.xs;
-
-      @override
-      Widget build(BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(widget.title),
-          ),
-          body: Center(
-            child: Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Elevated'),
-                ),
-                const SizedBox(height: 15.0),
-                FilledButton(
-                  onPressed: () {},
-                  child: const Text('Filled'),
-                ),
-                const SizedBox(height: 15.0),
-                FilledButton.tonal(
-                  onPressed: () {},
-                  child: const Text('Filled tonal'),
-                ),
-                const SizedBox(height: 15.0),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: const Text('Outlined'),
-                ),
-                const SizedBox(height: 15.0),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Text'),
-                ),
-                const SizedBox(height: 15.0),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.home_outlined),
-                ),
-                const SizedBox(height: 15.0),
-                SegmentedButton<Size>(
-                  segments: const [
-                    ButtonSegment<Size>(
-                      value: Size.xs,
-                      label: Text('XS'),
-                    ),
-                    ButtonSegment<Size>(
-                      value: Size.s,
-                      label: Text('S'),
-                    ),
-                    ButtonSegment<Size>(
-                      value: Size.m,
-                      label: Text('M'),
-                    ),
-                    ButtonSegment<Size>(
-                      value: Size.l,
-                      label: Text('L'),
-                    ),
-                    ButtonSegment<Size>(
-                      value: Size.xl,
-                      label: Text('XL'),
-                    ),
-                  ],
-                  selected: {selectedSize},
-                  onSelectionChanged: (newSelected) {
-                    setState(() {
-                      selectedSize = newSelected.first;
-                    });
-                  },
-                ),
-                const SizedBox(height: 15.0),
-                FloatingActionButton(
-                  onPressed: () {},
-                  child: const Icon(Icons.home),
-                ),
-                const SizedBox(height: 15.0),
-                FloatingActionButton.extended(
-                    onPressed: () {},
-                    icon: const Icon(Icons.home),
-                    label: const Text('Extended FAB')),
-              ],
-            ),
-          ),
-        );
-      }
-    }
-
-    ```
+```
 
 実行結果は次のようになります。
 
@@ -708,6 +531,152 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
 という名前です。
 
 [使い分けの詳細は、マテリアルデザインのサイト](https://m3.material.io/components/all-buttons){target=_blank}で確認してください。
+
+## 日付の選択
+
+日付は`DatePicker`を使うのが便利です。日本語でなければ特別な設定はいらないのですが、日本語にするためには少し設定が必要です。
+
+設定は、`pubspec.yaml`ファイルに次の設定を追加します。
+
+``` yaml
+  flutter_localizations:
+    sdk: flutter
+```
+
+記載する場所は決まっていて、`dependencies`の下で、`flutter`の下にしてください。
+
+``` yaml hl_lines="4-5"
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+```
+
+日付の選択画面を日本語にするためには、まず`import`を先頭に追加します。
+
+``` dart linenums="1"
+import 'package:flutter_localizations/flutter_localizations.dart';
+```
+
+また、`MyApp`の中の
+
+``` dart linenums="1" hl_lines="13-20"
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ja'),
+      ],
+    );
+  }
+}
+```
+
+ここまで行うことで、日本語で表示されます。
+
+日付の選択画面のコードは次のメソッドを作成します。
+
+``` dart linenums="1"
+DateTime? _date;
+
+void _onPress() async {
+  final picked = await showDatePicker(
+    locale: const Locale('ja'),
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate: DateTime(2024),
+    lastDate: DateTime.now().add(
+      const Duration(days: 366),
+    ),
+  );
+
+  if (picked == null) return;
+
+  setState(() => _date = picked);
+}
+```
+
+呼び出す部分は次のとおりです。
+
+``` dart linenums="1"
+Column(
+  children: [
+    Text(
+      '$_date',
+      style: const TextStyle(
+        fontSize: 20.0,
+      ),
+    ),
+    FilledButton(
+      onPressed: _onPress,
+      child: const Text('日付選択'),
+    ),
+  ],
+),
+```
+
+完成後は、次のようなイメージになります。
+
+![](image/date01.webp)
+
+## 時刻の選択
+
+時刻の選択はフィールドと、メソッドを用意します。
+
+``` dart linenums="1"
+  TimeOfDay? _time;
+
+  void _onPress2() async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) => MediaQuery(
+        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+        child: Localizations.override(
+          context: context,
+          locale: const Locale('ja', 'JP'),
+          child: child!,
+        ),
+      ),
+    );
+
+    if (picked == null) return;
+
+    setState(() => _time = picked);
+  }
+```
+
+後は、表示部分に次のものを追加します。
+
+``` dart linenums="1"
+Text(
+  '$_time',
+  style: const TextStyle(
+    fontSize: 20.0,
+  ),
+),
+FilledButton(
+  onPressed: _onPress2,
+  child: const Text('時刻選択'),
+),
+```
+
+![](image/time01.webp)
 
 ## 練習問題
 
@@ -885,14 +854,14 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
 
     ```dart
     import 'package:flutter/material.dart';
-    
+
     void main() {
       runApp(const MyApp());
     }
-    
+
     class MyApp extends StatelessWidget {
       const MyApp({super.key});
-    
+
       @override
       Widget build(BuildContext context) {
         return MaterialApp(
@@ -905,19 +874,19 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
         );
       }
     }
-    
+
     class MyHomePage extends StatefulWidget {
       const MyHomePage({Key? key, required this.title}) : super(key: key);
-    
+
       final String title;
-    
+
       @override
       State<MyHomePage> createState() => _MyHomePageState();
     }
-    
+
     class _MyHomePageState extends State<MyHomePage> {
       bool? _checked = false;
-    
+
       @override
       Widget build(BuildContext context) {
         return Scaffold(
@@ -957,14 +926,14 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
 
     ```dart
     import 'package:flutter/material.dart';
-    
+
     void main() {
       runApp(const MyApp());
     }
-    
+
     class MyApp extends StatelessWidget {
       const MyApp({super.key});
-    
+
       @override
       Widget build(BuildContext context) {
         return MaterialApp(
@@ -977,19 +946,19 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
         );
       }
     }
-    
+
     class MyHomePage extends StatefulWidget {
       const MyHomePage({Key? key, required this.title}) : super(key: key);
-    
+
       final String title;
-    
+
       @override
       State<MyHomePage> createState() => _MyHomePageState();
     }
-    
+
     class _MyHomePageState extends State<MyHomePage> {
       int? _value = 1;
-    
+
       @override
       Widget build(BuildContext context) {
         return Scaffold(

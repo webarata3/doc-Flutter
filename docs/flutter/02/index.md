@@ -6,9 +6,8 @@
 
 これに追記して動きを確認していきます。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-import &#x27;package:flutter/material.dart&#x27;;
+``` dart linenums="1"
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: &#x27;Flutter Demo&#x27;,
+      title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -37,52 +36,12 @@ class LayoutTest extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(&#x27;レイアウトテスト&#x27;),
+        title: const Text('レイアウトテスト'),
       ),
     );
   }
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    import 'package:flutter/material.dart';
-
-    void main() {
-      runApp(const MyApp());
-    }
-
-    class MyApp extends StatelessWidget {
-      const MyApp({super.key});
-
-      @override
-      Widget build(BuildContext context) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const LayoutTest(),
-        );
-      }
-    }
-
-    class LayoutTest extends StatelessWidget {
-      const LayoutTest({Key? key}) : super(key: key);
-
-      @override
-      Widget build(BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('レイアウトテスト'),
-          ),
-        );
-      }
-    }
-    ```
+```
 
 ## 並べて配置
 
@@ -100,7 +59,7 @@ Widgetを縦方向に並べたい場合には、`Column`を使います。
 
 例えば、次のように作成します。最初の例の`LayoutTest`クラスの`build`メソッドの`Scaffold`コンストラクタの`body`に指定します。
 
-```dart
+``` dart linenums="1"
 body: Column(
   children: [
     Text(
@@ -150,7 +109,7 @@ body: Column(
 
     `start`の例だけ。
 
-    ```dart
+    ``` dart linenums="1"
     import 'package:flutter/material.dart';
 
     void main() {
@@ -244,7 +203,7 @@ body: Column(
 
 例えば、次のように使います。
 
-```dart
+``` dart linenums="1"
 body: Column(
   children: [
     Container(
@@ -287,7 +246,7 @@ body: Column(
 
 次の`Column`に対して設定して確認します。
 
-```dart
+``` dart linenums="1"
 body: Column(
   children: [
     Container(
@@ -328,7 +287,7 @@ body: Column(
 
 `Container`に対して、`decoration`を設定できます。例えば、下線を引くには次のようにします。
 
-```dart
+``` dart linenums="1"
 Container(
   padding: const EdgeInsets.all(20.0),
   decoration: const BoxDecoration(
@@ -347,7 +306,7 @@ Container(
 
 例えば、次のようなレイアウトにした場合。
 
-```dart
+``` dart linenums="1"
 body: Column(
   crossAxisAlignment: CrossAxisAlignment.stretch,
   children: [
@@ -382,7 +341,7 @@ body: Column(
 
 縦方向の余白を埋めたい場合に`Expanded`を使います。例えば、真ん中の赤い部分を引き伸ばす場合は次のように書きます。
 
-```dart
+``` dart linenums="1"
 Expanded(
   child: Container(
     color: Colors.red[200],
@@ -400,7 +359,7 @@ Expanded(
 
 余白を分配することもできます。その場合には、`flex`を指定します。
 
-```dart
+``` dart linenums="1"
 body: Column(
   crossAxisAlignment: CrossAxisAlignment.stretch,
   children: [
@@ -441,7 +400,7 @@ body: Column(
 
 `Scaffold`のコンストラクタの引数に次のものを追加します。
 
-```dart
+``` dart linenums="1"
 bottomNavigationBar: BottomNavigationBar(
   items: const <BottomNavigationBarItem>[
     BottomNavigationBarItem(
@@ -486,9 +445,8 @@ bottomNavigationBar: BottomNavigationBar(
 
 選択されているボタンを変更する場合には、`StatefulWidget`で作成する必要があります（ボタンの状態を持たないといけません）。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-import &#x27;package:flutter/material.dart&#x27;;
+``` dart linenums="1"
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -500,7 +458,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: &#x27;Flutter Demo&#x27;,
+      title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -514,10 +472,10 @@ class LayoutTest extends StatefulWidget {
   const LayoutTest({Key? key}) : super(key: key);
 
   @override
-  State&lt;LayoutTest&gt; createState() =&gt; _LayoutTestState();
+  State<LayoutTest> createState() => _LayoutTestState();
 }
 
-class _LayoutTestState extends State&lt;LayoutTest&gt; {
+class _LayoutTestState extends State<LayoutTest> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -530,21 +488,21 @@ class _LayoutTestState extends State&lt;LayoutTest&gt; {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(&#x27;レイアウトテスト&#x27;),
+        title: const Text('レイアウトテスト'),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const &lt;BottomNavigationBarItem&gt;[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: &#x27;ホーム&#x27;,
+            label: 'ホーム',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: &#x27;設定&#x27;,
+            label: '設定',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: &#x27;検索&#x27;,
+            label: '検索',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -553,78 +511,7 @@ class _LayoutTestState extends State&lt;LayoutTest&gt; {
     );
   }
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    import 'package:flutter/material.dart';
-
-    void main() {
-      runApp(const MyApp());
-    }
-
-    class MyApp extends StatelessWidget {
-      const MyApp({super.key});
-
-      @override
-      Widget build(BuildContext context) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const LayoutTest(),
-        );
-      }
-    }
-
-    class LayoutTest extends StatefulWidget {
-      const LayoutTest({Key? key}) : super(key: key);
-
-      @override
-      State<LayoutTest> createState() => _LayoutTestState();
-    }
-
-    class _LayoutTestState extends State<LayoutTest> {
-      int _selectedIndex = 0;
-
-      void _onItemTapped(int index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      }
-
-      @override
-      Widget build(BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('レイアウトテスト'),
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'ホーム',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: '設定',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: '検索',
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-          ),
-        );
-      }
-    }
-    ```
+```
 
 `BottomNavigationBar`の`onTap`にボタンが押されたときに呼び出される関数を設定します。関数は引数に押したボタンのインデックスが渡されます。
 
@@ -636,7 +523,7 @@ class _LayoutTestState extends State&lt;LayoutTest&gt; {
 
 次に`FloatingActionButton`を追加します。`BottomNavigationBar`の次に`floatingActionButton`を追加します。
 
-```dart
+``` dart linenums="1"
 floatingActionButton: FloatingActionButton(
   onPressed: () {},
   child: const Icon(Icons.plus_one),
@@ -649,7 +536,7 @@ floatingActionButton: FloatingActionButton(
 
 ボタンを押したときに反応がないのは寂しいので、ボタンを押したときの反応を追加します。ボタンを押したときには、`onPressed`で指定した関数が呼び出されます。その関数の中で、`SnackBar`を使いメッセージを表示します。
 
-```dart
+``` dart linenums="1"
 onPressed: () {
   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
     content: Text('ボタンが押されました！'),
@@ -684,7 +571,7 @@ onPressed: () {
 
 使用しているスマホの論理ピクセルでの縦横サイズを確認したい場合には、`build`メソッド内に次のようなコードを挿入します。
 
-```dart
+``` dart linenums="1"
   @override
   Widget build(BuildContext context) {
     double _deviceWidth = MediaQuery.of(context).size.width;

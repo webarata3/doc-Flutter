@@ -14,34 +14,54 @@
 
 また、関数の処理内容が1行だけの場合には`=>`で書けます（アロー構文と呼ばれます）。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+``` dart linenums="1"
 void main() {
   var value = 4;
   if (isEven(value)) {
-    print(&#x27;偶数です&#x27;);
+    print('偶数です');
   } else {
-    print(&#x27;奇数です&#x27;);
+    print('奇数です');
   }
 }
 
-bool isEven(int value) =&gt; value % 2 == 0;
-</code>
-</pre>
+bool isEven(int value) => value % 2 == 0;
+```
 
-??? オフライン用
+### 練習問題 関数-1
 
-    ```dart
+次の要件の関数を作成し、引数`5`で呼び出すこと。
+
+- 関数名: `twice`
+- 引数: `int`型の`num`
+- 戻り値: `int`
+- 処理内容: 引数の`num`を2倍して返す
+
+??? 解答例
+
+    ``` dart linenums="1"
     void main() {
-      var value = 4;
-      if (isEven(value)) {
-        print('偶数です');
-      } else {
-        print('奇数です');
-      }
+      print(twice(5));
     }
-    
-    bool isEven(int value) => value % 2 == 0;
+
+    int twice(int num) {
+      return num * 2;
+    }
+    ```
+
+### 練習問題 関数-2
+
+1の問題の関数をアロー関数にすること。
+
+??? 解答例
+
+    ``` dart linenums="1"
+    void main() {
+      print(twice(5));
+    }
+
+    int twice(int num) {
+      return num * 2;
+    }
     ```
 
 ## 引数
@@ -50,71 +70,66 @@ bool isEven(int value) =&gt; value % 2 == 0;
 
 例えば、次のように作成して使用することができます。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+``` dart linenums="1"
 void main() {
-  printProfile(name: &#x27;山田&#x27;, age: 30);
-  printProfile(name: &#x27;田中&#x27;);
+  printProfile(name: '山田', age: 30);
+  printProfile(name: '田中');
   printProfile(age: 22);
 }
 
 void printProfile({String? name, int? age}) {
-  print(&#x27;自己紹介&#x27;);
+  print('自己紹介');
   if (name != null) {
-    print(&#x27;名前は$name&#x27;);
+    print('名前は$name');
   }
   if (age != null) {
-    print(&#x27;年齢は$age&#x27;);
+    print('年齢は$age');
   }
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      printProfile(name: '山田', age: 30);
-      printProfile(name: '田中');
-      printProfile(age: 22);
-    }
-    
-    void printProfile({String? name, int? age}) {
-      print('自己紹介');
-      if (name != null) {
-        print('名前は$name');
-      }
-      if (age != null) {
-        print('年齢は$age');
-      }
-    }
-    ```
+```
 
 名前付きの引数は、そのままだと任意の引数になります。そのため、名前付きの引数は`null`になる可能性があるので、`?`を付ける必要があります。
 
 通常の引数と名前付き引数を混在させることもできます。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+``` dart linenums="1"
 void main() {
   test(3, b: 4);
 }
 
 void test(int a, {int? b}) {
-  print(&#x27;$a $b&#x27;);
+  print('$a $b');
 }
-</code>
-</pre>
+```
 
-??? オフライン用
+### 練習問題 名前付き引数-1
 
-    ```dart
+次の関数を作成すること。
+
+- 関数名: `printMessage`
+- 引数
+    - 1つ目: 通常の位置引数 `String`型の`message`
+    - 2つ目: 名前付き引数 `int`型の`count` 任意
+- 戻り値: なし
+- 処理内容: 引数の`message`を表示する。`count`が`null`でない場合には`count`の回数分`message`を表示する
+
+また、次の引数で実行すること
+
+- 1回目: ('こんにちは')
+- 2回目: ('おはよう', 3)
+
+??? 解答例
+
+    ``` dart linenums="1"
     void main() {
-      test(3, b: 4);
+      printMessage('こんにちは');
+      printMessage('おはよう', count: 3);
     }
-    
-    void test(int a, {int? b}) {
-      print('$a $b');
+
+    void printMessage(String message, {int? count}) {
+      for (var i = 0; i < (count ?? 1); i++) {
+        print(message);
+      }
     }
     ```
 
@@ -122,105 +137,52 @@ void test(int a, {int? b}) {
 
 引数を`[]`で囲むと、引数の指定が任意になります。任意の変数のため、型は`null`許容型にしないといけません。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+``` dart linenums="1"
 void main() {
-  printProfile(&#x27;山田&#x27;, 30);
-  printProfile(&#x27;田中&#x27;);
+  printProfile('山田', 30);
+  printProfile('田中');
 }
 
 void printProfile(String name, [int? age]) {
-  print(&#x27;自己紹介&#x27;);
-  print(&#x27;名前は$name&#x27;);
+  print('自己紹介');
+  print('名前は$name');
   if (age != null) {
-    print(&#x27;年齢は$age&#x27;);
+    print('年齢は$age');
   }
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      printProfile('山田', 30);
-      printProfile('田中');
-    }
-    
-    void printProfile(String name, [int? age]) {
-      print('自己紹介');
-      print('名前は$name');
-      if (age != null) {
-        print('年齢は$age');
-      }
-    }
-    ```
+```
 
 ## デフォルト値
 
 引数にはデフォルト値を設定できます。デフォルト値を設定できるためnull許容型にしなくても良くなります。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+``` dart linenums="1"
 void main() {
-  printProfile(&#x27;山田&#x27;, 30);
-  printProfile(&#x27;田中&#x27;);
+  printProfile('山田', 30);
+  printProfile('田中');
 }
 
 void printProfile(String name, [int age = 20]) {
-  print(&#x27;自己紹介&#x27;);
-  print(&#x27;名前は$name&#x27;);
-  print(&#x27;年齢は$age&#x27;);
+  print('自己紹介');
+  print('名前は$name');
+  print('年齢は$age');
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      printProfile('山田', 30);
-      printProfile('田中');
-    }
-    
-    void printProfile(String name, [int age = 20]) {
-      print('自己紹介');
-      print('名前は$name');
-      print('年齢は$age');
-    }
-    ```
+```
 
 名前付き引数もデフォルト値を設定できます。また。`required`をつけることで、その変数の指定が必須になります（必須のため、`?`は不要）。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+``` dart linenums="1"
 void main() {
-  printProfile(name: &#x27;山田&#x27;, age: 30);
-  printProfile(name: &#x27;田中&#x27;);
+  printProfile(name: '山田', age: 30);
+  printProfile(name: '田中');
 }
 
 void printProfile({required String name, int age = 30}) {
-  print(&#x27;自己紹介&#x27;);
-  print(&#x27;名前は$name&#x27;);
-  print(&#x27;年齢は$age&#x27;);
+  print('自己紹介');
+  print('名前は$name');
+  print('年齢は$age');
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      printProfile(name: '山田', age: 30);
-      printProfile(name: '田中');
-    }
-    
-    void printProfile({required String name, int age = 30}) {
-      print('自己紹介');
-      print('名前は$name');
-      print('年齢は$age');
-    }
-    ```
+```
 
 ## main関数
 
@@ -228,25 +190,13 @@ void printProfile({required String name, int age = 30}) {
 
 引数を`List<String>`にした場合には、コマンドライン引数を受け取ることができます。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-void main(List&lt;String&gt; arguments) {
+``` dart linenums="1"
+void main(List<String> arguments) {
   for (var value in arguments) {
     print(value);
   }
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    void main(List<String> arguments) {
-      for (var value in arguments) {
-        print(value);
-      }
-    }
-    ```
+```
 
 実行する際に、引数をつけるとそれが`main`関数に渡されます。
 
@@ -260,193 +210,117 @@ void main(List&lt;String&gt; arguments) {
 
 関数は第1級オブジェクトのため、変数に代入することができます。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-void main(List&lt;String&gt; arguments) {
+``` dart linenums="1"
+void main(List<String> arguments) {
   var p = printHello;
 
   p();
 }
 
 void printHello() {
-  print(&#x27;hello&#x27;);
+  print('hello');
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    void main(List<String> arguments) {
-      var p = printHello;
-    
-      p();
-    }
-    
-    void printHello() {
-      print('hello');
-    }
-    ```
+```
 
 匿名関数を代入することもできます。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-void main(List&lt;String&gt; arguments) {
-  var p = () =&gt; print(&#x27;Hello&#x27;);
+``` dart linenums="1"
+void main(List<String> arguments) {
+  var p = () => print('Hello');
 
   p();
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    void main(List<String> arguments) {
-      var p = () => print('Hello');
-    
-      p();
-    }
-    ```
+```
 
 ## 匿名関数
 
 匿名関数は処理内容が1行であれば、次のように書けます。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-void main(List&lt;String&gt; arguments) {
-  var p = () =&gt; print(&#x27;Hello&#x27;);
+``` dart linenums="1"
+void main(List<String> arguments) {
+  var p = () => print('Hello');
 
   p();
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    void main(List<String> arguments) {
-      var p = () => print('Hello');
-    
-      p();
-    }
-    ```
+```
 
 処理がたくさんあれば、次のように通常の関数の定義から関数名を除いた形で書くことができます。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-void main(List&lt;String&gt; arguments) {
+``` dart linenums="1"
+void main(List<String> arguments) {
   [1, 2, 3].forEach((element) {
     print(element);
   });
 }
-</code>
-</pre>
+```
 
-??? オフライン用
+### 練習問題 匿名関数-1
 
-    ```dart
-    void main(List<String> arguments) {
-      [1, 2, 3].forEach((element) {
-        print(element);
-      });
-    }
-    ```
+次の要件の関数を作成すること。
 
-#### 練習問題4-1
+- 関数名: `add`
+- 引数
+    - 1つ目: `int`型の`x`
+    - 2つ目: `int`型の`y`
+- 戻り値: `int`
+- 処理内容: 引数`x`と`y`の合計を返す
 
-次の関数を作成入力すること。
+また、次の関数を入力すること。
 
-```dart
-void printTest({String? name, int? age}) {
-  print('名前は${name ?? "なし"}');
-  print('年齢は${age ?? 0}');
+``` dart linenums="1"
+int calc(int x, int y, int f(int a, int b)) {
+  return f(x, y);
 }
 ```
 
-`main`関数を作成し、次の4パターンで`printTest`関数を呼び出すこと。
-
-- 引数なし
-- 引数`name`に`山田`を渡す。
-- 引数`age`に`20`を渡す。
-- 引数`name`に`田中`、引数`age`に`19`を渡す。
+最後に、`main`関数で`calc(3, 5, add)`として`calc`関数を呼び出し、結果を表示すること
 
 ??? 解答例
 
-    ```dart
-    void printTest({String? name, int? age}) {
-      print('名前は${name ?? "なし"}');
-      print('年齢は${age ?? 0}');
-    }
-    
+    ``` dart linenums="1"
     void main() {
-      printTest(name: '山田');
-      printTest(age: 20);
-      printTest(name: '田中', age: 19);
+      print(calc(3, 5, add));
+    }
+
+    int add(int x, int y) {
+      return x + y;
+    }
+
+    int calc(int x, int y, int f(int a, int b)) {
+      return f(x, y);
     }
     ```
 
-#### 練習問題4-2
+### 練習問題 匿名関数-2
 
-次の仕様の関数を作成すること。
-
-- 関数名: `panel`
-- 名前付き引数
-    - `String`型の`title`
-    - `int`型の`version`。`version`は必須（`required`）とする
-- 戻り値なし
-- 処理内容は、`title`と`version`を`print`関数で表示する。`title`が`null`の場合には`無題`とすること。
-
-動作確認のため、`main`関数を作成して、適当な引数で作った関数を呼び出すこと。
+1の問題の`add`関数をアロー関数に書き換えること
 
 ??? 解答例
 
-    ```dart
+    ``` dart linenums="1"
     void main() {
-      panel(title: 'テスト', version: 1);
-      panel(version: 2);
+      print(calc(3, 5, add));
+    }
+
+    int add(int x, int y) => x + y;
+
+    int calc(int x, int y, int f(int a, int b)) {
+      return f(x, y);
     }
     ```
 
-#### 練習問題4-3
+### 練習問題 匿名関数-3
 
-次の関数を入力すること。
-
-```dart
-int calc(int x, int y, [bool? plus]) {
-  if (plus ?? true) {
-    return x + y;
-  } else {
-    return x * y;
-  }
-}
-```
-
-`main`関数を作成し、次の3パターンで`calc`関数を呼び出すこと。
-
-最初の引数は`5`、2番目の引数は`3`とする
-
-- 3番目の引数なし
-- 3番目の引数`true`
-- 3番目の引数`false`
+2の問題の`add`関数を削除し、`calc`関数の呼び出しの際に`add`の代わりに匿名関数を用いること。
 
 ??? 解答例
 
-    ```dart
-    int calc(int x, int y, [bool? plus]) {
-      if (plus ?? true) {
-        return x + y;
-      } else {
-        return x * y;
-      }
-    }
-    
+    ``` dart linenums="1"
     void main() {
-      print(calc(3, 5));
-      print(calc(3, 5, true));
-      print(calc(3, 5, false));
+      print(calc(3, 5, (x, y) => x + y));
+    }
+
+    int calc(int x, int y, int f(int a, int b)) {
+      return f(x, y);
     }
     ```

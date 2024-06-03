@@ -19,33 +19,17 @@
 | `--var` | 1減算 |
 | `var--` | 1減算 |
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
+``` dart linenums="1"
 void main() {
-  print(&#x27;5 + 2 = ${5 + 2}&#x27;);
-  print(&#x27;5 - 2 = ${5 - 2}&#x27;);
-  print(&#x27;-(5 - 2) = ${-(5 - 2)}&#x27;);
-  print(&#x27;5 * 2 = ${5 * 2}&#x27;);
-  print(&#x27;5 / 2 = ${5 / 2}&#x27;);
-  print(&#x27;5 ~/ 2 = ${5 ~/ 2}&#x27;);
-  print(&#x27;5 % 2 = ${5 % 2}&#x27;);
+  print('5 + 2 = ${5 + 2}');
+  print('5 - 2 = ${5 - 2}');
+  print('-(5 - 2) = ${-(5 - 2)}');
+  print('5 * 2 = ${5 * 2}');
+  print('5 / 2 = ${5 / 2}');
+  print('5 ~/ 2 = ${5 ~/ 2}');
+  print('5 % 2 = ${5 % 2}');
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    void main() {
-      print('5 + 2 = ${5 + 2}');
-      print('5 - 2 = ${5 - 2}');
-      print('-(5 - 2) = ${-(5 - 2)}');
-      print('5 * 2 = ${5 * 2}');
-      print('5 / 2 = ${5 / 2}');
-      print('5 ~/ 2 = ${5 ~/ 2}');
-      print('5 % 2 = ${5 % 2}');
-    }
-    ```
+```
 
 実行結果は次のとおりです。
 
@@ -131,7 +115,7 @@ void main() {
 
 ??? 解答例
 
-    ```dart
+    ``` dart linenums="1"
     void main() {
       int? a = null;
       int? b = 10;

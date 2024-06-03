@@ -4,9 +4,8 @@
 
 自動生成されるコードのコメントを取り除いたコードです。
 
-<pre>
-<code class="language-run-dartpad:theme-light:mode-flutter:ga_id-example1">
-import &#x27;package:flutter/material.dart&#x27;;
+``` dart linenums="1"
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,12 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: &#x27;Flutter Demo&#x27;,
+      title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: &#x27;Flutter Demo Home Page&#x27;),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -34,10 +33,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State&lt;MyHomePage&gt; createState() =&gt; _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State&lt;MyHomePage&gt; {
+class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -56,12 +55,12 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: &lt;Widget&gt;[
+          children: <Widget>[
             const Text(
-              &#x27;You have pushed the button this many times:&#x27;,
+              'You have pushed the button this many times:',
             ),
             Text(
-              &#x27;$_counter&#x27;,
+              '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
@@ -69,98 +68,23 @@ class _MyHomePageState extends State&lt;MyHomePage&gt; {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: &#x27;Increment&#x27;,
+        tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
   }
 }
-</code>
-</pre>
-
-??? オフライン用
-
-    ```dart
-    import 'package:flutter/material.dart';
-    
-    void main() {
-      runApp(const MyApp());
-    }
-    
-    class MyApp extends StatelessWidget {
-      const MyApp({super.key});
-    
-      @override
-      Widget build(BuildContext context) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        );
-      }
-    }
-    
-    class MyHomePage extends StatefulWidget {
-      const MyHomePage({super.key, required this.title});
-    
-      final String title;
-    
-      @override
-      State<MyHomePage> createState() => _MyHomePageState();
-    }
-    
-    class _MyHomePageState extends State<MyHomePage> {
-      int _counter = 0;
-    
-      void _incrementCounter() {
-        setState(() {
-          _counter++;
-        });
-      }
-    
-      @override
-      Widget build(BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: Text(widget.title),
-          ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'You have pushed the button this many times:',
-                ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ],
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-        );
-      }
-    }
-    ```
+```
 
 Flutterを使うためには1行目の`import`が必要です。
 
-```dart
+``` dart linenums="1"
 import 'package:flutter/material.dart';
 ```
 
 Dartのプログラムですので、`main`関数がエントリーポイントであることは変わりありません。
 
-```dart
+``` dart linenums="1"
 void main() {
   runApp(const MyApp());
 }
@@ -175,7 +99,7 @@ void main() {
 
 次に`MyApp`クラスを見てみます。
 
-```dart
+``` dart linenums="1"
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -213,7 +137,7 @@ class MyApp extends StatelessWidget {
 
 `MyHomePage`クラスは次のようになっています。
 
-```dart
+``` dart linenums="1"
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -228,7 +152,7 @@ class MyHomePage extends StatefulWidget {
 
 ここでは、`State`クラスを継承した`_MyHomePageState`クラスを作成しています。変更される状態自体はこちらのクラスで所持します。
 
-```dart
+``` dart linenums="1"
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
@@ -307,4 +231,4 @@ class _MyHomePageState extends State<MyHomePage> {
 
 #### 練習問題1-4
 
-`MyApp`クラス内の`MaterialApp`クラスのコンストラクタの引数`theme`内の`Colors.blud`を`Colors.green`や、`Colors.red`に変えてみること。
+`MyApp`クラス内の`MaterialApp`クラスのコンストラクタの引数`theme`内の`Colors.deepPurple`を`Colors.green`や、`Colors.red`に変えてみること。
