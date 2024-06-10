@@ -131,6 +131,92 @@ const TextField(
 
 ![画面](image/text09.webp)
 
+### 入力された値の取得
+
+テキストフィールドに入力された値の取得をするには、`TextEditingController`を使います。
+
+``` dart linenums="1"
+class _MyHomePageState extends State<MyHomePage> {
+  var _input = '';
+  final _textController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: TextField(controller: _textController),
+          ),
+          FilledButton(
+            onPressed: () {
+              setState(() {
+                _input = _textController.text;
+              });
+            },
+            child: const Text('ボタン'),
+          ),
+          Text('入力された文字: $_input'),
+          FilledButton(
+            onPressed: () {},
+            child: const Text('テキストフィールド変更！'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+クラスのフィールドとして`TextEditingController`のインスタンスを作成します。そのインスタンスをテキストフィールドの`controller`に割り当てます。これは、テキストフィールドの数だけ必要になります。
+
+操作する場合には、インスタンスの`text`プロパティを読み込むと入力されているデータが受け取れ、`text`プロパティに代入すると入力されている内容が変更されます。
+
+### 入力チェック
+
+テキストフィールドに対して入力チェックをしたい場合には、`TextFormField`を使います。
+
+``` dart linenums="1"
+class _MyHomePageState extends State<MyHomePage> {
+  var _input = '';
+  final _textController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: TextField(controller: _textController),
+          ),
+          FilledButton(
+            onPressed: () {
+              setState(() {
+                _input = _textController.text;
+              });
+            },
+            child: const Text('ボタン'),
+          ),
+          Text('入力された文字: $_input'),
+          FilledButton(
+            onPressed: () {},
+            child: const Text('テキストフィールド変更！'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
 ## チェックボックス
 
 チェックボックスは、チェックの状態を持つため`StatefulWidget`として作成する必要があります。まず全体像を確認します。
@@ -997,3 +1083,15 @@ FilledButton(
       }
     }
     ```
+
+### 練習問題5
+
+次の動画のようになるようにアプリを作成すること。ボタンは`FilledButton`。
+
+<video src="image/ex05.mp4" controls width="400"></video>
+
+### 練習問題6
+
+次の動画のようになるようにアプリを作成すること。
+
+<video src="image/ex06.mp4" controls width="400"></video>
