@@ -24,19 +24,30 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LayoutTest(),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class LayoutTest extends StatelessWidget {
-  const LayoutTest({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
 
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('レイアウトテスト'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: Column(
+        children: [],
       ),
     );
   }
@@ -111,14 +122,14 @@ body: Column(
 
     ``` dart linenums="1"
     import 'package:flutter/material.dart';
-
+    
     void main() {
       runApp(const MyApp());
     }
-
+    
     class MyApp extends StatelessWidget {
       const MyApp({super.key});
-
+    
       @override
       Widget build(BuildContext context) {
         return MaterialApp(
@@ -127,35 +138,33 @@ body: Column(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const LayoutTest(),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
         );
       }
     }
-
-    class LayoutTest extends StatelessWidget {
-      const LayoutTest({Key? key}) : super(key: key);
-
+    
+    class MyHomePage extends StatefulWidget {
+      const MyHomePage({super.key, required this.title});
+    
+      final String title;
+    
+      @override
+      State<MyHomePage> createState() => _MyHomePageState();
+    }
+    
+    class _MyHomePageState extends State<MyHomePage> {
       @override
       Widget build(BuildContext context) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('レイアウトテスト'),
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: Text(widget.title),
           ),
-          body: Column(
+          body: const Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                'test1',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              Text(
-                'test2',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              Text(
-                'test3',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
+              Text('1'),
+              Text('2'),
             ],
           ),
         );
