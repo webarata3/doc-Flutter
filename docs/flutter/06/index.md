@@ -6,7 +6,7 @@
 
 まず具体的な例で確認します。
 
-```dart
+``` dart linenums="1"
 import 'package:flutter/material.dart';
 
 void main() {
@@ -78,7 +78,7 @@ class SecondPage extends StatelessWidget {
 
 `push`を用いると任意の画面へ遷移することができます。
 
-```dart
+``` dart linenums="1"
 Navigator.push(
   context,
   MaterialPageRoute(
@@ -89,9 +89,6 @@ Navigator.push(
 
 `pop`を使って、前の画面に戻ります。
 
-```dart
+``` dart linenums="1"
 Navigator.pop(context);
 ```
-
-## 画面に名前をつけて遷移する
-

@@ -182,9 +182,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ``` dart linenums="1"
 class _MyHomePageState extends State<MyHomePage> {
-  var _input = '';
-  final _textController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,21 +191,19 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(10.0),
-            child: TextField(controller: _textController),
-          ),
-          FilledButton(
-            onPressed: () {
-              setState(() {
-                _input = _textController.text;
-              });
-            },
-            child: const Text('ボタン'),
-          ),
-          Text('入力された文字: $_input'),
-          FilledButton(
-            onPressed: () {},
-            child: const Text('テキストフィールド変更！'),
+            padding: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '必須です';
+                }
+                if (value.length < 5) {
+                  return '5文字以上必要です';
+                }
+                return null;
+              },
+            ),
           ),
         ],
       ),
