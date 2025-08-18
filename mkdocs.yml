@@ -22,8 +22,6 @@ markdown_extensions:
   - pymdownx.critic
   - attr_list
 extra_javascript:
-  - js/inject_embed.dart.js
-  - js/highlight.min.js
   - javascripts/config.js
 extra_css:
   - css/vs.min.css
