@@ -10,11 +10,26 @@
 }
 ```
 
-関数の戻り値の型や、引数の型は必須ではありませんが、明示したほうが良いです。
+関数の戻り値の型や、引数の型は必須ではありませんが、明示したほうがわかりやすい場合が多いです。
+
+``` dart linenums="1" hl_lines="10-12"
+void main() {
+  var value = 4;
+  if (isEven(value)) {
+    print('偶数です');
+  } else {
+    print('奇数です');
+  }
+}
+
+bool isEven(int value) {
+  return value % 2 == 0;
+}
+```
 
 また、関数の処理内容が1行だけの場合には`=>`で書けます（アロー構文と呼ばれます）。
 
-``` dart linenums="1"
+``` dart linenums="1" hl_lines="10"
 void main() {
   var value = 4;
   if (isEven(value)) {
@@ -27,9 +42,9 @@ void main() {
 bool isEven(int value) => value % 2 == 0;
 ```
 
-### 練習問題 関数-1
+### やってみよう1
 
-次の要件の関数を作成し、引数`5`で呼び出すこと。
+次の仕様の関数を作成し、引数`5`で呼び出して戻り値を`print`しましょう。
 
 - 関数名: `twice`
 - 引数: `int`型の`num`
@@ -48,9 +63,10 @@ bool isEven(int value) => value % 2 == 0;
     }
     ```
 
-### 練習問題 関数-2
+### やってみよう2
 
-1の問題の関数をアロー関数にすること。
+やってみよう1の関数をアロー関数にしましょう。
+
 
 ??? 解答例
 
@@ -64,35 +80,39 @@ bool isEven(int value) => value % 2 == 0;
     }
     ```
 
-## 引数
+## 名前付き引数
 
-関数は名前付きの引数も作成できます。
+引数に名前をつけることができます。名前付きの引数は、関数の引数を`{}`内に書きます。次の例の場合、変数`x`が名前付き引数となります。関数を呼び出すときには、引数として`x: 9`のように名前を指定して呼び出します。
 
-例えば、次のように作成して使用することができます。
-
-``` dart linenums="1"
+``` dart linenums="1" hl_lines="5"
 void main() {
-  printProfile(name: '山田', age: 30);
-  printProfile(name: '田中');
-  printProfile(age: 22);
+  test(x: 9);
 }
 
-void printProfile({String? name, int? age}) {
-  print('自己紹介');
-  if (name != null) {
-    print('名前は$name');
-  }
-  if (age != null) {
-    print('年齢は$age');
-  }
+void test({int? x}) {
+  print(x ?? -1);
 }
 ```
 
-名前付きの引数は、そのままだと任意の引数になります。そのため、名前付きの引数は`null`になる可能性があるので、`?`を付ける必要があります。
+名前付き引数はデフォルトで任意の引数となります。そのため、引数が渡されないことがあるため型に`?`を付け`null`許容型にしています。引数が渡されなかった場合、その変数の値は`null`となります。
 
-通常の引数と名前付き引数を混在させることもできます。
+次のように複数の名前付きの引数があっても構いません。また、関数を呼び出すときに名前付きの引数は好きな順番に書くことができます。
 
-``` dart linenums="1"
+``` dart linenums="1" hl_lines="2-3 6"
+void main() {
+  test(x: 9); // xのみ
+  test(y: 3, x: 2); // y、xの順番にしてもいい
+}
+
+void test({int? x, int? y}) {
+  var ans = (x ?? -1) * (y ?? -1);
+  print(ans);
+}
+```
+
+通常の引数（位置引数と呼ばれます）と名前付き引数を混在させることもできます。位置引数は名前付き引数より前に書かないといけません。
+
+``` dart linenums="1" hl_lines="2 5"
 void main() {
   test(3, b: 4);
 }
@@ -102,91 +122,184 @@ void test(int a, {int? b}) {
 }
 ```
 
-### 練習問題 名前付き引数-1
+呼び出すときには、名前付き引数の後ろでも呼び出せます。
 
-次の関数を作成すること。
+``` dart linenums="1" hl_lines="2 5"
+void main() {
+  test(b: 4, 3); // 3がaに代入されます
+}
 
-- 関数名: `printMessage`
-- 引数
-    - 1つ目: 通常の位置引数 `String`型の`message`
-    - 2つ目: 名前付き引数 `int`型の`count` 任意
-- 戻り値: なし
-- 処理内容: 引数の`message`を表示する。`count`が`null`でない場合には`count`の回数分`message`を表示する
+void test(int a, {int? b}) {
+  print('$a $b');
+}
+```
 
-また、次の引数で実行すること
+### やってみよう3
 
-- 1回目: ('こんにちは')
-- 2回目: ('おはよう', 3)
+次の関数を作成しましょう。
+
+``` dart linenums="1"
+void view({int? a, int? b}) {
+  print('$a $b');
+}
+```
+
+作成後、`main`関数内で次の3パターンで呼び出してみましょう。
+
+- `a`を3
+- `b`を9
+- `b`を4、`a`を1
 
 ??? 解答例
 
     ``` dart linenums="1"
     void main() {
-      printMessage('こんにちは');
-      printMessage('おはよう', count: 3);
+      view(a: 3);
+      view(b: 9);
+      view(b: 4, a: 1);
     }
 
-    void printMessage(String message, {int? count}) {
-      for (var i = 0; i < (count ?? 1); i++) {
-        print(message);
-      }
+    void view({int? a, int? b}) {
+      print('$a $b');
     }
     ```
 
-## オプションパラメータ
+## 必須パラメーター
 
-引数を`[]`で囲むと、引数の指定が任意になります。任意の変数のため、型は`null`許容型にしないといけません。
-
-``` dart linenums="1"
+``` dart linenums="1" hl_lines="6"
 void main() {
-  printProfile('山田', 30);
-  printProfile('田中');
+  test(b: 3);
+  // test(a: 1); // エラー
 }
 
-void printProfile(String name, [int? age]) {
-  print('自己紹介');
-  print('名前は$name');
-  if (age != null) {
-    print('年齢は$age');
+void test({int? a, required int b}) {
+  print('$a $b');
+}
+```
+
+### やってみよう3
+
+次の関数を作成しましょう。
+
+``` dart linenums="1"
+void view({required int a, required int b}) {
+  print('$a $b');
+}
+```
+
+作成後、`main`関数内で次の引数で呼び出してみましょう。エラーになるものはエラーになることを確認してください。
+
+- `a`を3
+- `b`を9
+- `b`を4、`a`を1
+
+??? 解答例
+
+    ``` dart linenums="1"
+    void main() {
+      // view(a: 3); // エラー
+      // view(b: 9); // エラー
+      view(b: 4, a: 1);
+    }
+
+    void view({required int? a, required int? b}) {
+      print('$a $b');
+    }
+    ```
+
+## オプションパラメーター
+
+引数を`[]`で囲むと、引数の指定が任意になります。任意の変数のため、後述する`required`を付けない場合には、型は`null`許容型にしないといけません。オプションパラメーターは、位置引数となります。
+
+次の例の場合には、`count`がオプションパラメーターとなっています。
+
+``` dart linenums="1" hl_lines="6"
+void main() {
+  printName('たなか');
+  printName('さとう', 4);
+}
+
+void printName(String name, [int? count]) {
+  for (var i = 0; i < (count ?? 1); i++) {
+    print(name);
   }
 }
 ```
 
+DartはJavaと違いメソッドのオーバーロード（名前が同じで、引数が異なる）ができません。関数の場合も同名の関数を複数作ることはできません。その代わりにオプションパラメーターを活用することができます。
+
 ## デフォルト値
 
-引数にはデフォルト値を設定できます。デフォルト値を設定できるためnull許容型にしなくても良くなります。
+引数にはデフォルト値を設定できます。デフォルト値を使うことでnull許容型を避けることができます。
 
-``` dart linenums="1"
+オプションパラメーターの例のプログラムでデフォルト値を使うとコードをスッキリさせることができます。
+
+デフォルト値は、`引数 = デフォルト値`とすることで設定できます。
+
+``` dart linenums="1" hl_lines="6"
 void main() {
-  printProfile('山田', 30);
-  printProfile('田中');
+  printName('たなか');
+  printName('さとう', 4);
 }
 
-void printProfile(String name, [int age = 20]) {
-  print('自己紹介');
-  print('名前は$name');
-  print('年齢は$age');
+void printName(String name, [int count = 1]) {
+  for (var i = 0; i < count; i++) {
+    print(name);
+  }
 }
 ```
 
-名前付き引数もデフォルト値を設定できます。また。`required`をつけることで、その変数の指定が必須になります（必須のため、`?`は不要）。
+名前付き引数でもデフォルト値を利用できます。
+
+``` dart linenums="1" hl_lines="6"
+void main() {
+  test();
+  test(a: 9);
+}
+
+void test({int a = 2, int b = 4}) {
+  print('$a $b');
+}
+```
+
+## やってみよう4
+
+次のプログラムを入力しましょう。
 
 ``` dart linenums="1"
 void main() {
-  printProfile(name: '山田', age: 30);
-  printProfile(name: '田中');
+  test(1);
 }
 
-void printProfile({required String name, int age = 30}) {
-  print('自己紹介');
-  print('名前は$name');
-  print('年齢は$age');
+void test(int x, [int? y]) {
+  print(x + (y ?? 0));
+}
+```
+
+`test`関数の引数`y`の`?`を消すとエラーになることを確認しましょう。また、その状態から引数`y`に初期値0を設定してエラーが消えることを確認しましょう。
+
+## やってみよう5
+
+次のプログラムを入力しましょう。名前付き引数とデフォルト値をどのように活用しているかを考えてみましょう。
+
+``` dart linenums="1"
+void main() {
+  print('1,000円の税込価格=${calcPrice(1000)}円');
+  print('1,000円の20%割引の税込価格=${calcPrice(1000, discountRate: 20)}円');
+  print(
+    '1,000円の20%割引で消費税が15%の場合=${calcPrice(1000, taxRate: 15, discountRate: 20)}円',
+  );
+}
+
+int calcPrice(int price, {int taxRate = 10, int discountRate = 0}) {
+  final discountPrice = (price * (100 - discountRate)) ~/ 100;
+  return (discountPrice * (100 + taxRate)) ~/ 100;
 }
 ```
 
 ## main関数
 
-`main`関数はエントリーポイントになっていてます。`main`関数は戻り値は`void`で、引数はなしか`List<String>`になります。
+`main`関数はエントリーポイントになっています。`main`関数は戻り値は`void`で、引数はなしか`List<String>`になります。
 
 引数を`List<String>`にした場合には、コマンドライン引数を受け取ることができます。
 
@@ -210,11 +323,11 @@ void main(List<String> arguments) {
 
 関数は第1級オブジェクトのため、変数に代入することができます。
 
-``` dart linenums="1"
+``` dart linenums="1" hl_lines="2"
 void main(List<String> arguments) {
-  var p = printHello;
+  var p = printHello; // 関数自体を変数pに代入
 
-  p();
+  p(); // 変数に代入された関数が実行される
 }
 
 void printHello() {
@@ -222,105 +335,144 @@ void printHello() {
 }
 ```
 
-匿名関数を代入することもできます。
-
-``` dart linenums="1"
-void main(List<String> arguments) {
-  var p = () => print('Hello');
-
-  p();
-}
-```
-
 ## 匿名関数
 
-匿名関数は処理内容が1行であれば、次のように書けます。
+名前がない（名前をつけない）関数のことを匿名関数といいます。
 
-``` dart linenums="1"
-void main(List<String> arguments) {
-  var p = () => print('Hello');
+例えば、次のように作ることができます。引数がなく戻り値もない関数です。Dartの関数は戻り値や引数の型が明らかな場合には明示しなくてもいいです。
 
-  p();
+``` dart linenums="1" hl_lines="2-4"
+void main() {
+  var f = () {
+    print('hello');
+  };
+
+  f();
 }
 ```
 
-処理がたくさんあれば、次のように通常の関数の定義から関数名を除いた形で書くことができます。
+匿名関数の場合には、戻り値がある場合に戻り値の型は書くことができません。次の場合、`return 1`としていることから戻り値は`int`型と判断されます。
 
-``` dart linenums="1"
-void main(List<String> arguments) {
-  [1, 2, 3].forEach((element) {
-    print(element);
-  });
+``` dart linenums="1" hl_lines="2-4"
+void main() {
+  var f = () { // var f = int () { とは書けない
+    return 1;
+  };
+
+  print(f());
 }
 ```
 
-### 練習問題 匿名関数-1
+匿名関数は、アロー関数にしても構いません。
 
-次の要件の関数を作成すること。
+``` dart linenums="1" hl_lines="2"
+void main() {
+  var f = () => print('hello');
 
-- 関数名: `add`
-- 引数
-    - 1つ目: `int`型の`x`
-    - 2つ目: `int`型の`y`
-- 戻り値: `int`
-- 処理内容: 引数`x`と`y`の合計を返す
-
-また、次の関数を入力すること。
-
-``` dart linenums="1"
-int calc(int x, int y, int f(int a, int b)) {
-  return f(x, y);
+  f();
 }
 ```
 
-最後に、`main`関数で`calc(3, 5, add)`として`calc`関数を呼び出し、結果を表示すること
+???+ note "即時関数"
 
-??? 解答例
+    JavaScriptの即時関数のようなことも可能です（Dartの場合は必要なケースがあるかは別問題です）。
 
-    ``` dart linenums="1"
-    void main() {
-      print(calc(3, 5, add));
-    }
-
-    int add(int x, int y) {
-      return x + y;
-    }
-
-    int calc(int x, int y, int f(int a, int b)) {
-      return f(x, y);
-    }
-    ```
-
-### 練習問題 匿名関数-2
-
-1の問題の`add`関数をアロー関数に書き換えること
-
-??? 解答例
+    次の例の場合には、匿名関数が定義されて、それが即実行されます。
 
     ``` dart linenums="1"
     void main() {
-      print(calc(3, 5, add));
-    }
-
-    int add(int x, int y) => x + y;
-
-    int calc(int x, int y, int f(int a, int b)) {
-      return f(x, y);
+      (() {
+        print('hello');
+      })();
     }
     ```
 
-### 練習問題 匿名関数-3
+## 関数を引数にする
 
-2の問題の`add`関数を削除し、`calc`関数の呼び出しの際に`add`の代わりに匿名関数を用いること。
+関数の引数を関数にすることができます。次の例では引数なし、戻り値なしの関数を引数としています。その場合には、引数の型は`void f()`となります。仮引数名は`f`となります。
 
-??? 解答例
+``` dart linenums="1" hl_lines="2 5"
+void main() {
+  repeat(times: 2, () => print('hello'));
+}
 
-    ``` dart linenums="1"
-    void main() {
-      print(calc(3, 5, (x, y) => x + y));
-    }
+void repeat(void Function() f, {int times = 1}) {
+  for (var i = 0; i < times; i++) {
+    f();
+  }
+}
+```
 
-    int calc(int x, int y, int f(int a, int b)) {
-      return f(x, y);
-    }
-    ```
+もう一つ例を示しますが、引数がある場合です。引数を匿名関数とする場合には、引数の型が明確なため、引数の型を省略することができます。
+
+``` dart linenums="1" hl_lines="2 5"
+void main() {
+  repeat(times: 5, (x) => print(x * 2));
+}
+
+void repeat(void f(int i), {int times = 1}) {
+  for (var i = 1; i <= times; i++) {
+    f(i);
+  }
+}
+```
+
+## 関数を戻り値にする
+
+関数を戻り値にする場合には、`Function`型を使います。下記の例の場合には、`test`関数の戻り値を単純に`Function`だけにしても動作はします。ただ、できるだけ詳細な戻り値の型にしたほうが良いため、戻り値を`int Function(int n)`としています。これは、戻り値が関数で、その関数は`int`型の引数を取り、戻り値が`int`型ということを表しています。
+
+``` dart linenums="1" hl_lines="2 6"
+void main() {
+  var f = test();
+  print(f(5));
+}
+
+int Function(int n) test() {
+  return (int x) {
+    return x * 2;
+  };
+}
+```
+
+この場合、`return`していて型が明確になるので戻り値を省略することができます。
+
+``` dart linenums="1" hl_lines="6"
+void main() {
+  var f = test();
+  print(f(5));
+}
+
+test() {
+  return (int x) {
+    return x * 2;
+  };
+}
+```
+
+Javaと違いクロージャーを作ることもできます。
+
+``` dart linenums="1"
+void main() {
+  var counter1 = counter();
+  var counter2 = counter();
+  counter1();
+  counter1();
+  counter2();
+  counter1();
+  counter2();
+}
+
+void Function() counter() {
+  var count = 0;
+  return () {
+    count++;
+    print(count);
+  };
+}
+```
+
+???+ note "クロージャー"
+
+    クロージャーは、関数が宣言されたときのスコープの変数を保持しているものです。
+
+    上記の例だと、`counter1`と`counter2`はそれぞれ別の`count`を保持しています。そのため、`counter1`と`counter2`を呼び出すとそれぞれ別の値としてカウントアップしていきます。
