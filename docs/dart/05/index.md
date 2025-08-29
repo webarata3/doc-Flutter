@@ -1,6 +1,6 @@
 # クラス
 
-## インスタンス変数
+## クラスの基本とインスタンス変数
 
 クラスは`class`の後にクラス名を付けます。
 
@@ -8,7 +8,7 @@
 class Human {}
 ```
 
-インスタンス変数は`{}`の中に書きます。Javaのようにアクセス修飾子（`public`、`private`）は付けられません。インスタンス変数は定義と同時に初期化していない場合には、`null`になる場合があるため、`?`が必要です。
+インスタンス変数は`{}`の中に書きます。Javaのようにアクセス修飾子（`public`、`private`）は付けられません。アクセスの制限は違った方法で行います。インスタンス変数は定義と同時に初期化しない場合には、`null`になる場合があるため`?`が必要です。
 
 ``` dart linenums="1"
 class Human {
@@ -18,30 +18,35 @@ class Human {
 }
 ```
 
-インスタンス変数は（例えば、コンストラクタ等で）必ず初期化される場合には`late`をつけることで初期化を遅らせることができます。
+インスタンス変数は、例えばコンストラクター等で必ず初期化される場合には`late`をつけることで初期化を遅らせることができます。その場合には`null`許容型にしなくても大丈夫です。
+
+また、クラスのインスタンスの作成はコンストラクターを使いますが、Javaと違い`new`演算子は必須ではありません（通常は書きません）。
 
 ``` dart linenums="1"
 void main() {
-  var s = Sample('名前');
-  print(s.name);
+  var sample = Sample();
+  print(sample.value);
 }
 
 class Sample {
-  late String name;
+  late int value;
 
-  Sample(this.name);
+  Sample() {
+    value = 5;
+  }
 }
 ```
 
-## コンストラクタ
+## コンストラクター
 
-クラスと同名の関数を作るとコンストラクタになります。
+### コンストラクターの基本
+
+Javaと同様にクラスと同名のメソッドのようなものを作るとコンストラクターになります。
 
 ``` dart linenums="1"
 class Human {
-  String? name;
-  int? age;
-  List<Human> family = [];
+  late String name;
+  late int age;
 
   Human(String name, int age) {
     this.name = name;
@@ -50,90 +55,106 @@ class Human {
 }
 ```
 
-`this`は上記のように使わないと区別がつかない場合のみ記述します。
+`this`はこの例のように使わないと区別がつかない（`name`がインスタンス変数か、コンストラクターの引数か）場合のみ記述します。
 
-上記の例は、次のように省略して書くこともできます。
+またこの例は、次のように省略して書くこともできます。この場合には、コンストラクターの引数でインスタンス変数の初期化をすることが明確になるため、`late`も必要なくなります。
 
 ``` dart linenums="1"
 class Human {
-  String? name;
-  int? age;
-  List<Human> family = [];
+  String name;
+  int age;
 
   Human(this.name, this.age);
 }
 ```
 
-コンストラクタを明示して作らなかった場合、自動的に引数なしの何もしないコンストラクタが作られます。
-
-また、この場合、`name`と`age`は必ず初期化されるので、`?`は不要です。また、`final`にすることもできます。
+さらに、値の変更をしない場合には、`final`をつけることもできます。
 
 ``` dart linenums="1"
-void main() {
-  var h = Human('Dartくん', 3);
-}
-
 class Human {
   final String name;
   final int age;
-  List<Human> family = [];
 
   Human(this.name, this.age);
 }
 ```
 
-## 名前付きコンストラクタ
+コンストラクターを明示して作らなかった場合、自動的に引数なしの特別なことをしないコンストラクターが作られます。
 
-複数のコンストラクタを作る場合には、名前付きコンストラクタとして作成します。
+### 名前付きコンストラクター
+
+関数のオーバーロードのようなことができないため、Javaと同様のコンストラクターのオーバーロードはできません。そのため、複数のコンストラクターが必要な場合には、`クラス名.名前()`として、名前付きのコンストラクターを作成します。
 
 ``` dart linenums="1"
 class Human {
-  String? name;
-  int? age;
-  List<Human> family = [];
+  final String name;
+  final int age;
 
   Human(this.name, this.age);
 
-  Human.origin()
-      : name = 'Dummy',
+  Human.origin() : name = 'Dummy', age = 30;
+}
+```
+
+上記のようにコンストラクターの後ろに`:`をつけることでコンストラクターの初期化リストをつけることができます。初期化リストではフィールドの初期化をすることができます。
+
+名前付きのコンストラクターは、使用する場合には名前まで記載します。
+
+``` dart linenums="1"
+class Human {
+  final String name;
+  final int age;
+
+  Human(this.name, this.age);
+
+  Human.origin() : name = 'Dummy', age = 30;
+}
+
+void main() {
+  var humnan = Human.origin();
+}
+```
+
+???+ note "初期化リスト"
+
+    `final`のインスタンス変数を初期化するのは、初期化リストで行わないといけません。コンストラクター内で初期化しようとしてもエラーとなります。
+
+    ``` dart linenums="1"
+    class Human {
+      final String name;
+      final int age;
+
+      Human(this.name, this.age);
+
+      Human.origin() { // エラー
+        name = 'Dummy';
         age = 30;
-}
-```
+      }
+    }
+    ```
 
-上記のようにコンストラクタの後ろに`:`をつけることでコンストラクタの初期化リストをつけることができます。初期化リストではフィールドの初期化をすることができます。
+### 継承とスーパークラスのコンストラクター
+
+Javaと同様に`extends`を使うと他のクラスを継承できます。Javaと同様に多重継承は行えず、親となるクラスは1つのみです。
 
 ``` dart linenums="1"
-void main() {
-  var h = Human('Dartくん', 3);
-}
+class Animal {}
 
-class Human {
-  final String name;
-  final int age;
-  List<Human> family = [];
-
-  Human(this.name, this.age);
-
-  Human.init()
-      : name = '初期化くん',
-        age = 10;
-}
+class Cat extends Animal {}
 ```
 
-## スーパークラスのコンストラクタ
-
-コンストラクタの呼び出しがあると、親クラスの引数なしのコンストラクタが呼び出されてから、コンストラクタが実行されます。
+このクラスにそれぞれ引数なしのコンストラクターを作成します。この状態で`Cat`クラスのインスタンスを作成します。
 
 ``` dart linenums="1"
 class Animal {
   Animal() {
-    print('Animalのコンストラクタ');
+    print('Animalのコンストラクター');
   }
 }
 
 class Cat extends Animal {
   Cat() {
-    print('Catのコンストラクタ');
+    print('Catのコンストラクター');
   }
 }
 
@@ -142,14 +163,56 @@ void main() {
 }
 ```
 
-## 他のコンストラクタの呼び出し
+実行すると次のようになります。
 
-`this`を使って他のコンストラクタを呼び出すこともできます。
+```
+Animalのコンストラクター
+Catのコンストラクター
+```
+
+サブクラスの`Cat`から明示して、スーパークラスのコンストラクターを呼び出していませんが、実行結果を見ると呼び出されているのがわかります。これはつまり、Javaと同様にサブクラスでは明示してスーパークラスのコンストラクターを呼び出していない場合には、スーパークラスの引数なしのコンストラクターが呼び出されているということです。そのため、次のようにスーパークラスから引数なしのコンストラクターをなくしてしまうとエラーになります。
+
+``` dart linenums="1"
+class Animal {
+  Animal(int n) {
+    print('Animalのコンストラクター');
+  }
+}
+
+class Cat extends Animal {
+  Cat() {
+    print('Catのコンストラクター');
+  }
+}
+```
+
+エラーを解決しようと次のようにすることはできません。
+
+``` dart linenums="1" hl_lines="9"
+class Animal {
+  Animal(int n) {
+    print('Animalのコンストラクター');
+  }
+}
+
+class Cat extends Animal {
+  Cat() {
+    super(3); // エラー
+    print('Catのコンストラクター');
+  }
+}
+```
+
+この解決法は、このあと説明します。
+
+### 他のコンストラクターの呼び出し（コンストラクターのリダイレクト）
+
+`this`を使って他のコンストラクターを呼び出すには、`this`を使います。この場合には、コンストラクターの本体は書くことができません。
 
 ``` dart linenums="1"
 class Animal {
   Animal() {
-    print('Animalのコンストラクタ');
+    print('Animalのコンストラクター');
   }
 
   Animal.other() : this();
@@ -160,9 +223,60 @@ void main() {
 }
 ```
 
+同様にスーパークラスのコンストラクターを呼び出す事もできます。この場合は、コンストラクターの本体を記載できます。
+
+``` dart linenums="1"
+class Animal {
+  Animal(int n) {
+    print('Animalのコンストラクター');
+  }
+}
+
+class Cat extends Animal {
+  Cat() : super(3) {
+    print('Catのコンストラクター');
+  }
+}
+```
+
+### コンストラクターでの名前付き引数
+
+コンストラクターでも名前付きの引数を利用できます。
+
+``` dart linenums="1"
+class Human {
+  late final String name;
+  late final int age;
+
+  Human({required String name, required int age}) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+void main() {
+  var human = Human(name: 'テスト', age: 30);
+}
+```
+
+このような場合、次のように省略した書き方で同様のことができます。
+
+``` dart linenums="1"
+class Human {
+  final String name; // lateは不要
+  final int age;
+
+  Human({required this.name, required this.age});
+}
+
+void main() {
+  var human = Human(name: 'テスト', age: 30);
+}
+```
+
 ## 抽象クラス
 
-インスタンスを作成できない、抽象クラスを作成することもできます。
+抽象クラスを作成することもできます。Javaと同じです。抽象メソッドには`abstract`は不要です。単純にメソッドの実態を記載しません。メソッドのオーバーライドの際`@override`アノテーションは必須ではありませんが、つけることでオーバーライドできていない場合（スーパークラスにメソッドがない場合等）に警告が表示されます。
 
 ``` dart linenums="1"
 abstract class Device {
@@ -170,6 +284,7 @@ abstract class Device {
 }
 
 class Computer extends Device {
+  @override
   void printInfo() {
     print('computer');
   }
@@ -181,142 +296,171 @@ class Computer extends Device {
 すべてのクラスは、暗黙的にインタフェースが作られます。インタフェースの実装は`implements`で行います。
 
 ``` dart linenums="1"
-abstract class Human {
-  String _name;
-
-  Human(this._name);
-
-  void printInfo();
+abstract class Animal {
+  void move() {
+    print('Animal is moving');
+  }
 }
 
-class Man implements Human {
-  String? name2;
-  String get _name => '';
-  void set _name(value) {
-    name2 = value;
+class Cat implements Animal {
+  @override
+  void move() {
+    print('Cat is moving!');
   }
+}
 
-  void printInfo() {
-    print(name2);
-  }
+void main() {
+  var cat = Cat();
+  cat.move();
 }
 ```
 
-インタフェースはJavaと同じように、複数`implements`することができます。
+この場合、`Animal`クラスで定義されている`move`メソッドのみが定義されたインターフェースになるため、`Cat`クラスでオーバーライドしないといけません。
 
-インタフェースは実装を持たないため、次のように書くと`Human`インターフェースの`printInfo`は実装を持たないため、`Man`クラスでオーバーライドしないとエラーになります。
+## ライブラリープライバシー
+
+インスタンス変数やクラス等の名前の先頭を`_`とすることで、ライブラリー内（ファイル内）でのみアクセスが可能になります。Javaのような`private`といった概念はなく、ファイル単位ので管理になります。
 
 ``` dart linenums="1"
 class Human {
-  void printInfo() {
-    print('人間です');
-  }
-}
+  String _name;
+  int _age;
 
-class Man implements Human {
-  // エラー。printInfoをオーバーライドしないといけない
-}
-```
-
-## クラスの継承
-
-`exnteds`でクラスの継承が行なえます。
-
-``` dart linenums="1"
-class Book {
-  String name;
-  int price;
-
-  Book(this.name, this.price);
-}
-
-class DartBook extends Book {
-  DartBook(name, price) : super(name, price);
-
-  void printInfo() {
-    print('$name $price円');
-  }
+  Human(this._name, this._age);
 }
 
 void main() {
-  var b = DartBook('Dart', 2980);
-  b.printInfo();
+  var h = Human('Dartくん', 22);
+  // 同じファイルの場合は読み書きできる
+  print('${h._name} ${h._age}');
 }
 ```
 
-### メソッドのオーバーライド
+ここで、`main`関数と`Human`クラスを別のファイルとして定義し、次のようにすることでエラーになることを確認できます。
 
-`@override`アノテーションを付けると、正しくオーバーライドされているかのチェックが行われます。
-
-``` dart linenums="1"
-class Book {
-  String name;
-  int price;
-
-  Book(this.name, this.price);
-
-  void printInfo() {
-    print('$name ${price}円');
-  }
-}
-
-class DartBook extends Book {
-  DartBook(name, price) : super(name, price);
-
-  @override
-  void printInfo() {
-    print('この本は$name ${price}円');
-  }
-}
-```
-
-### 列挙型
-
-`enum`で列挙型を作成できます。
-
-``` dart linenums="1"
-enum Color { red, green, blue }
+``` dart linenums="1" title="human.dart"
+import 'human.dart';
 
 void main() {
-  print('赤 ${Color.red.index}');
-  print('緑 ${Color.green.index}');
-  print('青 ${Color.blue.index}');
-
-  print(Color.values);
-
-  var c = Color.red;
-
-  switch (c) {
-    case Color.red:
-      print('赤です');
-      break;
-    case Color.green:
-      print('緑です');
-      break;
-    case Color.blue:
-      print('青です');
-      break;
-  }
+  var h = Human('Dartくん', 22);
+  // 同じファイルの場合は読み書きできる
+  print('${h._name} ${h._age}');
 }
 ```
+
+``` dart linenums="1"
+import 'human.dart';
+
+void main() {
+  var h = Human('Dartくん', 22);
+  // 同じファイルの場合は読み書きできる
+  print('${h._name} ${h._age}');
+}
+```
+
+## プロパティ
+
+Javaでいうクラスのフィールドは、Dartの場合は単純なフィールドではありません。例えば次のようなクラスで見ていきます。
+
+``` dart linenums="1"
+class Human {
+  int age;
+
+  Human(this.age);
+}
+
+void main() {
+  final human = Human(20);
+  print('年齢=${human.age}');
+  human.age = 30;
+  print('年齢=${human.age}');
+}
+```
+
+`Human`クラス内で`public`なインスタンス変数（変数名が`_`で始まらない）を作成した場合には自動的にプロパティになり、`getter`、`setter`が作成されます。
+
+`main`関数内で、`human.age`と参照した場合には`getter`が呼び出され、`human.age = 30`のように代入した場合には`setter`が呼び出されます。
+
+また、次のように自分で明示してプロパティを作成することができます。
+
+``` dart linenums="1"
+class Human {
+  int _age;
+
+  int get age => _age;
+
+  set age(int value) => _age = value;
+
+  Human(this._age);
+}
+
+void main() {
+  final human = Human(20);
+  print('年齢=${human.age}');
+  human.age = 30;
+  print('年齢=${human.age}');
+}
+```
+
+`getter`は次のように定義します。
+
+```
+型 get プロパティ名 => 値;
+```
+
+もしくは、関数の形で書く場合。
+
+```
+型 get プロパティ名 {
+  // 処理を書いてもいい
+  return 値;
+}
+```
+
+`setter`は同様に次のように定義します。
+
+```
+set プロパティ名(型 変数名) => 値をセットする処理;
+```
+
+もしくは、関数の形で書く場合。
+
+```
+set プロパティ名(型 変数名) {
+  // 値をセットする処理
+}
+```
+
+メソッドとプロパティはできることが一部重複しています。使い分けの基準は次のようにするのが良いです。
+
+- プロパティは、内部状態のセットや確認に用いる
+- メソッドはアクション（動詞）
+
+例えば、次のようなクラスを参考にしてください。
 
 ## mixin
 
-mixinはクラスのようなものですが、コンストラクタを含むことはできません。
+mixinはクラスのようなものですが、コンストラクターを含むことはできません。また、インスタンスを生成することはできません。抽象クラスに似ていて、他のクラスと合成をして利用します。
+
+例えば、`Log`を出力するためのmixinを次のように作成して利用します。
 
 ``` dart linenums="1"
-mixin Book {
-  String name = '本';
-  int price = 0;
+mixin Log {
+  void log(String message) {
+    print('${DateTime.now()} $message');
+  }
 }
 
-class DartBook with Book {}
+class Human with Log {}
 
 void main() {
-  var d = DartBook();
-  print(d.name);
+  var human = Human();
+  human.log('begin');
+  human.log('end');
 }
 ```
+
+上記の`Log`クラスのように多数のクラスで共通の機能があった際に、mixinの意味が出てきます。`Log`をクラスや抽象クラスで作成することもできますが、多重継承ができないため`Log`を継承すると他のクラスを継承できないという制約が生まれます。インターフェースにすると、継承の製薬は生まれませんが、実装を記載することができないため目的の機能自体が実装できません。
 
 また、mixinを使うことができる型を`on`を使って制限することができます。
 
@@ -355,53 +499,72 @@ void main() {
 }
 ```
 
-## プロパティとprivate
+## 拡張メソッド
 
-インスタンス変数は、変数名の先頭に`_`をつけることで、privateにすることができます。privateにしたものは、別のファイルからは読み書きすることはできません。
+ここは[ドキュメントのサンプル](https://dart.dev/language/extension-methods){targer=_blank}を例にします。
+
+文字列を`int`型に変換するには、`int.parse`メソッドを使います。
+
+``` dart
+int.parse('42');
+```
+
+これが、もっと直感的に次のようにできるといいのではないかというところから来ています。
+
+``` dart
+'42'.parseInt();
+```
+
+ただ、`String`クラスは組み込みのクラスで継承ができないため簡単に行きません。そういったとき拡張メソッドが活用できます。
+
+今回は`String`クラスを拡張してメソッドを追加したいので次のように定義します。
 
 ``` dart linenums="1"
-class Human {
-  String _name;
-  int _age;
-
-  Human(this._name, this._age);
-}
-
-void main() {
-  var h = Human('Dartくん', 22);
-  // 同じファイルの場合は読み書きできる
-  print('${h._name} ${h._age}');
+extension NumberParsing on String {
+  int parseInt() {
+    return int.parse(this);
+  }
 }
 ```
 
-別のファイルでもアクセスする必要がある場合には、getterとsetterを用意します。それぞれ次のように書きます。
+そうすることで、次のように動作させることができます。
 
 ``` dart linenums="1"
-class Human {
-  String _name;
-  int _age;
-
-  String get name => _name;
-
-  set name(String value) {
-    _name = value;
-  }
-
-  int get age => _age;
-
-  set age(int value) {
-    _age = value;
-  }
-
-  Human(this._name, this._age);
-}
-
 void main() {
-  var h = Human('Dartくん', 22);
-  // setterを使うときには = で代入するように使える
-  h.name = 'プロパティさん';
-  h.age = 22;
-  // getterはインスタンス変数と同様に使える
-  print('${h.name} ${h._age}');
+  var n = '42'.parseInt();
+  print(n * 10);
 }
 ```
+
+
+
+## 列挙型
+
+`enum`で列挙型を作成できます。
+
+``` dart linenums="1"
+enum Color { red, green, blue }
+
+void main() {
+  print('赤 ${Color.red.index}');
+  print('緑 ${Color.green.index}');
+  print('青 ${Color.blue.index}');
+
+  print(Color.values);
+
+  var c = Color.red;
+
+  switch (c) {
+    case Color.red:
+      print('赤です');
+      break;
+    case Color.green:
+      print('緑です');
+      break;
+    case Color.blue:
+      print('青です');
+      break;
+  }
+}
+```
+
