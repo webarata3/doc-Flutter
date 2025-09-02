@@ -274,6 +274,44 @@ void main() {
 }
 ```
 
+## メソッド
+
+### 演算子
+
+演算子を定義して、インスタンス同士の演算を行うことができます。
+
+``` dart linenums="1"
+class Complex {
+  int real;
+  int imaginary;
+
+  Complex({required this.real, required this.imaginary});
+
+  Complex operator +(Complex v) =>
+      Complex(real: real + v.real, imaginary: imaginary + v.imaginary);
+
+  Complex operator -(Complex v) =>
+      Complex(real: real - v.real, imaginary: imaginary - v.imaginary);
+
+  @override
+  bool operator ==(Object other) =>
+      other is Complex && real == other.real && imaginary == other.imaginary;
+
+  @override
+  String toString() {
+    return '$real${imaginary < 0 ? "" : "+"}${imaginary}i';
+  }
+}
+
+void main() {
+  final v1 = Complex(real: 2, imaginary: 1);
+  final v2 = Complex(real: 4, imaginary: 4);
+
+  print(v1 + v2);
+  print(v1 - v2);
+}
+```
+
 ## 抽象クラス
 
 抽象クラスを作成することもできます。Javaと同じです。抽象メソッドには`abstract`は不要です。単純にメソッドの実態を記載しません。メソッドのオーバーライドの際`@override`アノテーションは必須ではありませんが、つけることでオーバーライドできていない場合（スーパークラスにメソッドがない場合等）に警告が表示されます。
@@ -536,7 +574,60 @@ void main() {
 }
 ```
 
+## 呼び出し可能なオブジェクト
 
+クラスのインスンタンスを関数のように呼び出せる機能があり、呼び出し可能なオブジェクトと言います。呼び出し可能なオブジェクトは、`call`という名前のメソッドを定義することで実装できます。`call`メソッドの引数と戻り値は自由です。具体的に見ていきます。
+
+``` dart linenums="1"
+class Counter {
+  var count = 0;
+  int call() {
+    count++;
+    return count;
+  }
+}
+
+void main() {
+  var counter = Counter();
+  print(counter());
+  print(counter());
+  print(counter());
+  print(counter());
+}
+```
+
+これは、関数として利用したいが、内部状態を保持したいという場合に使うことができます。
+
+## 拡張型
+
+拡張型を使うことで、`int`や`double`に意味的な単位を持たせて、型安全性を担保することができます。例えば、長さの単位のマイルとメートルで考えます。
+
+``` dart linenums="1"
+extension type const Meter(double value) {}
+extension type const Mile(double value) {}
+
+Meter mileToMeter(Mile mile) {
+  return Meter(mile.value * 1.609);
+}
+
+Mile meterToMile(Meter meter) {
+  return Mile(meter.value / 1.609);
+}
+
+void main() {
+  var speed = Mile(100);
+  var meter = mileToMeter(speed);
+  print('100マイルは${meter}m');
+}
+```
+
+このようなプログラムを書くと、次の3行はすべてエラーになります。
+
+``` dart linenums="1"
+var n = speed + meter;
+var m = speed + 1;
+var s = meter + 1;
+```
 
 ## 列挙型
 
