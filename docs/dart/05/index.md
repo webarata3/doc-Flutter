@@ -631,7 +631,9 @@ var s = meter + 1;
 
 ## 列挙型
 
-`enum`で列挙型を作成できます。
+`enum`で列挙型を作成できます。列挙型を利用することで、特定の型に代入できる値を制限することができます。
+
+次の例の場合には`Color`型の値として`red`、`green`、`blue`の3種類のみが許されていて、その他の値は使うことができません。
 
 ``` dart linenums="1"
 enum Color { red, green, blue }
@@ -648,14 +650,141 @@ void main() {
   switch (c) {
     case Color.red:
       print('赤です');
-      break;
     case Color.green:
       print('緑です');
-      break;
     case Color.blue:
       print('青です');
-      break;
   }
 }
 ```
 
+列挙型はクラスのようにコンストラクターを追加することができます。列挙型のコンストラクターは`const`にしないといけません。
+
+``` dart linenums="1"
+enum Color {
+  red('赤'),
+  green('緑'),
+  blue('青');
+
+  final String label;
+
+  const Color(this.label);
+}
+
+void main() {
+  var c = Color.red;
+  print(c.label);
+}
+```
+
+列挙型にはメソッドを追加することができます。
+
+``` dart linenums="1"
+enum Shape {
+  square,
+  triangle;
+
+  double area(double base, double height) {
+    return switch (this) {
+      square => base * height,
+      triangle => base * height / 2,
+    };
+  }
+}
+
+void main() {
+  print('幅3、高さ4の長方形の面積は${Shape.square.area(3, 4)}');
+  print('幅3、高さ4の三角形の面積は${Shape.triangle.area(3, 4)}');
+}
+```
+
+## レコード
+
+### レコードの基本
+
+レコードは複数のデータをまとめて扱うための仕組みです。レコードは`()`の中にデータを書くことで作成することができます。
+
+``` dart linenums="1"
+void main() {
+  var r = ('最初', x: 5, y: true, '最後');
+  print('r.x = ${r.x}');
+  print('r.\$1 = ${r.$1}');
+  print('r.\$2 = ${r.$2}');
+}
+```
+
+`()`内のデータのうち`x: 5`のように書くと`x`という名前で`5`というデータを保持します。アクセスするときは`r.x`とします。
+
+`最初`や`最後`といったデータは名前がついていません。この場合には、名前がついていないものの先頭から、`$1`、`$2`といった名前でアクセスできます。
+
+レコードは**不変**のため、一度決めた値を変更することはできません。
+
+### レコードの型
+
+関数の戻り値や変数の型としてレコードを使う場合には、`()`内に型を書きます。
+
+``` dart linenums="1"
+void main() {
+  (int, int) r = (3, 4);
+  print(swap(r));
+}
+
+(int, int) swap((int, int) r) {
+  var (a, b) = r;
+  return (b, a);
+}
+```
+
+上記コードのうち、次の部分で型の定義をしています。整数2つを格納したいので`(int, int)`としています。
+
+``` dart
+  (int, int) r = (3, 4);
+```
+
+`swap`関数も確認します。関数定義は次のとおりです。
+
+``` dart
+(int, int) swap((int, int) r) {
+```
+
+戻り値は`(int, int)`です。引数は`(int, int)`型で`r`という名前で受け取ります。
+
+もう1つ面白いのが、[JavaScriptの分割代入](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring){target=_blank}と同じようなことができます。次のコードですが、レコード`r`の値を変数`a`と`b`に代入しています。
+
+``` dart
+  var (a, b) = r;
+```
+
+変数で書かずに表すと、次のようになります。`a`に3、`b`に4が代入されます。
+
+``` dart
+var (a, b) = (3, 4);
+```
+
+!!! note "値の入れ替え"
+
+    変数の値の入れ替えはレコードがない場合には、次のように書かないといけません。
+
+    ``` dart linenums="1"
+    var a = 1;
+    var b = 2;
+    var temp = a;
+    a = b;
+    b = temp;
+    ```
+
+    レコードを用いることで簡単に値の入れ替えをすることができます。
+
+    ``` dart linenums="1"
+    var a = 1;
+    var b = 2;
+    (b, a) = (a, b);
+    ```
+
+### 名前付きのレコードの型
+
+レコードの型を定義するときに、フィールドの名前をつけることができます。
+
+``` dart
+({int a, int b}) r = (a: 3, b: 4);
+```

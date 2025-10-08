@@ -1,5 +1,38 @@
 # レイアウト
 
+## アプリの言語
+
+サンプルプログラムの`_MyHomePageState`を次のように変更します。
+
+``` dart linenums="1"
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.all(30.0), child: TextField()),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+テキストの入力欄が出るので、長押しすると貼り付けが表示されますが、英語になっています。
+
+Flutterアプリを日本語化する場合には、コマンドラインで次のコマンドでパッケージをインストールします。
+
+```
+flutter pub add flutter_localizations --sdk=flutter
+```
+
 ## 単位
 
 Flutterアプリの中で使われる単位については、論理ピクセルという単位が使われています。

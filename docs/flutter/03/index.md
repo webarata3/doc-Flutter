@@ -15,6 +15,25 @@ const Text(
 ),
 ```
 
+次のように長い文字列をいれると、自動で折り返します。
+
+``` dart linenums="1"
+body: Column(
+  children: [
+    const Text(
+      'Textのテスト長い文字列をいれるとどうなるかのテスト',
+      style: TextStyle(
+        color: Colors.blue,
+        fontSize: 30.0,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ],
+),
+```
+
+![](image/longtext01.webp)
+
 ## テキスト入力
 
 次のレイアウトを基準に作成していきます。
@@ -43,7 +62,7 @@ class MyApp extends StatelessWidget {
 }
 
 class LayoutTest extends StatelessWidget {
-  const LayoutTest({Key? key}) : super(key: key);
+  const LayoutTest({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -88,13 +107,34 @@ class LayoutTest extends StatelessWidget {
 
 `maxLength`を指定すると入力可能な文字数を制限できます。例えば`3`を指定すると次のようになります。`maxLength`を指定すると、テキストフィールドの右下に`2/3`のように何文字まで入力できて、今何文字入力しているかが表示されます。
 
+``` dart linenums="1"
+const TextField(maxLength: 3),
+```
+
 ![画面](image/text05.webp)
+
+絵文字もきちんとカウントしてくれます。
+
+![画面](image/text10.webp)
 
 ### 入力を隠す
 
 パスワード等を入力する場合には、入力している文字を表示したくありません。そのような場合には、`obscureText`を`true`にすることで、入力文字が見えなくなります。
 
 ![画面](image/text06.webp)
+
+### 長いテキストの入力
+
+`TextField`はデフォルトで文字の折り返しはしません。改行も入りません。複数行になるような長いテキストを入力させたい場合には、次のように`keyboardType`と`maxLines`を指定します。
+
+``` dart linenums="1"
+const TextField(
+  keyboardType: TextInputType.multiline,
+  maxLines: null,
+),
+```
+
+![](image/text11.webp)
 
 ### 装飾する
 
@@ -282,7 +322,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     ![](image/check03.webp)
 
-    ただ、デフォルトでは`value`を`null`にすることはできず、`tristate`引数を`true`とすることで`value`を`null`にする事ができます。
+    ただ、デフォルトでは`value`を`null`にすることはできず、引数`tristate`を`true`とすることで`value`を`null`にする事ができます。
 
 チェックボックスにラベルをつけるには、`CheckboxListTile`を使います。`Checkbox`との違いは`title`を指定するかどうかです。
 
@@ -300,7 +340,7 @@ CheckboxListTile(
 
 ## スイッチ
 
-チェックボックスと同様のもので、スイッチの形をしたものが使えます。
+チェックボックスと同様のもので、スイッチがあります。
 
 ``` dart linenums="1"
 SwitchListTile(
@@ -329,51 +369,39 @@ SwitchListTile(
 
 ## ラジオボタン
 
-ラジオボタンは`enum`と一緒に使うと便利に使えます。
+ラジオボタンは、グループの中で1つだけ選択できるボタンです。グループの設定をするクラスと、選択項目のクラスの2つがあります。
+
+グループの設定をするのが`RadioGroup`クラスです。次の例では、`groupValue`として1つ変数を割り当てています。この変数の値が現在選択されているボタンを表します。例の場合には`int?`型の`_selectedValue`を割り当てています。この変数を`null`にした場合には未選択の状態になります。また、ラジオボタンが押されたときには`onChanged`に指定した関数が呼び出されます。
+
+ラジオボタン自体は`RadioListTile`を使うのが簡単です。`title`にボタンの見出しを設定します。`value`には、このラジオボタンの値を指定します。`RadioGroup`の`groupValue`がこの値のときに、ラジオボタンが選択されている状態になります。
 
 ``` dart linenums="1"
-enum Janken { gu, choki, pa }
-
 class _MyHomePageState extends State<MyHomePage> {
-  Janken? _te = Janken.gu;
+  int? _selectedValue;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Column(
         children: [
-          RadioListTile<Janken>(
-            title: const Text('グー'),
-            value: Janken.gu,
-            groupValue: _te,
-            onChanged: (Janken? value) {
+          RadioGroup<int>(
+            groupValue: _selectedValue,
+            onChanged: (int? value) {
               setState(() {
-                _te = value;
+                _selectedValue = value;
               });
             },
-          ),
-          RadioListTile<Janken>(
-            title: const Text('チョキ'),
-            value: Janken.choki,
-            groupValue: _te,
-            onChanged: (Janken? value) {
-              setState(() {
-                _te = value;
-              });
-            },
-          ),
-          RadioListTile<Janken>(
-            title: const Text('パー'),
-            value: Janken.pa,
-            groupValue: _te,
-            onChanged: (Janken? value) {
-              setState(() {
-                _te = value;
-              });
-            },
+            child: const Column(
+              children: <Widget>[
+                RadioListTile<int>(title: Text('グー'), value: 0),
+                RadioListTile<int>(title: Text('チョキ'), value: 1),
+                RadioListTile<int>(title: Text('パー'), value: 2),
+              ],
+            ),
           ),
         ],
       ),
@@ -387,35 +415,67 @@ class _MyHomePageState extends State<MyHomePage> {
 このラジオボタンは`for`ループを使って書き換えることができます。
 
 ``` dart linenums="1"
-enum Janken { gu, choki, pa }
+body: Column(
+    children: [
+      RadioGroup<int>(
+        groupValue: _selectedValue,
+        onChanged: (int? value) {
+          setState(() {
+            _selectedValue = value;
+          });
+        },
+        child: Column(
+          children: [
+            for (var i = 0; i < _labels.length; i++)
+              RadioListTile<int>(title: Text(_labels[i]), value: i),
+          ],
+        ),
+      ),
+    ],
+  ),
+```
+
+### enumを使う
+
+ラジオボタンの最初の例では`int`型を使いましたが、`enum`を使ったほうがスッキリと書くことができます。
+
+``` dart linenums="1"
+enum Janken {
+  gu('グー'),
+  choki('チョキ'),
+  pa('パー');
+
+  final String label;
+
+  const Janken(this.label);
+}
 
 class _MyHomePageState extends State<MyHomePage> {
-  Janken? _te = Janken.gu;
-  final _labels = {
-    Janken.gu: 'グー',
-    Janken.choki: 'チョキ',
-    Janken.pa: 'パー',
-  };
+  Janken? _janken = Janken.gu;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Column(
         children: [
-          for (var janken in Janken.values)
-            RadioListTile<Janken>(
-              title: Text(_labels[janken] ?? ''),
-              value: janken,
-              groupValue: _te,
-              onChanged: (Janken? value) {
-                setState(() {
-                  _te = value;
-                });
-              },
+          RadioGroup<Janken>(
+            groupValue: _janken,
+            onChanged: (Janken? value) {
+              setState(() {
+                _janken = value;
+              });
+            },
+            child: Column(
+              children: [
+                for (final j in Janken.values)
+                  RadioListTile<Janken>(title: Text(j.label), value: j),
+              ],
             ),
+          ),
         ],
       ),
     );
