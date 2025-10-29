@@ -1,38 +1,5 @@
 # レイアウト
 
-## アプリの言語
-
-サンプルプログラムの`_MyHomePageState`を次のように変更します。
-
-``` dart linenums="1"
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Padding(padding: EdgeInsets.all(30.0), child: TextField()),
-          ],
-        ),
-      ),
-    );
-  }
-}
-```
-
-テキストの入力欄が出るので、長押しすると貼り付けが表示されますが、英語になっています。
-
-Flutterアプリを日本語化する場合には、コマンドラインで次のコマンドでパッケージをインストールします。
-
-```
-flutter pub add flutter_localizations --sdk=flutter
-```
-
 ## 単位
 
 Flutterアプリの中で使われる単位については、論理ピクセルという単位が使われています。
@@ -44,7 +11,7 @@ Flutterアプリの中で使われる単位については、論理ピクセル�
 | 機種 | 画面サイズ | 解像度 横 | 解像度 縦 |
 |-|-|-|-|
 | iPhone 11 | 6.1インチ | 828 | 1792 |
-| iPhone 14 | 6.1インチ | 1179 | 2556 |
+| iPhone 16 | 6.1インチ | 1179 | 2556 |
 
 同じ画面サイズですが、iPhone 16のほうが解像度が高いです。こういった場合に論理ピクセルではなく、物理的なピクセル数でサイズを表すと、機種ごとに大きさの違いが出てしまいます。
 
@@ -65,7 +32,7 @@ Flutterアプリの中で使われる単位については、論理ピクセル�
 - 短辺: 360～414px
 - 長辺: 640～926px
 
-縦はスクロールすればいいのですが、横幅が入らないのはあまり好ましくありません。横幅は360pxに入るようにつくほうがいいです。
+縦はスクロールすればいいのですが、横幅が入らないのはあまり好ましくありません。横幅は360pxに入るように作る方がいいです。
 
 ## アプリケーションの準備
 
@@ -722,7 +689,7 @@ class _LayoutTestState extends State<LayoutTest> {
 
 上記の`BottomNavigationBar`のサンプルに`BottomNavitaionBarItem`を1つ追加する頃こと。
 
-### FloatingActionButton
+## FloatingActionButton
 
 次に`FloatingActionButton`を追加します。`BottomNavigationBar`の次に`floatingActionButton`を追加します。
 
@@ -750,3 +717,82 @@ onPressed: () {
 ボタンを押すと次のように表示され、しばらく待つと消えます。
 
 ![SnackBar](image/03.webp)
+
+## 練習問題
+
+### 練習問題1
+
+次のコードをベースにして、下記の画像のような画面を作成すること。フォントサイズは20とすること。
+
+``` dart linenums="1"
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: Column(children: <Widget>[]),
+    );
+  }
+}
+```
+
+![](image/ex/01.webp)
+
+### 練習問題2
+
+練習問題1のプログラムを変更して、次の画面のようにすること。
+
+`Column`と`Row`を組み合わせます。文字1～文字20の間は余白を開けています。
+
+![](image/ex/02.webp)
+
+### 練習問題3
+
+練習問題2のプログラムを変更して、次の画面のようにすること。
+
+![](image/ex/03.webp)
+
+### 練習問題4
+
+練習問題3のプログラムを変更して、次の画面のようにすること。文字2は背景に透明度50%の赤を指定し、パディングとして上下左右すべて20を指定。
+
+![](image/ex/04.webp)
+
+### 練習問題5
+
+練習問題4のプログラムを変更して、次の画面のようにすること。
+
+![](image/ex/05.webp)
