@@ -2,22 +2,22 @@
 
 ## 必要なパッケージの設定
 
-`pubspec.yaml`ファイルに次の内容を追加します。追加するのは、`sqflite`と`path`の2つです。
+`pubspec.yaml`ファイルに次の内容を追加します。追加するのは、`sqflite`と`path`の2つです。インデントに意味があるので、追加する部分の先頭には必ずスペース2つを入れてください。
 
-```dart
+``` yaml linenums="1" hl_lines="5-6"
 dependencies:
   flutter:
     sdk: flutter
-  sqflite: ^2.0.2+1
-  path: ^1.8.1
-```
 
+  sqflite: ^2.4.2
+  path: ^1.9.1
+```
 
 ## モデルの作成
 
 TODOのデータを扱うために、モデルのクラスを作成します。TODOの1件に該当するクラスを次のように作成します。
 
-```dart title="model/todo.dart"
+``` dart linenums="1" title="model/todo.dart"
 class Todo {
   final int? todoId;
   final String title;
@@ -43,7 +43,7 @@ class Todo {
 
 実際のデータベースを操作するクラスを次のように作成します。
 
-```dart title="helper/db_helper.dart"
+``` dart linenums="1" title="helper/db_helper.dart"
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../model/todo.dart';
@@ -126,16 +126,15 @@ class DbHelper {
 
 まず、`import`を追加します。
 
-```dart title="view/todo_page.dart"
+``` dart linenums="1" title="view/todo_page.dart"
 import '../helper/db_helper.dart';
 import '../model/todo.dart';
 ```
 
 `_TodoPageState`に次のものを追加します。
 
-```dart
+``` dart linenums="1"
 var _todos = <Todo>[];
-var count = 0;
 
 @override
 void initState() {
@@ -149,17 +148,15 @@ void dispose() {
   super.dispose();
 }
 
-Future<void> getTodos() async {
+void getTodos() async {
   _todos = await DbHelper.instance.selectAll();
-  setState(() {
-    _count = _todos.length;
-  });
+  setState(() {});
 }
 ```
 
 `ListView`のTODOを表示する`Text`の内容を変更します。
 
-```dart
+``` dart linenums="1"
 Expanded(
   flex: 1,
   child: Text(_todos[index].title),
@@ -168,7 +165,7 @@ Expanded(
 
 `showAddDialog`の最後の`if`文を次のように変更します。
 
-```dart
+``` dart linenums="1"
 if (result != null && result.length != 0) {
   await DbHelper.instance.create(Todo(title: result));
   getTodos();
@@ -194,12 +191,6 @@ void updateTodo(BuildContext context, int index) async {
 }
 ```
 
-また、`ListView`の`itemCount`を`count`に変更します。
-
-```dart
-itemCount: _count,
-```
-
 ## 削除できるようにする
 
 `deleteTodo`メソッドの`AlertDialog`コンストラクタの引数`content`を次のように変更します。
@@ -211,7 +202,7 @@ content: Text('「${_todos[index].title}」を削除してよろしいですか'
 また、`deleteTodo`の最後の`if`文を次のように変更します。
 
 ```dart
-if (result) {
+if (result != null && result) {
   var todoId = _todos[index].todoId;
   if (todoId == null) return;
   await DbHelper.instance.delete(todoId);

@@ -125,3 +125,127 @@ class LayoutTest extends StatelessWidget {
 この例では、無限にリストを作成しています。特にリストの項目が多い場合に、すべてのウィジェットを最初に作ってしまうと、メモリ等の資源を使ってしまいますし、時間もかかってしまいます。
 
 `ListView.builder`では表示される部分のウィジェットを用意しますので、効率よくリストを扱うことができます。
+
+### 練習問題1
+
+次のレイアウトになるように画面を作成すること。
+
+![練習問題1](image/ex01.webp)
+
+1行ごとのデータは次のようなクラスを作成すること
+
+``` dart linenums="1"
+
+class News {
+  final String title;
+  final DateTime date;
+  final int commentCount;
+
+  const News({
+    required this.title,
+    required this.date,
+    required this.commentCount,
+  });
+}
+```
+
+このクラスに次のデータを入れて利用すること。
+
+``` dart linenums="1"
+final newsList = <News>[
+  News(title: '最初のニュース', date: DateTime.now(), commentCount: 100),
+  News(title: '2番目のニュース', date: DateTime.now(), commentCount: 90),
+  News(title: '3番目のニュース', date: DateTime.now(), commentCount: 88),
+  News(title: '4番目のニュース', date: DateTime.now(), commentCount: 80),
+  News(
+    title: '新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 10),
+    commentCount: 10,
+  ),
+  News(
+    title: 'A新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 9),
+    commentCount: 10,
+  ),
+  News(
+    title: '新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 10),
+    commentCount: 10,
+  ),
+  News(
+    title: 'A新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 9),
+    commentCount: 10,
+  ),
+  News(
+    title: '新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 10),
+    commentCount: 10,
+  ),
+  News(
+    title: 'A新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 9),
+    commentCount: 10,
+  ),
+  News(
+    title: '新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 10),
+    commentCount: 10,
+  ),
+  News(
+    title: 'A新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 9),
+    commentCount: 10,
+  ),
+  News(
+    title: '新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 10),
+    commentCount: 10,
+  ),
+  News(
+    title: 'A新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 9),
+    commentCount: 10,
+  ),
+  News(
+    title: '新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 10),
+    commentCount: 10,
+  ),
+  News(
+    title: 'A新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 9),
+    commentCount: 10,
+  ),
+  News(
+    title: 'B新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 8),
+    commentCount: 10,
+  ),
+  News(
+    title: 'C新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 7),
+    commentCount: 10,
+  ),
+  News(
+    title: 'D新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 6),
+    commentCount: 10,
+  ),
+  News(
+    title: 'E新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 5),
+    commentCount: 10,
+  ),
+  News(
+    title: 'F新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 4),
+    commentCount: 10,
+  ),
+  News(
+    title: 'G新しいカフェが金沢駅前にオープン',
+    date: DateTime(2025, 11, 3),
+    commentCount: 10,
+  ),
+];
+```

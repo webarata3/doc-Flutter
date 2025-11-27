@@ -4,11 +4,11 @@
 
 初期表示される画面を`view`フォルダ内に、`todo_page.dart`ファイルとして作成します。画面の定義だけで、ボタン等は動きません。最初に作ったものと違い、TODOの追加はFloatingActionButtonを使います。
 
-```dart title="view/todo_page.dart"
+``` dart linenums="1" title="view/todo_page.dart"
 import 'package:flutter/material.dart';
 
 class TodoPage extends StatefulWidget {
-  const TodoPage({Key? key}) : super(key: key);
+  const TodoPage({super.key});
 
   @override
   State<TodoPage> createState() => _TodoPageState();
@@ -20,9 +20,7 @@ class _TodoPageState extends State<TodoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('TODO'),
-      ),
+      appBar: AppBar(title: Text('TODO')),
       body: Column(
         children: [
           Expanded(
@@ -30,30 +28,18 @@ class _TodoPageState extends State<TodoPage> {
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     border: Border(
-                      bottom: BorderSide(
-                        width: 1.0,
-                        color: Colors.grey,
-                      ),
+                      bottom: BorderSide(width: 1.0, color: Colors.grey),
                     ),
                   ),
                   child: Container(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: EdgeInsets.all(10.0),
                     child: Row(
                       children: [
-                        Expanded(
-                          flex: 1,
-                          child: Text(_todos[index]),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text('変更'),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text('削除'),
-                        ),
+                        Expanded(flex: 1, child: Text(_todos[index])),
+                        TextButton(onPressed: () {}, child: Text('変更')),
+                        TextButton(onPressed: () {}, child: Text('削除')),
                       ],
                     ),
                   ),
@@ -61,12 +47,12 @@ class _TodoPageState extends State<TodoPage> {
               },
               itemCount: _todos.length,
             ),
-          )
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -75,7 +61,7 @@ class _TodoPageState extends State<TodoPage> {
 
 初期画面を表示するために、`main.dart`を次のようにします。
 
-```dart title="main.dart"
+``` dart linenums="1" title="main.dart"
 import 'package:flutter/material.dart';
 import 'view/todo_page.dart';
 
@@ -84,7 +70,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -106,44 +92,35 @@ class MyApp extends StatelessWidget {
 
 最初にTODOを追加できるようにします。まず、`TodoPageState`クラスに次のメソッドを追加します。
 
-```dart title="view/todo_page.dart"
+```dart linenums="1" title="view/todo_page.dart"
 void _showAddDialog() async {
   final textController = TextEditingController();
-  var result = await showDialog(
+  var result = await showDialog<String>(
     context: context,
     builder: (_) {
       return AlertDialog(
-        title: const Text('TODOの追加'),
+        title: Text('TODOの追加'),
         content: Padding(
-          padding: const EdgeInsets.only(
-            left: 10.0,
-            right: 10.0,
-          ),
+          padding: EdgeInsets.only(left: 10.0, right: 10.0),
           child: TextField(
             controller: textController,
-            decoration: const InputDecoration(labelText: 'やること'),
+            decoration: InputDecoration(labelText: 'やること'),
           ),
         ),
         actions: [
           TextButton(
-            child: const Text('キャンセル'),
-            onPressed: () => Navigator.pop(
-              context,
-              null,
-            ),
+            child: Text('キャンセル'),
+            onPressed: () => Navigator.pop(context, null),
           ),
           TextButton(
-            child: const Text('登録'),
-            onPressed: () => Navigator.pop(
-              context,
-              textController.text,
-            ),
+            child: Text('登録'),
+            onPressed: () => Navigator.pop(context, textController.text),
           ),
         ],
       );
     },
   );
-  if (result != null && result.length != 0) {
+  if (result != null && result.isNotEmpty) {
     setState(() {
       _todos.insert(0, result);
     });
@@ -153,7 +130,7 @@ void _showAddDialog() async {
 
 また、`FloatingActionButton`を押したときに、このメソッドが呼び出される夜にします。
 
-```dart
+``` dart linenums="1"
 onPressed: _showAddDialog,
 ```
 
@@ -161,34 +138,28 @@ onPressed: _showAddDialog,
 
 `deleteTodo`メソッドを追加します。
 
-```dart
+``` dart linenums="1"
 void _deleteTodo(int index) async {
-  var result = await showDialog(
+  var result = await showDialog<bool>(
     context: context,
     builder: (_) {
       return AlertDialog(
-        title: const Text('TODOの削除'),
+        title: Text('TODOの削除'),
         content: Text('「${_todos[index]}」を削除してよろしいですか'),
         actions: [
           TextButton(
-            child: const Text('いいえ'),
-            onPressed: () => Navigator.pop(
-              context,
-              false,
-            ),
+            child: Text('いいえ'),
+            onPressed: () => Navigator.pop(context, false),
           ),
           TextButton(
-            child: const Text('はい'),
-            onPressed: () => Navigator.pop(
-              context,
-              true,
-            ),
+            child: Text('はい'),
+            onPressed: () => Navigator.pop(context, true),
           ),
         ],
       );
     },
   );
-  if (result) {
+  if (result != null && result) {
     setState(() {
       _todos.removeAt(index);
     });
@@ -198,7 +169,7 @@ void _deleteTodo(int index) async {
 
 また、削除ボタンで、`deleteTodo`メソッドが呼び出されるようにします。
 
-```dart
+``` dart linenums="1"
 onPressed: () => _deleteTodo(index),
 ```
 
@@ -206,41 +177,36 @@ onPressed: () => _deleteTodo(index),
 
 更新画面は別の画面に表示するので、`view`フォルダ内に、`todo_update_page.dart`ファイルを作成します。
 
-```dart
+``` dart linenums="1"
 import 'package:flutter/material.dart';
 
 class TodoUpdatePage extends StatelessWidget {
-  TodoUpdatePage({Key? key, required String todo}) : super(key: key) {
+  TodoUpdatePage({super.key, required String todo}) {
     _textController.text = todo;
   }
 
   final TextEditingController _textController = TextEditingController();
 
   void updateTodo(BuildContext context) {
-    Navigator.pop(context, _textController.text);
+    Navigator.pop<String>(context, _textController.text);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('todoの更新'),
-      ),
+      appBar: AppBar(title: Text('todoの更新')),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-              left: 10.0,
-              right: 10.0,
-            ),
+            padding: EdgeInsets.only(left: 10.0, right: 10.0),
             child: TextField(
               controller: _textController,
-              decoration: const InputDecoration(labelText: 'やること'),
+              decoration: InputDecoration(labelText: 'やること'),
             ),
           ),
           ElevatedButton(
             onPressed: () => updateTodo(context),
-            child: const Text('更新'),
+            child: Text('更新'),
           ),
         ],
       ),
@@ -251,20 +217,18 @@ class TodoUpdatePage extends StatelessWidget {
 
 `todo_page.dart`に次の`import`を追加します。
 
-```dart
+``` dart linenums="1"
 import 'todo_update_page.dart';
 ```
 
 `updateTodo`メソッドを追加します。
 
-```dart
+``` dart linenums="1"
 void _updateTodo(BuildContext context, int index) async {
-  var result = await Navigator.push(
+  var result = await Navigator.push<String>(
     context,
     MaterialPageRoute(
-      builder: (context) => TodoUpdatePage(
-        todo: _todos[index],
-      ),
+      builder: (context) => TodoUpdatePage(todo: _todos[index]),
     ),
   );
   if (result == null) return;
