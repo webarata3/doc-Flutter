@@ -8,9 +8,9 @@
 
 ???+ note "Javaのエントリーポイント"
 
-    記載の通り、Javaは`public static void main(String[] args)`がエントリーポイントでした。当然、メソッドのため何らかのクラスに属している形でした。
+    記載の通り、Javaは`public static void main(String[] args)`がエントリーポイントでした。当然、**メソッド**ですので任意のクラス配下に作成していました。
 
-    2025年9月にリリースのJava 25からは次のように`void main()`をエントリーポイントとすることができるようになりました。また、クラスの記述も必須ではなくなりました。そのため、エントリーポイントだけ見ると、Dartとほぼ同じように記述することができます。
+    2025年9月にリリースのJava 25からは次のように`void main()`をエントリーポイントとすることができるようになりました。また、クラスの記述も必須ではなくなり、見かけ上関数のように書けるようになりました。そのため、エントリーポイントだけ見ると、Dartとほぼ同じように記述することができます。
 
     ``` java linenums="1"
     void main() {
@@ -565,7 +565,7 @@ void main() {
 ``` dart linenums="1"
 void main() {
   var list = [for (var i = 1; i <= 10; i++) i];
-  print('list=${list}');
+  print('list=${list}'); // list=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
 ```
 
@@ -576,8 +576,8 @@ void main() {
 ``` dart linenums="1"
 void main() {
   var list = [1, 2, 3];
-  print(list.isEmpty);
-  print(list.isNotEmpty);
+  print(list.isEmpty); // false
+  print(list.isNotEmpty); // true
 }
 ```
 
@@ -586,7 +586,7 @@ void main() {
 ``` dart linenums="1"
 void main() {
   var list = [1, 2, 3];
-  print(list.length);
+  print(list.length); // 3
 }
 ```
 
@@ -600,7 +600,7 @@ void main() {
   var list = [1, 2, 3];
   list.add(4);
   list.insert(1, 999);
-  print(list);
+  print(list); // [1, 999, 2, 3, 4]
 }
 ```
 
@@ -608,15 +608,44 @@ void main() {
 
     Dartの`List`はJavaの`ArrayList`と同様です。最後に追加する場合は特に問題ありませんが、大量に挿入（`insert`）する場合にはパフォーマンスに問題が出る場合があります。
 
+    ``` dart linenums="1"
+    void main() {
+      var timer = Stopwatch();
+
+      var list = <int>[];
+      timer.start();
+      for (var i = 0; i < 100_000; i++) {
+        list.add(i);
+      }
+      timer.stop();
+      print(timer.elapsed.toString());
+
+      var list2 = <int>[];
+      timer.start();
+      for (var i = 0; i < 100_000; i++) {
+        list2.insert(0, i);
+      }
+      timer.stop();
+      print(timer.elapsed.toString());
+    }
+    ```
+
+    手元の環境だと結果は次のようになります。
+
+    ```
+    0:00:00.003328
+    0:00:12.137335
+    ```
+
 データの削除は、要素を指定するか、インデックスを指定するかどちらかになります。要素の指定の場合には、複数ある場合には最初の要素になります。
 
 ``` dart linenums="1"
 void main() {
   var list = [1, 2, 3, 4, 5, 1, 2];
   list.remove(1);
-  print(list);
+  print(list); // [2, 3, 4, 5, 1, 2]
   list.removeAt(2);
-  print(list);
+  print(list); // [2, 3, 5, 1, 2]
 }
 ```
 
@@ -628,10 +657,10 @@ void main() {
 ``` dart linenums="1"
 void main() {
   var list = [1, 2, 3, 4, 5, 1, 2];
-  print(list.contains(3));
-  print(list.indexOf(2));
-  print(list.lastIndexOf(2));
-  print(list.lastIndexOf(7));
+  print(list.contains(3)); // true
+  print(list.indexOf(2)); // 1
+  print(list.lastIndexOf(2)); // 6
+  print(list.lastIndexOf(7)); // -1
 }
 ```
 
