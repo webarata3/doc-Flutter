@@ -18,10 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -54,11 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+          mainAxisAlignment: .center,
+          children: [
+            const Text('You have pushed the button this many times:'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -108,7 +103,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -217,18 +212,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
 最後に、`floatingActionButton`ですが、これは画面の右下に出ている![ボタン](image/flutter01.webp)の部分です。`child`で`+`のアイコンを設定し、このボタンを押したときの処理は`onPressed`で設定しています。`onPressed`の引数に、このクラスの`_incrementCounter()`メソッドを設定しています。`onPressed`の型は`VoidCallback`となっており、このボタンが押されたときに呼び出される関数を指定します。
 
-#### 練習問題1-1
+#### やってみよう1
 
 `_MyHomePageState`クラス内の`You have pushed the button this many times:`という文字列を`ボタンをたくさん押しましょう`に変えること。
 
-#### 練習問題1-2
-
-`_MyHomePageState`クラス内の、`Center`クラスのコンストラクタの引数`child`を`Column`から`Row`に変更し、どのように表示されるか確認すること。
-
-#### 練習問題1-3
-
-練習問題1-2で変更した`Row`クラスのコンストラクタの引数`children`について、その2番目の`Text`クラスのコンストラクタの引数`style`の`Theme.of(context).textTheme.headline4`の最後の数字`4`を`1`や`6`に変更してみること。
-
-#### 練習問題1-4
+#### やってみよう2
 
 `MyApp`クラス内の`MaterialApp`クラスのコンストラクタの引数`theme`内の`Colors.deepPurple`を`Colors.green`や、`Colors.red`に変えてみること。
