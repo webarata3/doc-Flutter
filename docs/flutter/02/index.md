@@ -249,6 +249,7 @@ Widgetを縦方向に並べたい場合には、`Column`を使います。
 |-|-|
 | `mainAxisAlignment` | 配置方法。`MainAxisAlignment`に`enum`として定義されているものを使う |
 | `crossAxisAlignment` | 並べる方向と直行する方向にどのように配置するかを決める。`CrossAxisAlignment`に`enum`として定義されているものを使う |
+| `spacing` | 要素ごとの間隔 |
 | `children` | 並べたい`Widget`の`List` |
 
 例えば、次のように作成します。
@@ -549,6 +550,38 @@ body: Column(
 ```
 
 ![画像](image/06.webp)
+
+## 横幅いっぱいに表示
+
+いろいろなWidgetを横幅一杯に表示したいことがあります。その場合次のいずれかの方法を取ることができます。
+
+1つ目の方法はWidgetの幅に`double.inifinity`とすることです。
+
+``` dart linenums="1"
+body: Column(
+  children: <Widget>[
+    Container(
+      width: double.infinity,
+      color: Color(0xff8080ff),
+      child: Text('テスト', style: TextStyle(fontSize: 20.0)),
+    ),
+  ],
+),
+```
+
+2つ目は画面の横幅の実数値を使う方法で、`MediaQuery`を使います。最近のFlutterの場合にはこの方法がいいです。
+
+``` dart linenums="1"
+body: Column(
+  children: <Widget>[
+    Container(
+      width: MediaQuery.sizeOf(context).width,
+      color: Color(0xff8080ff),
+      child: Text('テスト', style: TextStyle(fontSize: 20.0)),
+    ),
+  ],
+),
+```
 
 ## BottomNavigationBar
 
