@@ -77,7 +77,7 @@ class _CalcState extends State<CalcWidget> {
                 keyboardType: .number,
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: Text('計算')),
+            FilledButton(onPressed: () {}, child: Text('計算')),
             Text('答え: '),
           ],
         ),
@@ -105,7 +105,7 @@ void _calc() {
 また、++"計算"++ボタンの`onPressed`を押したときに`calc`メソッドが動作するようにします。
 
 ```dart linenums="1"
-ElevatedButton(
+FilledButton(
   onPressed: _calc,
   child: Text('計算'),
 ),
@@ -184,11 +184,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '計算機',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      title: 'Flutter Demo',
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
       home: const CalcWidget(),
     );
   }
@@ -239,7 +236,7 @@ class _CalcState extends State<CalcWidget> {
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            Container(
+            Padding(
               padding: .all(20.0),
               child: TextField(
                 controller: _num1Controller,
@@ -260,14 +257,14 @@ class _CalcState extends State<CalcWidget> {
               },
               value: _selectedOperator,
             ),
-            Container(
+            Padding(
               padding: .all(20.0),
               child: TextField(
                 controller: _num2Controller,
                 keyboardType: .number,
               ),
             ),
-            ElevatedButton(onPressed: _calc, child: Text('計算')),
+            FilledButton(onPressed: _calc, child: Text('計算')),
             Text('答え: $_result'),
           ],
         ),
@@ -294,11 +291,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '計算機',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      title: 'Flutter Demo',
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
       home: const CalcWidget(),
     );
   }
@@ -315,7 +309,6 @@ class _CalcState extends State<CalcWidget> {
   final _formKey = GlobalKey<FormState>();
   int? _num1;
   int? _num2;
-
   String? _selectedOperator = '+';
   var _result = '数値を入力して計算ボタンを押してください';
 
@@ -359,7 +352,7 @@ class _CalcState extends State<CalcWidget> {
           child: Column(
             mainAxisAlignment: .center,
             children: [
-              Container(
+              Padding(
                 padding: .all(20.0),
                 child: TextFormField(
                   keyboardType: .number,
@@ -383,7 +376,7 @@ class _CalcState extends State<CalcWidget> {
                 },
                 value: _selectedOperator,
               ),
-              Container(
+              Padding(
                 padding: .all(20.0),
                 child: TextFormField(
                   keyboardType: .number,
@@ -393,7 +386,7 @@ class _CalcState extends State<CalcWidget> {
                   },
                 ),
               ),
-              ElevatedButton(onPressed: _calc, child: Text('計算')),
+              FilledButton(onPressed: _calc, child: Text('計算')),
               Text('答え: $_result'),
             ],
           ),
@@ -419,11 +412,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '計算機',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      title: 'Flutter Demo',
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
       home: const CalcWidget(),
     );
   }
@@ -460,7 +450,6 @@ class _CalcState extends State<CalcWidget> {
   final _formKey = GlobalKey<FormState>();
   int? _num1;
   int? _num2;
-
   Operator? _selectedOperator = .add;
 
   var _result = '数値を入力して計算ボタンを押してください';
@@ -493,7 +482,7 @@ class _CalcState extends State<CalcWidget> {
           child: Column(
             mainAxisAlignment: .center,
             children: [
-              Container(
+              Padding(
                 padding: .all(20.0),
                 child: TextFormField(
                   keyboardType: .number,
@@ -518,7 +507,7 @@ class _CalcState extends State<CalcWidget> {
                 },
                 value: _selectedOperator,
               ),
-              Container(
+              Padding(
                 padding: .all(20.0),
                 child: TextFormField(
                   keyboardType: .number,
@@ -528,7 +517,7 @@ class _CalcState extends State<CalcWidget> {
                   },
                 ),
               ),
-              ElevatedButton(onPressed: _calc, child: Text('計算')),
+              FilledButton(onPressed: _calc, child: Text('計算')),
               Text('答え: $_result'),
             ],
           ),

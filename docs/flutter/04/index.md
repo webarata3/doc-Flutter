@@ -16,37 +16,32 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const LayoutTest(),
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      home: const MyHomePage(),
     );
   }
 }
 
-class LayoutTest extends StatelessWidget {
-  const LayoutTest({Key? key}) : super(key: key);
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('レイアウトテスト'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text('サンプル'),
       ),
       body: ListView(
         children: [
           for (var i = 1; i <= 20; i++)
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Text('List$i'),
-            )
+            Container(padding: .all(20.0), child: Text('List$i')),
         ],
       ),
     );
@@ -78,39 +73,34 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const LayoutTest(),
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      home: const MyHomePage(),
     );
   }
 }
 
-class LayoutTest extends StatelessWidget {
-  const LayoutTest({Key? key}) : super(key: key);
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('レイアウトテスト'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text('サンプル'),
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(
-                  width: 1.0,
-                  color: Colors.grey,
-                ),
+                bottom: BorderSide(width: 1.0, color: Colors.grey),
               ),
             ),
             child: Text('$index番目'),
