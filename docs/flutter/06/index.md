@@ -14,40 +14,42 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
       home: const FirstPage(),
     );
   }
 }
 
 class FirstPage extends StatelessWidget {
-  const FirstPage({Key? key}) : super(key: key);
+  const FirstPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("最初のページ"),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text('最初のページ'),
       ),
       body: Center(
-        child: TextButton(
-          child: const Text("次のページ"),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SecondPage(),
-              ),
-            );
-          },
+        child: Column(
+          mainAxisAlignment: .center,
+          children: [
+            FilledButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SecondPage()),
+                );
+              },
+              child: Text('次のページ'),
+            ),
+          ],
         ),
       ),
     );
@@ -55,20 +57,26 @@ class FirstPage extends StatelessWidget {
 }
 
 class SecondPage extends StatelessWidget {
-  const SecondPage({Key? key}) : super(key: key);
+  const SecondPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('2つ目のページ'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text('次のページ'),
       ),
       body: Center(
-        child: TextButton(
-          child: const Text('戻る'),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        child: Column(
+          mainAxisAlignment: .center,
+          children: [
+            FilledButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('戻る'),
+            ),
+          ],
         ),
       ),
     );
